@@ -53,8 +53,6 @@ img {
           <a href="{{ block.settings.link }}">
             <img src="{{ block.settings.image | img_url: '800x400' }}" alt="Slider Image">
           </a>
-        {% else %}
-          <img src="placeholder_image_url" alt="Placeholder Image">
         {% endif %}
       </div>
     {% endfor %}
