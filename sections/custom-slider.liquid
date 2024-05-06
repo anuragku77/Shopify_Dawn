@@ -1,6 +1,6 @@
 {%- for block in section.blocks -%}
-  <img src="{{ section.settings.banner_image | image_url: '500x500' }}" alt="Banner Image" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
-{% endfor %}}
+  <img src="{{ section.settings.banner_image | img_url: '500x500' }}" alt="Banner Image" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
+{% endfor %}
 
 
 {% schema %}
