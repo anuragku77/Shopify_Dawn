@@ -1,7 +1,10 @@
 <style>
 
+<style>
 .slider {
   position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .slides {
@@ -10,13 +13,12 @@
 
 .slide-container {
   flex: 0 0 auto;
-  margin-right: 10px; /* Adjust spacing between slides */
 }
 
-img {
+.slide-container img {
   width: 100%;
   height: auto;
-  border: 0;
+  display: none;
 }
 
 .prev,
@@ -39,6 +41,8 @@ img {
 .next {
   right: 0;
 }
+</style>
+
 
 </style>
 
