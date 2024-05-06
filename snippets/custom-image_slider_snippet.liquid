@@ -51,7 +51,7 @@ img {
       <div class="slide-container">
         {% if block.settings.image != blank %}
           <a href="{{ block.settings.link }}">
-            <img src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
+            <img src="{{ block.settings.image | img_url: '800x400' }}" alt="Slider Image">
           </a>
         {% else %}
           <img src="placeholder_image_url" alt="Placeholder Image">
@@ -59,9 +59,10 @@ img {
       </div>
     {% endfor %}
   </div>
-  <button class="prev">&#10094;</button>
-  <button class="next">&#10095;</button>
+  <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+  <button class="next" onclick="plusSlides(1)">&#10095;</button>
 </div>
+
 
 <script>
 var slideIndex = 1;
