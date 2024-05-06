@@ -185,6 +185,7 @@
           "slide_pxEDWa": {
             "type": "slide",
             "settings": {
+              "image": "shopify:\/\/shop_images\/picking-strawberries.jpg",
               "button_label": "Button label",
               "link": "",
               "image_overlay_opacity": 0
