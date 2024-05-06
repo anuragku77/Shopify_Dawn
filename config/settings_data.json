@@ -159,8 +159,8 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/makeup-and-jewelry.jpg",
-              "button_label": "",
-              "link": "",
+              "button_label": "Shop Now",
+              "link": "shopify:\/\/pages\/contact",
               "image_overlay_opacity": 100
             }
           },
