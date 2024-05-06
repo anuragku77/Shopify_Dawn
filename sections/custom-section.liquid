@@ -1,0 +1,123 @@
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.banner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa; /* Optional: Set a background color */
+}
+
+.custom-banner {
+  position: relative;
+  text-align: center;
+}
+
+.banner-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.banner-button-default {
+  border: 1px solid #007bff;
+  background-color: transparent;
+  color: #007bff;
+}
+</style>
+
+<div class="custom-banner">
+  {% if section.settings.banner_title != blank %}
+    <div> text = {{ section.settings.banner_title }}</div>
+  {% endif %}
+  {% if section.settings.banner_description != blank %}
+    <div> text = {{ section.settings.banner_description }} </div>
+  {% endif %}
+  
+  {% if section.settings.show_banner_button %}
+    <a href="#" class="banner-button banner-button-{{ section.settings.banner_button_style }}">Shop Now</a>
+  {% endif %}
+  
+  <img src="{{ section.settings.banner_image | img_url: '500x500' }}" alt="Banner Image" style="opacity: {{ section.settings.banner_opacity }}%;">
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Custom Banner",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Banner Title"
+    },
+    {
+      "type": "textarea",
+      "id": "banner_description",
+      "label": "Banner Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "select",
+      "id": "banner_button_style",
+      "label": "Button Style",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Outlined", "value": "outlined" },
+        { "label": "Filled", "value": "filled" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner_button",
+      "label": "Show Banner Button",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "feature_count",
+      "label": "Feature Count"
+    },
+    {
+      "type": "radio",
+      "id": "feature_style",
+      "label": "Feature Style",
+      "options": [
+        { "label": "Style 1", "value": "style1" },
+        { "label": "Style 2", "value": "style2" },
+        { "label": "Style 3", "value": "style3" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "banner_opacity",
+      "label": "Banner Opacity",
+      "default": 50,
+      "min": 0,
+      "max": 100
+    }
+  ]
+}
+{% endschema %}
