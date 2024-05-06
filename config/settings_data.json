@@ -178,7 +178,7 @@
             "settings": {
               "image": "shopify:\/\/shop_images\/man-browsing-at-a-guitar-shop.jpg",
               "button_label": "Shop Now",
-              "link": "",
+              "link": "shopify:\/\/blogs\/news\/fashion",
               "image_overlay_opacity": 100
             }
           },
