@@ -4,6 +4,8 @@
 display:none;
 width: 100% !important;
 height: 100% !important;
+
+opacity: {{ block.settings.image_overlay_opacity}}
 }
 </style>
 
@@ -14,7 +16,7 @@ height: 100% !important;
   <div class="slide-container">
     {% if block.settings.image != blank %}
       <a href="{{ block.settings.link }}">
-        <img src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%; class="mySlides">
+        {{ block.settings.image | image_url: width: 1000 | image_tag: class: 'mySlides' }}
       </a>
     {% endif %}
   </div>
