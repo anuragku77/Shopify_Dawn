@@ -1,5 +1,4 @@
 <style>
-
 .slider {
   position: relative;
 }
@@ -10,11 +9,10 @@
 
 .slide-container {
   flex: 0 0 auto;
-  margin-right: 10px; /* Adjust spacing between slides */
 }
 
-img {
-  width: 100%;
+.slide-container img {
+  width: 100%; /* Adjust to make the image fill the container */
   height: auto;
   border: 0;
 }
@@ -39,10 +37,7 @@ img {
 .next {
   right: 0;
 }
-
 </style>
-
-
 
 {% assign blocks = section.blocks | where: 'type', 'slide' %}
 <div class="slider">
