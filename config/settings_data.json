@@ -176,6 +176,7 @@
           "slide_AWCqmT": {
             "type": "slide",
             "settings": {
+              "image": "shopify:\/\/shop_images\/man-browsing-at-a-guitar-shop.jpg",
               "button_label": "Button label",
               "link": "",
               "image_overlay_opacity": 0
