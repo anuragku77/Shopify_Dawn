@@ -1,6 +1,6 @@
 {%- for block in section.blocks -%}
-  {{ block.settings.image.url | image_url: width: 200 }}
-{%- endfor -%}
+  {{block.settings.image | image_url: width: 200}}
+{% endfor %}}
 
 
 {% schema %}
