@@ -1,47 +1,61 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-.mySlides {
-display:none;
-width: 100% !important;
-height: 100% !important;
-
-opacity: {{ block.settings.image_overlay_opacity}}
-}
+  .mySlides {
+    display: none;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative;
+  }
+  .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .slider-button-left {
+    left: 0;
+  }
+  .slider-button-right {
+    right: 0;
+  }
 </style>
 
-
-
-{% assign blocks = section.blocks | where: 'type', 'slide' %}
-{% for block in blocks %}
-  <div class="slide-container">
-    {% if block.settings.image != blank %}
-      <a href="{{ block.settings.link }}">
-        {{ block.settings.image | image_url: width: 1000 | image_tag: class: 'mySlides' }}
-      </a>
-    {% endif %}
-  </div>
-{% endfor %}
-
-
-<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+<div class="w3-content" style="max-width:500px">
+  {% assign blocks = section.blocks | where: 'type', 'slide' %}
+  {% for block in blocks %}
+    <div class="slide-container">
+      {% if block.settings.image != blank %}
+        <a href="{{ block.settings.link }}">
+          {{ block.settings.image | image_url: width: 1000 | image_tag: class: 'mySlides' }}
+          <button class="w3-button w3-black slider-button slider-button-left" onclick="plusDivs(-1)">&#10094;</button>
+          <button class="w3-button w3-black slider-button slider-button-right" onclick="plusDivs(1)">&#10095;</button>
+        </a>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
 
 <script>
-var slideIndex = 1;
-showDivs(slideIndex);
+  var slideIndex = 1;
+  showDivs(slideIndex);
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
   }
-  x[slideIndex-1].style.display = "block";  
-}
+
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = x.length }
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    x[slideIndex - 1].style.display = "block";
+  }
 </script>
