@@ -1,0 +1,4 @@
+{%- assign blocks = section.blocks | where: 'type', 'slide' -%}
+{%- for block in blocks -%}
+  <img src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
+{%- endfor -%}
