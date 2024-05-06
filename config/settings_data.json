@@ -186,8 +186,8 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/picking-strawberries.jpg",
-              "button_label": "",
-              "link": "",
+              "button_label": "Shop Now",
+              "link": "shopify:\/\/collections\/watches",
               "image_overlay_opacity": 100
             }
           }
