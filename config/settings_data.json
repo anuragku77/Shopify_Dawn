@@ -158,6 +158,7 @@
           "slide_Fh3dbr": {
             "type": "slide",
             "settings": {
+              "image": "shopify:\/\/shop_images\/makeup-and-jewelry.jpg",
               "button_label": "Button label",
               "link": "",
               "image_overlay_opacity": 0
