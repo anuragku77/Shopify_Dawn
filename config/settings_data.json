@@ -179,7 +179,7 @@
               "image": "shopify:\/\/shop_images\/man-browsing-at-a-guitar-shop.jpg",
               "button_label": "Button label",
               "link": "",
-              "image_overlay_opacity": 0
+              "image_overlay_opacity": 100
             }
           },
           "slide_pxEDWa": {
