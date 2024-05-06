@@ -1,0 +1,41 @@
+{% render 'custom-image_slider_snippet' %}
+
+
+{% schema %}
+  {
+    "name": "Custom Slider",
+    "enabled_on": {
+    "templates": ["page"]
+    },
+    "settings": [],
+    "blocks": [
+    {
+      "type": "slide",
+      "name": "Custom Image slider",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slider Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button Link"
+        },
+        {
+          "type": "range",
+          "id": "image_overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "unit": "%",
+          "label": "Image Light",
+          "default": 0
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
