@@ -1,4 +1,7 @@
 {%- assign blocks = section.blocks | where: 'type', 'slide' -%}
 {%- for block in blocks -%}
-  <img src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
+  <div class="slide-container">
+    <img src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
+    <a href="{{ block.settings.link }}" class="button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">{{ block.settings.button_label }}</a>
+  </div>
 {%- endfor -%}
