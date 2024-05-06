@@ -2,6 +2,20 @@
 {%- for block in blocks -%}
   <div class="slide-container">
     <img src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
-    <a href="{{ block.settings.link }}" class="button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">{{ block.settings.button_label }}</a>
+    {%- if block.settings.button_label != blank -%}
+      <div class="banner__buttons">
+        <a
+          {% if block.settings.link %}
+            href="{{ block.settings.link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          class="button {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}"
+          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+        >
+          {{- block.settings.button_label | escape -}}
+        </a>
+      </div>
+    {%- endif -%}
   </div>
 {%- endfor -%}
