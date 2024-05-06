@@ -1,5 +1,5 @@
 {%- for block in section.blocks -%}
-  {{block.settings.image | image_url: width: 200}}
+  <img src="{{ section.settings.banner_image | image_url: '500x500' }}" alt="Banner Image" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
 {% endfor %}}
 
 
