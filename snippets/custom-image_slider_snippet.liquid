@@ -1,63 +1,24 @@
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<style>
-  .mySlides {
-    display: none;
-    width: 100% !important;
-    height: 100% !important;
-    position: relative;
-  }
-  .slider-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    z-index: 1;
-  }
-  .slider-button-left {
-    left: 0;
-  }
-  .slider-button-right {
-    right: 0;
-  }
-</style>
-
-<div class="w3-content" style="max-width:500px">
-  {% assign blocks = section.blocks | where: 'type', 'slide' %}
-  {% for block in blocks %}
-    <div class="slide-container">
-      {% if block.settings.image != blank %}
-        <a href="{{ block.settings.link }}">
-          {{ block.settings.image | image_url: width: 1000 | image_tag: class: 'mySlides' }}
-          <button class="w3-button w3-black slider-button slider-button-left" onclick="plusDivs(-1)">&#10094;</button>
-          <button class="w3-button w3-black slider-button slider-button-right" onclick="plusDivs(1)">&#10095;</button>
-        </a>
-      {% endif %}
-    </div>
-  {% endfor %}
-  <button class="w3-button w3-black slider-button slider-button-left" onclick="plusDivs(-1)">&#10094;</button>
-  <button class="w3-button w3-black slider-button slider-button-right" onclick="plusDivs(1)">&#10095;</button>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    {% assign blocks = section.blocks | where: 'type', 'slide' %}
+    {% for block in blocks %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="slide-container">
+          {% if block.settings.image != blank %}
+            <a href="{{ block.settings.link }}">
+              <img class="d-block w-100" src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%;" alt="Slide {{ forloop.index }}">
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
-
-<script>
-  var slideIndex = 1;
-  showDivs(slideIndex);
-
-  function plusDivs(n) {
-    showDivs(slideIndex += n);
-  }
-
-  function showDivs(n) {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    if (n > x.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = x.length }
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    x[slideIndex - 1].style.display = "block";
-  }
-</script>
