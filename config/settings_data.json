@@ -150,7 +150,7 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/baby-nursery.jpg",
-              "button_label": "",
+              "button_label": "Shop Now",
               "link": "",
               "image_overlay_opacity": 100
             }
