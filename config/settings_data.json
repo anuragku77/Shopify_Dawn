@@ -177,7 +177,7 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/man-browsing-at-a-guitar-shop.jpg",
-              "button_label": "Button label",
+              "button_label": "",
               "link": "",
               "image_overlay_opacity": 100
             }
