@@ -150,7 +150,6 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/baby-nursery.jpg",
-              "button_label": "Shop Now",
               "link": "shopify:\/\/products\/blue-t-shirts",
               "image_overlay_opacity": 100
             }
@@ -159,7 +158,6 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/makeup-and-jewelry.jpg",
-              "button_label": "Shop Now",
               "link": "shopify:\/\/pages\/contact",
               "image_overlay_opacity": 100
             }
@@ -168,7 +166,6 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/core-strength-fitness.jpg",
-              "button_label": "Shop Now",
               "link": "shopify:\/\/collections\/mens-top-wear",
               "image_overlay_opacity": 100
             }
@@ -177,7 +174,6 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/man-browsing-at-a-guitar-shop.jpg",
-              "button_label": "Shop Now",
               "link": "shopify:\/\/blogs\/news\/fashion",
               "image_overlay_opacity": 100
             }
@@ -185,8 +181,6 @@
           "slide_pxEDWa": {
             "type": "slide",
             "settings": {
-              "image": "shopify:\/\/shop_images\/picking-strawberries.jpg",
-              "button_label": "Shop Now",
               "link": "shopify:\/\/collections\/watches",
               "image_overlay_opacity": 100
             }
