@@ -1,6 +1,4 @@
-{%- for block in section.blocks -%}
-  <img src="{{ block.settings.image | img_url: '500x500' }}" style="opacity: {{ block.settings.image_overlay_opacity }}%;">
-{% endfor %}
+{% render 'custom-image_slider_snippet' %}
 
 
 {% schema %}
