@@ -8,11 +8,11 @@
 }
 
 .slide-container {
-  flex: 0 0 auto;
+  flex: 0 0 100%; /* Adjust to make each slide take up the full width */
 }
 
 .slide-container img {
-  width: 100%; /* Adjust to make the image fill the container */
+  width: 100%;
   height: auto;
   border: 0;
 }
@@ -38,6 +38,7 @@
   right: 0;
 }
 </style>
+
 
 {% assign blocks = section.blocks | where: 'type', 'slide' %}
 <div class="slider">
