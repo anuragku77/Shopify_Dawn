@@ -167,6 +167,7 @@
           "slide_ReAzcy": {
             "type": "slide",
             "settings": {
+              "image": "shopify:\/\/shop_images\/core-strength-fitness.jpg",
               "button_label": "Button label",
               "link": "",
               "image_overlay_opacity": 0
