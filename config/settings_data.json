@@ -168,8 +168,8 @@
             "type": "slide",
             "settings": {
               "image": "shopify:\/\/shop_images\/core-strength-fitness.jpg",
-              "button_label": "",
-              "link": "",
+              "button_label": "Shop Now",
+              "link": "shopify:\/\/collections\/mens-top-wear",
               "image_overlay_opacity": 100
             }
           },
