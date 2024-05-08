@@ -5,10 +5,12 @@
 
 .slides {
   display: flex;
+  position: relative;
 }
 
 .slide-container {
   flex: 0 0 100%; /* Adjust to make each slide take up the full width */
+  position: relative;
 }
 
 .slide-container img {
@@ -33,13 +35,14 @@
 }
 
 .prev {
-  left: 0;
+  left: 10px; /* Adjust the left position for the previous button */
 }
 
 .next {
-  right: 0;
+  right: 10px; /* Adjust the right position for the next button */
 }
 </style>
+
 
 
 {% assign blocks = section.blocks | where: 'type', 'slide' %}
