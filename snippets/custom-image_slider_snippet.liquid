@@ -52,7 +52,7 @@
       <div class="slide-container">
         {% if block.settings.image != blank %}
           <a href="{{ block.settings.link }}">
-            <img src="{{ block.settings.image | img_url }}" alt="Slider Image">
+            <img src="{{ block.settings.image | img_url: '800x400' }}" alt="Slider Image">
           </a>
         {% endif %}
       </div>
