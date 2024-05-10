@@ -3,7 +3,9 @@
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
-
+{%- if section.settings.show_social and has_social_icons -%}
+  {%- render 'social-icons', class: 'footer__list-social' -%}
+{%- endif -%}
 
 
 
