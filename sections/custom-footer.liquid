@@ -1,6 +1,38 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_heading",
+      "label": "Custom Heading",
+      "default": "Your Custom Heading"
+    },
+    {
+      "type": "text",
+      "id": "custom_subheading",
+      "label": "Custom Subheading",
+      "default": "Your Custom Subheading"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "footer",
+      "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+      "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.payment_enable.label"
+    }
+  ]
+}
 {% endschema %}
