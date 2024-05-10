@@ -1,11 +1,11 @@
-{{ 'section-footer.css' | asset_url | stylesheet_tag }}
+{% comment %} {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 {%- if section.settings.show_social -%}
   {%- render 'social-icons', class: 'footer__list-social' -%}
-{%- endif -%}
+{%- endif -%} {% endcomment %}
 
 
 
