@@ -5,8 +5,10 @@
 
 <footer class="footer">
     <div class="footer__content-top">
-        <h2>{{ section.settings.custom_heading }}</h2>
-        <p>{{ section.settings.custom_subheading }}</p>
+        <div class="footer__heading-wrapper">
+            <h2 class="footer__heading">{{ section.settings.custom_heading }}</h2>
+            <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
+        </div>
 
         {%- if section.settings.menu != blank -%}
             <ul class="footer-block__details-content list-unstyled">
@@ -38,7 +40,6 @@
         {%- endif -%}
     </div>
 </footer>
-
 
 
 {% schema %}
