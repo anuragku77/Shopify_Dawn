@@ -206,18 +206,10 @@
               "heading": "Quick links",
               "menu": "footer"
             }
-          },
-          "link_list_ewCKJD": {
-            "type": "link_list",
-            "settings": {
-              "heading": "Quick links",
-              "menu": "consumer-policy"
-            }
           }
         },
         "block_order": [
-          "link_list_yRCAQL",
-          "link_list_ewCKJD"
+          "link_list_yRCAQL"
         ],
         "settings": {
           "custom_heading": "Your Custom Heading",
