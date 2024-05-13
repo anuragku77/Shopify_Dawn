@@ -112,6 +112,9 @@
 @media (max-width: 767px) {
     .footer-block__details-content {
         display: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
     }
 
     .footer-block__heading {
@@ -126,11 +129,13 @@
         font-weight: bold;
     }
 
-    .footer-block__details-content.open {
+    .active + .footer-block__details-content {
         display: block;
+        max-height: 500px; /* Set a maximum height or use content.scrollHeight if dynamic */
     }
 }
 </style>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -156,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Close other accordions
             accordions.forEach(acc => {
-                if (acc !== this) {
+                if (acc !== this && acc.classList.contains('active')) {
                     acc.classList.remove('active');
                     acc.nextElementSibling.style.maxHeight = '0';
                     acc.querySelector('.accordion-icon').textContent = '+';
