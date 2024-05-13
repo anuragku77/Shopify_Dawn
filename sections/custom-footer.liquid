@@ -127,11 +127,19 @@
 
     .accordion-icon {
         font-weight: bold;
+        display: inline-block; /* Show icon on mobile */
     }
 
     .active + .footer-block__details-content {
         display: block;
         max-height: 500px; /* Set a maximum height or use content.scrollHeight if dynamic */
+    }
+}
+
+/* Styles for desktop devices */
+@media (min-width: 768px) {
+    .accordion-icon {
+        display: none; /* Hide icon on desktop */
     }
 }
 </style>
