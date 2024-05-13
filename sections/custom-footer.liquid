@@ -5,50 +5,63 @@
 
 <footer class="footer">
     <div class="footer__content-top" page-width>
-        <div class="footer__heading-wrapper">
-            <h2 class="footer__heading">{{ section.settings.custom_heading }}</h2>
-            <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
-        </div>
+        {%- if section.blocks.size > 0 -%}
+            {%- assign footer_grid_class = '' -%}
+            {%- if section.blocks.size == 9 -%}
+                {%- assign footer_grid_class = 'grid--3-col-tablet' -%}
+            {%- elsif section.blocks.size > 6 -%}
+                {%- assign footer_grid_class = 'grid--4-col-desktop' -%}
+            {%- elsif section.blocks.size > 4 -%}
+                {%- assign footer_grid_class = 'grid--3-col-tablet' -%}
+            {%- endif -%}
 
-        {% for block in section.blocks %}
-            {% if block.settings.menu != blank %}
-                <div class="footer-block">
-                    <h2 class="footer-block__heading inline-richtext accordion-heading">
-                        {{ block.settings.heading }}<span class="accordion-icon">+</span></h2>
-                    <ul class="footer-block__details-content list-unstyled accordion-content">
-                        {% for link in block.settings.menu.links %}
-                        <li>
-                            <a
-                              href="{{ link.url }}"
-                              class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
-                            >
-                              {{ link.title }}
-                            </a>
-                          </li>
+            <div class="footer__blocks-wrapper grid {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                <div class="footer__heading-wrapper">
+                    <h2 class="footer__heading">{{ section.settings.custom_heading }}</h2>
+                    <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
+                </div>
+
+                {% for block in section.blocks %}
+                    {% if block.type == 'link_list' %}
+                        <div class="footer-block{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                            <h2 class="footer-block__heading accordion-heading">
+                                {{ block.settings.heading }}<span class="accordion-icon">+</span>
+                            </h2>
+                            <ul class="footer-block__details-content list-unstyled accordion-content">
+                                {% for link in block.settings.menu.links %}
+                                    <li>
+                                        <a href="{{ link.url }}" class="link link--text list-menu__item{% if link.active %} list-menu__item--active{% endif %}">
+                                            {{ link.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if section.settings.show_social %}
+                    <div class="footer__list-social">
+                        {% render 'social-icons' %}
+                    </div>
+                {% endif %}
+            </div>
+        {%- endif -%}
+
+        <div class="footer__column footer__column--info">
+            {% if section.settings.payment_enable %}
+                <div class="footer__payment">
+                    <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+                    <ul class="list list-payment" role="list">
+                        {% for type in shop.enabled_payment_types %}
+                            <li class="list-payment__item">
+                                {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}
-        {% endfor %}
-
-        {% if section.settings.show_social %}
-            {% render 'social-icons', class: 'footer__list-social' %}
-        {% endif %}
-    </div>
-
-    <div class="footer__column footer__column--info">
-        {% if section.settings.payment_enable %}
-            <div class="footer__payment">
-                <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-                <ul class="list list-payment" role="list">
-                    {% for type in shop.enabled_payment_types %}
-                        <li class="list-payment__item">
-                            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+        </div>
     </div>
 </footer>
 
@@ -58,20 +71,19 @@
   "blocks": [
     {
       "type": "link_list",
-      "name": "t:sections.footer.blocks.link_list.name",
+      "name": "Quick links",
       "settings": [
         {
           "type": "inline_richtext",
           "id": "heading",
-          "default": "Quick links",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+          "label": "Heading",
+          "default": "Quick links"
         },
         {
           "type": "link_list",
           "id": "menu",
-          "default": "footer",
-          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
-          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+          "label": "Menu",
+          "default": "footer"
         }
       ]
     }
@@ -92,14 +104,14 @@
     {
       "type": "checkbox",
       "id": "show_social",
-      "default": true,
-      "label": "t:sections.footer.settings.show_social.label"
+      "label": "Show Social Icons",
+      "default": true
     },
     {
       "type": "checkbox",
       "id": "payment_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.payment_enable.label"
+      "label": "Enable Payment Icons",
+      "default": true
     }
   ]
 }
@@ -125,23 +137,22 @@
 
     .accordion-icon {
         font-weight: bold;
-        display: inline-block; /* Show icon on mobile */
+        display: inline-block;
     }
 
     .active + .footer-block__details-content {
         display: block;
-        max-height: 500px; /* Set a maximum height or use content.scrollHeight if dynamic */
+        max-height: 500px;
     }
 }
 
 /* Styles for desktop devices */
 @media (min-width: 768px) {
     .accordion-icon {
-        display: none; /* Hide icon on desktop */
+        display: none;
     }
 }
 </style>
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -164,15 +175,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 content.style.maxHeight = '0';
                 icon.textContent = '+';
             }
-
-            // Close other accordions
-            accordions.forEach(acc => {
-                if (acc !== this && acc.classList.contains('active')) {
-                    acc.classList.remove('active');
-                    acc.nextElementSibling.style.maxHeight = '0';
-                    acc.querySelector('.accordion-icon').textContent = '+';
-                }
-            });
         });
     });
 });
