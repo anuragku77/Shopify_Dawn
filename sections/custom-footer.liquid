@@ -138,43 +138,8 @@
 
 /* Styles for desktop devices */
 @media (min-width: 768px) {
-    .footer-block {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        margin-bottom: 10px; /* Add margin between accordion sections */
-        border: 1px solid #ccc; /* Optional: Add border for visual separation */
-        border-radius: 5px; /* Optional: Add border radius for styling */
-    }
-
-    .footer-block__heading {
-        cursor: pointer;
-        padding: 10px;
-        flex: 1; /* Let each heading occupy equal space */
-        background-color: #f0f0f0; /* Optional: Add background color */
-        border-right: 1px solid #ccc; /* Optional: Add border between headings */
-        border-radius: 5px 0 0 5px; /* Optional: Round the top-left and bottom-left corners */
-    }
-
-    .footer-block__details-content {
-        display: none;
-        flex: 3; /* Let the content occupy more space */
-        padding: 10px;
-        border-left: 1px solid #ccc; /* Optional: Add border between content and heading */
-        border-radius: 0 5px 5px 0; /* Optional: Round the top-right and bottom-right corners */
-    }
-
     .accordion-icon {
-        font-weight: bold;
-        display: none; /* Hide icon by default */
-    }
-
-    .footer-block.active .accordion-icon {
-        display: inline-block; /* Show icon when active */
-    }
-
-    .footer-block.active .footer-block__details-content {
-        display: block;
+        display: none; /* Hide icon on desktop */
     }
 }
 </style>
