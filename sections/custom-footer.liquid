@@ -209,7 +209,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 content.style.maxHeight = '0';
                 icon.textContent = '+';
             }
+
+            // Close other accordions
+            accordions.forEach(acc => {
+                if (acc !== this && acc.classList.contains('active')) {
+                    acc.classList.remove('active');
+                    acc.nextElementSibling.style.maxHeight = '0';
+                    acc.querySelector('.accordion-icon').textContent = '+';
+                }
+            });
         });
     });
 });
 </script>
+
