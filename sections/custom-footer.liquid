@@ -39,13 +39,12 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-
-                {% if section.settings.show_social %}
+            </div>
+          {% if section.settings.show_social %}
                     <div class="footer__list-social">
                         {% render 'social-icons' %}
                     </div>
                 {% endif %}
-            </div>
         {%- endif -%}
     </div>
 
