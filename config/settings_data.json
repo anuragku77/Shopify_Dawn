@@ -99,7 +99,7 @@
     "brand_headline": "",
     "brand_description": "<p><\/p>",
     "brand_image_width": 100,
-    "social_facebook_link": "",
+    "social_facebook_link": "https:\/\/www.facebook.com\/Brainvire\/",
     "social_instagram_link": "",
     "social_youtube_link": "",
     "social_tiktok_link": "",
@@ -195,6 +195,16 @@
           "slide_pxEDWa"
         ],
         "settings": {
+        }
+      },
+      "custom-footer": {
+        "type": "custom-footer",
+        "settings": {
+          "custom_heading": "Your Custom Heading",
+          "custom_subheading": "Your Custom Subheading",
+          "show_social": true,
+          "payment_enable": true,
+          "menu": "footer"
         }
       }
     },
