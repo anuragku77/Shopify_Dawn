@@ -9,19 +9,17 @@
             <h2 class="footer__heading">{{ section.settings.custom_heading }}</h2>
             <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
         </div>
-
+      
         {% for block in section.blocks %}
             {% if block.settings.menu != blank %}
-                <div class="footer-block__accordion">
-                    <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
-                    <ul class="footer-block__details-content list-unstyled accordion">
-                        {% for link in block.settings.menu.links %}
-                            <li>
-                                <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
+                <ul class="footer-block__details-content list-unstyled">
+                    {% for link in block.settings.menu.links %}
+                        <li>
+                            <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         {% endfor %}
 
@@ -45,7 +43,6 @@
         {% endif %}
     </div>
 </footer>
-
 
 
 {% schema %}
@@ -107,47 +104,3 @@
   ]
 }
 {% endschema %}
-<style>
-  /* Accordion styles */
-.footer-block__accordion {
-    margin-bottom: 20px;
-}
-
-.footer-block__heading {
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.footer-block__details-content {
-    display: none;
-}
-
-.footer-block__details-content.open {
-    display: block;
-}
-</style>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const accordions = document.querySelectorAll('.footer-block__heading');
-
-        accordions.forEach(accordion => {
-            accordion.addEventListener('click', function () {
-                const detailsContent = this.nextElementSibling;
-                if (detailsContent.style.display === 'block') {
-                    detailsContent.style.display = 'none';
-                } else {
-                    // Close all open accordions first
-                    const openAccordions = document.querySelectorAll('.footer-block__details-content.open');
-                    openAccordions.forEach(openAccordion => {
-                        openAccordion.style.display = 'none';
-                        openAccordion.classList.remove('open');
-                    });
-
-                    // Open clicked accordion
-                    detailsContent.style.display = 'block';
-                    detailsContent.classList.add('open');
-                }
-            });
-        });
-    });
-</script>
