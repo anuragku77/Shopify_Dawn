@@ -206,10 +206,18 @@
               "heading": "Quick links",
               "menu": "footer"
             }
+          },
+          "link_list_nbkFTd": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "accessories"
+            }
           }
         },
         "block_order": [
-          "link_list_yRCAQL"
+          "link_list_yRCAQL",
+          "link_list_nbkFTd"
         ],
         "settings": {
           "custom_heading": "Your Custom Heading",
