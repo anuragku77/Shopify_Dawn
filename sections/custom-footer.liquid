@@ -9,16 +9,17 @@
             <h2 class="footer__heading">{{ section.settings.custom_heading }}</h2>
             <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
         </div>
-
-        {%- if section.settings.menu != blank -%}
+       {%- for block in section.blocks -%}
+        {%- if block.settings.menu != blank -%}
             <ul class="footer-block__details-content list-unstyled">
-                {%- for link in section.settings.menu.links -%}
+                {%- for link in block.settings.menu.links -%}
                     <li>
                         <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
                     </li>
                 {%- endfor -%}
             </ul>
         {%- endif -%}
+      {% endfor %}}
 
         {%- if section.settings.show_social -%}
             {%- render 'social-icons', class: 'footer__list-social' -%}
