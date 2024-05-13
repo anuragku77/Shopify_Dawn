@@ -14,7 +14,7 @@
             {% if block.settings.menu != blank %}
                 <div class="footer-block">
                     <h2 class="footer-block__heading inline-richtext accordion-heading">
-                        <span class="accordion-icon">+</span>{{ block.settings.heading }}</h2>
+                        {{ block.settings.heading }}<span class="accordion-icon">+</span></h2>
                     <ul class="footer-block__details-content list-unstyled accordion-content">
                         {% for link in block.settings.menu.links %}
                             <li>
