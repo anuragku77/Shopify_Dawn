@@ -139,24 +139,32 @@ document.addEventListener('DOMContentLoaded', function () {
     accordions.forEach(accordion => {
         accordion.addEventListener('click', function () {
             const content = this.nextElementSibling;
+            const icon = this.querySelector('.accordion-icon');
 
-            // Toggle accordion content visibility
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-                this.querySelector('.accordion-icon').textContent = '+';
-            } else {
-                // Close all other open accordions
-                accordions.forEach(acc => {
-                    const accContent = acc.nextElementSibling;
-                    accContent.style.maxHeight = null;
-                    acc.querySelector('.accordion-icon').textContent = '+';
-                });
+            // Toggle active class on the accordion
+            this.classList.toggle('active');
 
+            if (this.classList.contains('active')) {
+                // Open this accordion
                 content.style.maxHeight = content.scrollHeight + 'px';
-                this.querySelector('.accordion-icon').textContent = '-';
+                icon.textContent = '-';
+            } else {
+                // Close this accordion
+                content.style.maxHeight = '0';
+                icon.textContent = '+';
             }
+
+            // Close other accordions
+            accordions.forEach(acc => {
+                if (acc !== this) {
+                    acc.classList.remove('active');
+                    acc.nextElementSibling.style.maxHeight = '0';
+                    acc.querySelector('.accordion-icon').textContent = '+';
+                }
+            });
         });
     });
 });
 </script>
+
 
