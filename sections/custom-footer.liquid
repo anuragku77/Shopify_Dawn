@@ -13,8 +13,9 @@
         {% for block in section.blocks %}
             {% if block.settings.menu != blank %}
                 <div class="footer-block">
-                    <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
-                    <ul class="footer-block__details-content list-unstyled">
+                    <h2 class="footer-block__heading inline-richtext accordion-heading">
+                        <span class="accordion-icon">+</span>{{ block.settings.heading }}</h2>
+                    <ul class="footer-block__details-content list-unstyled accordion-content">
                         {% for link in block.settings.menu.links %}
                             <li>
                                 <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
@@ -121,32 +122,36 @@
     .footer-block__details-content.open {
         display: block;
     }
+
+    /* Icon styles */
+    .accordion-icon {
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+        font-weight: bold;
+        margin-right: 5px;
+    }
 }
-
 </style>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const accordions = document.querySelectorAll('.footer-block__heading');
+document.addEventListener('DOMContentLoaded', function () {
+    const accordions = document.querySelectorAll('.accordion-heading');
 
-        accordions.forEach(accordion => {
-            accordion.addEventListener('click', function () {
-                const detailsContent = this.nextElementSibling;
-                if (detailsContent.style.display === 'block') {
-                    detailsContent.style.display = 'none';
-                } else {
-                    // Close all open accordions first
-                    const openAccordions = document.querySelectorAll('.footer-block__details-content.open');
-                    openAccordions.forEach(openAccordion => {
-                        openAccordion.style.display = 'none';
-                        openAccordion.classList.remove('open');
-                    });
+    accordions.forEach(accordion => {
+        accordion.addEventListener('click', function () {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector('.accordion-icon');
 
-                    // Open clicked accordion
-                    detailsContent.style.display = 'block';
-                    detailsContent.classList.add('open');
-                }
-            });
+            // Toggle accordion content visibility
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.textContent = '+';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '-';
+            }
         });
     });
+});
 </script>
-
