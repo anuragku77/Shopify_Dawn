@@ -206,10 +206,18 @@
               "heading": "Quick links",
               "menu": "footer"
             }
+          },
+          "link_list_ttYNBF": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "consumer-policy"
+            }
           }
         },
         "block_order": [
-          "link_list_yRCAQL"
+          "link_list_yRCAQL",
+          "link_list_ttYNBF"
         ],
         "settings": {
           "custom_heading": "Your Custom Heading",
