@@ -10,39 +10,37 @@
             <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
         </div>
       
-       {%- for block in section.blocks -%}
-         {%- if block.settings.heading != blank -%}
-            <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
-        {%- endif -%}
-        {%- if block.settings.menu != blank -%}
-            <ul class="footer-block__details-content list-unstyled">
-                {%- for link in block.settings.menu.links -%}
-                    <li>
-                        <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
-                    </li>
-                {%- endfor -%}
-            </ul>
-        {%- endif -%}
-      {% endfor %}}
+        {% for block in section.blocks %}
+            {% if block.settings.menu != blank %}
+                <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
+                <ul class="footer-block__details-content list-unstyled">
+                    {% for link in block.settings.menu.links %}
+                        <li>
+                            <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
 
-        {%- if section.settings.show_social -%}
-            {%- render 'social-icons', class: 'footer__list-social' -%}
-        {%- endif -%}
+        {% if section.settings.show_social %}
+            {% render 'social-icons', class: 'footer__list-social' %}
+        {% endif %}
     </div>
 
     <div class="footer__column footer__column--info">
-        {%- if section.settings.payment_enable -%}
+        {% if section.settings.payment_enable %}
             <div class="footer__payment">
                 <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
                 <ul class="list list-payment" role="list">
-                    {%- for type in shop.enabled_payment_types -%}
+                    {% for type in shop.enabled_payment_types %}
                         <li class="list-payment__item">
                             {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
                         </li>
-                    {%- endfor -%}
+                    {% endfor %}
                 </ul>
             </div>
-        {%- endif -%}
+        {% endif %}
     </div>
 </footer>
 
