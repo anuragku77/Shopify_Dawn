@@ -210,7 +210,7 @@
           "link_list_ttYNBF": {
             "type": "link_list",
             "settings": {
-              "heading": "CONSUMER POLICY",
+              "heading": "<strong>CONSUMER POLICY<\/strong>",
               "menu": "consumer-policy"
             }
           }
