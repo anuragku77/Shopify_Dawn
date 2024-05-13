@@ -9,17 +9,19 @@
             <h2 class="footer__heading">{{ section.settings.custom_heading }}</h2>
             <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
         </div>
-      
+
         {% for block in section.blocks %}
             {% if block.settings.menu != blank %}
-                <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
-                <ul class="footer-block__details-content list-unstyled">
-                    {% for link in block.settings.menu.links %}
-                        <li>
-                            <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                <div class="footer-block__accordion">
+                    <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
+                    <ul class="footer-block__details-content list-unstyled accordion">
+                        {% for link in block.settings.menu.links %}
+                            <li>
+                                <a href="{{ link.url }}" class="link link--text">{{ link.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
         {% endfor %}
 
@@ -43,6 +45,7 @@
         {% endif %}
     </div>
 </footer>
+
 
 
 {% schema %}
