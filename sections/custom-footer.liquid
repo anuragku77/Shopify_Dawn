@@ -139,17 +139,24 @@ document.addEventListener('DOMContentLoaded', function () {
     accordions.forEach(accordion => {
         accordion.addEventListener('click', function () {
             const content = this.nextElementSibling;
-            const icon = this.querySelector('.accordion-icon');
 
             // Toggle accordion content visibility
             if (content.style.maxHeight) {
                 content.style.maxHeight = null;
-                icon.textContent = '+';
+                this.querySelector('.accordion-icon').textContent = '+';
             } else {
+                // Close all other open accordions
+                accordions.forEach(acc => {
+                    const accContent = acc.nextElementSibling;
+                    accContent.style.maxHeight = null;
+                    acc.querySelector('.accordion-icon').textContent = '+';
+                });
+
                 content.style.maxHeight = content.scrollHeight + 'px';
-                icon.textContent = '-';
+                this.querySelector('.accordion-icon').textContent = '-';
             }
         });
     });
 });
 </script>
+
