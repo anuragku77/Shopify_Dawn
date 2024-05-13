@@ -1,20 +1,11 @@
-{% comment %} {{ 'section-footer.css' | asset_url | stylesheet_tag }}
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 {%- if section.settings.show_social -%}
   {%- render 'social-icons', class: 'footer__list-social' -%}
-{%- endif -%} {% endcomment %}
-
-
-
-
-{{ 'section-footer.css' | asset_url | stylesheet_tag }}
-{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 
 
 {% schema %}
@@ -32,6 +23,25 @@
       "id": "custom_subheading",
       "label": "Custom Subheading",
       "default": "Your Custom Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.payment_enable.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "footer",
+      "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+      "info": "t:sections.footer.blocks.link_list.settings.menu.info"
     }
   ]
 }
