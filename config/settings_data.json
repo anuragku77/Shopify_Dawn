@@ -203,7 +203,7 @@
           "link_list_yRCAQL": {
             "type": "link_list",
             "settings": {
-              "heading": "Quick links",
+              "heading": "<strong>Get to Know Us<\/strong>",
               "menu": "footer"
             }
           },
