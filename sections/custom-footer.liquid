@@ -126,3 +126,28 @@
     display: block;
 }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const accordions = document.querySelectorAll('.footer-block__heading');
+
+        accordions.forEach(accordion => {
+            accordion.addEventListener('click', function () {
+                const detailsContent = this.nextElementSibling;
+                if (detailsContent.style.display === 'block') {
+                    detailsContent.style.display = 'none';
+                } else {
+                    // Close all open accordions first
+                    const openAccordions = document.querySelectorAll('.footer-block__details-content.open');
+                    openAccordions.forEach(openAccordion => {
+                        openAccordion.style.display = 'none';
+                        openAccordion.classList.remove('open');
+                    });
+
+                    // Open clicked accordion
+                    detailsContent.style.display = 'block';
+                    detailsContent.classList.add('open');
+                }
+            });
+        });
+    });
+</script>
