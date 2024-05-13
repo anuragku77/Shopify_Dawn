@@ -207,17 +207,17 @@
               "menu": "footer"
             }
           },
-          "link_list_nbkFTd": {
+          "link_list_ewCKJD": {
             "type": "link_list",
             "settings": {
               "heading": "Quick links",
-              "menu": "accessories"
+              "menu": "consumer-policy"
             }
           }
         },
         "block_order": [
           "link_list_yRCAQL",
-          "link_list_nbkFTd"
+          "link_list_ewCKJD"
         ],
         "settings": {
           "custom_heading": "Your Custom Heading",
