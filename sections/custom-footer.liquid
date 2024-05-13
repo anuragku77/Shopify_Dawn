@@ -37,7 +37,12 @@
                 {%- assign footer_grid_class = 'grid--3-col-tablet' -%}
             {%- endif -%}
 
-            <div class="footer__blocks-wrapper grid {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <div
+            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+            {% endif %}
+          >
                 <div class="footer__heading-wrapper">
                     <h2 class="footer__heading">{{ section.settings.custom_heading }}</h2>
                     <p class="footer__subheading">{{ section.settings.custom_subheading }}</p>
