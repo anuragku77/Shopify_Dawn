@@ -11,10 +11,18 @@
             "heading": "Quick links",
             "menu": "footer"
           }
+        },
+        "link_list_ctHy6M": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "consumer-policy"
+          }
         }
       },
       "block_order": [
-        "link_list_WBFBCz"
+        "link_list_WBFBCz",
+        "link_list_ctHy6M"
       ],
       "settings": {
         "color_scheme": "scheme-1",
