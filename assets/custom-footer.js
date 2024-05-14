@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', function () {
     const accordions = document.querySelectorAll('.footer-block__heading');
 
@@ -31,4 +30,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-</script>
