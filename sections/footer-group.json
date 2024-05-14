@@ -18,11 +18,19 @@
             "heading": "Quick links",
             "menu": "consumer-policy"
           }
+        },
+        "text_dLD7Fb": {
+          "type": "text",
+          "settings": {
+            "heading": "Our mission",
+            "subtext": "<p>Experience Quality and Integrity in Every Purchase That Supports Our Mission.<\/p>"
+          }
         }
       },
       "block_order": [
         "link_list_WBFBCz",
-        "link_list_ctHy6M"
+        "link_list_ctHy6M",
+        "text_dLD7Fb"
       ],
       "settings": {
         "color_scheme": "scheme-1",
