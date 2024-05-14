@@ -1,0 +1,48 @@
+/* Styles for mobile devices */
+@media (max-width: 767px) {
+    .footer-block__details-content {
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+
+    .footer-block__heading {
+        cursor: pointer;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-icon {
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .active + .footer-block__details-content {
+        display: block;
+        max-height: 500px;
+    }
+}
+
+/* Styles for desktop devices */
+@media (min-width: 768px) {
+    .accordion-icon {
+        display: none;
+    }
+}
+
+.footer__heading-wrapper {
+    text-align: center; /* Center-align all content within this wrapper */
+}
+
+.footer__heading {
+    font-size: 24px; /* Adjust font size as needed */
+    margin-bottom: 8px; /* Add spacing between heading and subheading */
+}
+
+.footer__subheading {
+    font-size: 16px; /* Adjust font size as needed */
+    color: #666; /* Adjust text color as needed */
+}
