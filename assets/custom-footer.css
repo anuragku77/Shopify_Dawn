@@ -34,6 +34,7 @@
 }
 
 .footer__heading-wrapper {
+    display: block;
     text-align: center; /* Center-align all content within this wrapper */
 }
 
