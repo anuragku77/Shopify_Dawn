@@ -99,7 +99,7 @@
     "brand_headline": "",
     "brand_description": "<p><\/p>",
     "brand_image_width": 100,
-    "social_facebook_link": "",
+    "social_facebook_link": "https:\/\/www.facebook.com\/Brainvire\/",
     "social_instagram_link": "",
     "social_youtube_link": "",
     "social_tiktok_link": "",
@@ -195,6 +195,36 @@
           "slide_pxEDWa"
         ],
         "settings": {
+        }
+      },
+      "custom-footer": {
+        "type": "custom-footer",
+        "blocks": {
+          "link_list_yRCAQL": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "footer"
+            }
+          },
+          "link_list_ttYNBF": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "consumer-policy"
+            }
+          }
+        },
+        "block_order": [
+          "link_list_yRCAQL",
+          "link_list_ttYNBF"
+        ],
+        "settings": {
+          "custom_heading": "Your Custom Heading",
+          "custom_subheading": "Your Custom Subheading",
+          "show_social": true,
+          "payment_enable": true,
+          "menu": "footer"
         }
       }
     },
