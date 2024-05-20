@@ -30,7 +30,7 @@
         "image": "shopify:\/\/shop_images\/minimalist-retail-clothing-display.jpg",
         "video_background": true,
         "video_url": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/7bc5e671301848ca8b8819b5d08b4f8d.mp4",
-        "image_overlay_opacity": 40,
+        "image_overlay_opacity": 100,
         "image_height": "large",
         "desktop_content_position": "bottom-center",
         "show_text_box": false,
@@ -69,10 +69,36 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "video_background_RiqBxe": {
+      "type": "video-background",
+      "blocks": {
+        "video_9NNKmx": {
+          "type": "video",
+          "settings": {
+            "video_link": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/27fe64d7ac634b16abd28eba00255683.mp4",
+            "overlay_opacity": 40,
+            "title": "Fashion",
+            "text": "<p>Find your signature style with our curated selection of fashionable pieces that exude sophistication and elegance. Upgrade your wardrobe.<\/p>",
+            "color_text": "#000000",
+            "button_label": "Shop Now",
+            "button_link": "shopify:\/\/collections\/all",
+            "color_btn_bg": "#000000",
+            "color_btn_text": "#fff"
+          }
+        }
+      },
+      "block_order": [
+        "video_9NNKmx"
+      ],
+      "disabled": true,
+      "settings": {
+      }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "video_background_RiqBxe"
   ]
 }
