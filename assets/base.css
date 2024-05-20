@@ -3454,3 +3454,8 @@ details-disclosure > details {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
 }
+.my_video_background_banner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
