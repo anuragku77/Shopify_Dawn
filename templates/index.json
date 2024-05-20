@@ -30,7 +30,7 @@
         "my_video_background_banner": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/898a848863d14d1fa5a72b21031fdd65.mp4",
         "image": "shopify:\/\/shop_images\/minimalist-retail-clothing-display.jpg",
         "image_overlay_opacity": 10,
-        "image_height": "medium",
+        "image_height": "large",
         "desktop_content_position": "bottom-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
