@@ -8,16 +8,41 @@
         "link_list_WBFBCz": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
+            "heading": "Get To Know Us",
             "menu": "footer"
+          }
+        },
+        "link_list_ctHy6M": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Consumer Policy",
+            "menu": "consumer-policy"
+          }
+        },
+        "text_dLD7Fb": {
+          "type": "text",
+          "settings": {
+            "heading": "Our mission",
+            "subtext": "<p>Experience Quality and Integrity in Every Purchase That Supports Our Mission.<\/p>"
+          }
+        },
+        "image_jDaxTW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/bv-logo-with-color-1.png",
+            "image_width": 100,
+            "alignment": "center"
           }
         }
       },
       "block_order": [
-        "link_list_WBFBCz"
+        "link_list_WBFBCz",
+        "link_list_ctHy6M",
+        "text_dLD7Fb",
+        "image_jDaxTW"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": true,
