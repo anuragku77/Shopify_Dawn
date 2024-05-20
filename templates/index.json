@@ -10,10 +10,10 @@
             "overlay_opacity": 99,
             "title": "Fashion",
             "text": "<p>Find your signature style with our curated selection of fashionable pieces that exude sophistication and elegance. Upgrade your wardrobe.<\/p>",
-            "color_text": "#fff",
+            "color_text": "#ffffff",
             "button_label": "Shop Now",
             "button_link": "shopify:\/\/collections\/all",
-            "color_btn_bg": "#fff",
+            "color_btn_bg": "#ffffff",
             "color_btn_text": "#000000"
           }
         }
@@ -21,7 +21,6 @@
       "block_order": [
         "video_9NNKmx"
       ],
-      "disabled": true,
       "settings": {
       }
     },
