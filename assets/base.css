@@ -3456,6 +3456,6 @@ details-disclosure > details {
 }
 .my_video_background_banner {
     position: absolute;
-    width: 100%;
+    width: 50%;
     height: 100%;
 }
