@@ -71,6 +71,7 @@
     },
     "autoplay_video_GppDhU": {
       "type": "autoplay-video",
+      "disabled": true,
       "settings": {
         "heading": "Video Autoplay",
         "fullwidth": true,
@@ -79,11 +80,36 @@
         "self_hosted_video": "shopify:\/\/files\/videos\/4524595-hd_1920_1080_25fps.mp4",
         "video_url": ""
       }
+    },
+    "video_background_atmqRC": {
+      "type": "video-background",
+      "blocks": {
+        "video_4URT8d": {
+          "type": "video",
+          "settings": {
+            "video_link": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/898a848863d14d1fa5a72b21031fdd65.mp4",
+            "overlay_opacity": 99,
+            "title": "Fashion",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>",
+            "color_text": "#121212",
+            "button_label": "Shop Now",
+            "button_link": "shopify:\/\/collections\/all",
+            "color_btn_bg": "#fff",
+            "color_btn_text": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "video_4URT8d"
+      ],
+      "settings": {
+      }
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
-    "autoplay_video_GppDhU"
+    "autoplay_video_GppDhU",
+    "video_background_atmqRC"
   ]
 }
