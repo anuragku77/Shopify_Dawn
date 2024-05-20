@@ -31,7 +31,7 @@
         "video_url": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/898a848863d14d1fa5a72b21031fdd65.mp4",
         "image_overlay_opacity": 10,
         "image_height": "large",
-        "desktop_content_position": "bottom-center",
+        "desktop_content_position": "middle-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
         "color_scheme": "scheme-3",
