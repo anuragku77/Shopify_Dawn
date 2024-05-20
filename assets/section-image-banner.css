@@ -490,3 +490,50 @@
     color: currentColor;
   }
 }
+/*Custom CSS for Video Background*/
+.media.video-background>*:not(.zoom):not(.deferred-media__poster-button) {
+  height: auto;
+}
+
+.banner__media, .banner:after, .banner__media:after {
+	background: none
+}
+
+@media screen and (max-width: 749px) {
+  .banner--large.video-background:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+  	min-height: 20rem;
+  }
+
+  .button {
+	min-height: calc(3.5rem + var(--buttons-border-width) * 2);
+	font-size: 1.2rem;
+  }
+
+  .banner__box {
+      padding-top: 1rem;
+	padding-bottom: 1rem;
+  }
+  .banner__heading.h0 {
+      line-height: 2rem;
+	font-size: calc(var(--font-heading-scale) * 3rem);
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .banner--large.video-background:not(.banner--adapt) {
+  	min-height: 39rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .banner--large.video-background:not(.banner--adapt) {
+  	min-height: 54rem;
+  }
+}
+
+@media screen and (min-width: 1320px) {
+  .banner--large.video-background:not(.banner--adapt) {
+  	min-height: 72rem;
+  }
+}
+
