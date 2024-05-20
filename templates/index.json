@@ -94,7 +94,7 @@
             "color_text": "#121212",
             "button_label": "Shop Now",
             "button_link": "shopify:\/\/collections\/all",
-            "color_btn_bg": "#fff",
+            "color_btn_bg": "#ffffff",
             "color_btn_text": "#121212"
           }
         }
@@ -102,6 +102,7 @@
       "block_order": [
         "video_4URT8d"
       ],
+      "disabled": true,
       "settings": {
       }
     }
