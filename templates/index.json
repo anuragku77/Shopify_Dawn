@@ -76,22 +76,21 @@
         "video_9NNKmx": {
           "type": "video",
           "settings": {
-            "video_link": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/78d233351dd34405929411228ec2c6b3.mp4",
+            "video_link": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/27fe64d7ac634b16abd28eba00255683.mp4",
             "overlay_opacity": 99,
             "title": "Fashion",
             "text": "<p>Find your signature style with our curated selection of fashionable pieces that exude sophistication and elegance. Upgrade your wardrobe.<\/p>",
-            "color_text": "#ffffff",
+            "color_text": "#000000",
             "button_label": "Shop Now",
             "button_link": "shopify:\/\/collections\/all",
-            "color_btn_bg": "#ffffff",
-            "color_btn_text": "#000000"
+            "color_btn_bg": "#000000",
+            "color_btn_text": "#fff"
           }
         }
       },
       "block_order": [
         "video_9NNKmx"
       ],
-      "disabled": true,
       "settings": {
       }
     }
