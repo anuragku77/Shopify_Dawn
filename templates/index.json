@@ -27,8 +27,6 @@
         "button"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/autumn-photographer-taking-picture.jpg",
-        "image_2": "shopify:\/\/shop_images\/person-fishing-on-the-beach-is-silhouetted-at-sunset.jpg",
         "video_background": true,
         "video_url": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/898a848863d14d1fa5a72b21031fdd65.mp4",
         "image_overlay_opacity": 40,
