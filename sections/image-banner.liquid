@@ -63,6 +63,7 @@
   	</video>
 	</div>                                                                                                                 	 
   {%- endif -%}
+  {%- if section.settings.video_background != blank -%}
   {%- if section.settings.image != blank -%}
     <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {%- liquid
@@ -95,6 +96,7 @@
       {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
     </div>
   {%- endif -%}
+  {% endif %}}
   {%- if section.settings.image_2 != blank and section.settings.video_background == false -%}
     <div class="banner__media media{% if section.settings.image != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {%- liquid
