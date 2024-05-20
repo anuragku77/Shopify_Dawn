@@ -77,7 +77,7 @@
           "type": "video",
           "settings": {
             "video_link": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/27fe64d7ac634b16abd28eba00255683.mp4",
-            "overlay_opacity": 99,
+            "overlay_opacity": 40,
             "title": "Fashion",
             "text": "<p>Find your signature style with our curated selection of fashionable pieces that exude sophistication and elegance. Upgrade your wardrobe.<\/p>",
             "color_text": "#000000",
