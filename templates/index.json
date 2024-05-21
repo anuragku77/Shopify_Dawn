@@ -97,42 +97,9 @@
     },
     "product_slider_H3VGze": {
       "type": "product-slider",
-      "blocks": {
-        "card_VmQnLt": {
-          "type": "card",
-          "settings": {
-            "product_item": "black-t-shirts"
-          }
-        },
-        "card_gBHP9n": {
-          "type": "card",
-          "settings": {
-            "product_item": "blue-t-shirts"
-          }
-        },
-        "card_cX9zaE": {
-          "type": "card",
-          "settings": {
-            "product_item": "men-black-shoes"
-          }
-        },
-        "card_7WhEa9": {
-          "type": "card",
-          "settings": {
-            "product_item": "shirts"
-          }
-        }
-      },
-      "block_order": [
-        "card_VmQnLt",
-        "card_gBHP9n",
-        "card_cX9zaE",
-        "card_7WhEa9"
-      ],
       "settings": {
-        "navigation_amount": 4,
-        "navigation_color": "#be2626",
-        "title": "Bestseller Collection"
+        "title": "Bestseller Collection",
+        "collection": "mens-top-wear"
       }
     }
   },
