@@ -131,7 +131,7 @@
       ],
       "settings": {
         "navigation_amount": 4,
-        "navigation_color": "",
+        "navigation_color": "#be2626",
         "title": "Bestseller Collection"
       }
     }
