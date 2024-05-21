@@ -1,3 +1,4 @@
+/* Base Slider Component Styles */
 slider-component {
   --desktop-margin-left-first-item: max(
     5rem,
@@ -314,7 +315,13 @@ slider-component.slider-component-full-width {
 .slider-buttons {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between; /* Align buttons to left and right */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 0 1rem; /* Adjust padding as necessary */
 }
 
 @media screen and (min-width: 990px) {
@@ -374,4 +381,43 @@ slider-component.slider-component-full-width {
 
 .slider-button--prev:not([disabled]):hover .icon {
   transform: rotate(90deg) scale(1.1);
+}
+
+/* New styles for dots below slider */
+.slider-counter {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.slider-counter__link--dots .dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.5);
+  margin: 0 0.5rem;
+  padding: 0;
+  display: block;
+}
+
+.slider-counter__link--active .dot {
+  background-color: rgb(var(--color-foreground));
+}
+
+@media screen and (forced-colors: active) {
+  .slider-counter__link--active .dot {
+    background-color: CanvasText;
+  }
+}
+
+.slider-counter__link--dots:not(.slider-counter__link--active):hover .dot {
+  border-color: rgb(var(--color-foreground));
+}
+
+.slider-counter__link--dots .dot {
+  transition: transform 0.2s ease-in-out;
+}
+
+.slider-counter__link--dots:not(.slider-counter__link--active):hover .dot {
+  transform: scale(1.1);
 }
