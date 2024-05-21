@@ -84,7 +84,7 @@
             "button_label": "Shop Now",
             "button_link": "shopify:\/\/collections\/all",
             "color_btn_bg": "#000000",
-            "color_btn_text": "#fff"
+            "color_btn_text": "#ffffff"
           }
         }
       },
@@ -94,11 +94,19 @@
       "disabled": true,
       "settings": {
       }
+    },
+    "product_slider_H3VGze": {
+      "type": "product-slider",
+      "settings": {
+        "title": "Bestseller Collection",
+        "collection": ""
+      }
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
-    "video_background_RiqBxe"
+    "video_background_RiqBxe",
+    "product_slider_H3VGze"
   ]
 }
