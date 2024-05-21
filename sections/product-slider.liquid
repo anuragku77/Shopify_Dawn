@@ -7,7 +7,7 @@
 
 <div class = "page-width">    
     <h2>{{ section.settings.title }}</h2>
-    <div class = "productsslider">
+    <div class = "productslider">
         {% assign collection = collections[section.settings.collection] %}
         {%- for product in collection.products -%}
             {% assign lazy_load = false %}
@@ -38,7 +38,7 @@
 </div>
 
 <script>
-    $('.productsslider').slick({
+    $('.productslider').slick({
         dots: true,
         infinite: false,
         speed: 300,
