@@ -1,30 +1,79 @@
-<div class="page-width">    
-  <h2>{{ section.settings.title }}</h2>
-  <div class="productcarousel-container">
-    <button class="prev">&#10094;</button> <!-- Left arrow -->
-    <div class="productcarousel">
-      <ul>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer="defer"> </script>
+
+
+<div class = "page-width">    
+    <h2>{{ section.settings.title }}</h2>
+    <div class = "productcarousel">
         {% assign collection = collections[section.settings.collection] %}
         {%- for product in collection.products -%}
-          <li class="grid__item">
-            {% render 'card-product',
-              card_product: product,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating,
-              lazy_load: lazy_load,
-              quick_add: section.settings.quick_add,
-              section_id: section.id
-            %}
-          </li>
-        {%- endfor -%}
-      </ul>
+            {% assign lazy_load = false %}
+            {%- if forloop.index > 2 -%}
+              {%- assign lazy_load = true -%}
+            {%- endif -%}
+            <li
+              class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% if settings.animations_reveal_on_scroll %}
+                data-cascade
+                style="--animation-order: {{ forloop.index }};"
+              {% endif %}
+            >
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
+                image_shape: section.settings.image_shape,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                lazy_load: lazy_load,
+                quick_add: section.settings.quick_add,
+                section_id: section.id
+              %}
+            </li>
+          {%- endfor -%}
     </div>
-    <button class="next">&#10095;</button> <!-- Right arrow -->
-  </div>
 </div>
+
+<script>
+    $('.productcarousel').slick({
+        dots: true,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
+
+</script>
 
 {% schema %}
 {
@@ -37,12 +86,12 @@
       "type": "inline_richtext",
       "id": "title",
       "default": "Featured collection",
-      "label": "Title"
+      "label": "t:sections.featured-collection.settings.title.label"
     },
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "t:sections.featured-collection.settings.collection.label"
     }
   ],
   "presets": [
@@ -52,116 +101,3 @@
   ]
 }
 {% endschema %}
-
-<style>
-  .page-width {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .productcarousel-container {
-    position: relative;
-    width: 100%;
-  }
-  
-  .productcarousel {
-    overflow: hidden;
-  }
-  
-  .productcarousel ul {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  
-  .productcarousel li {
-    flex: 1 0 auto;
-    margin: 0 10px;
-    box-sizing: border-box;
-  }
-  
-  .productcarousel .prev, .productcarousel .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1;
-    font-size: 24px;
-    line-height: 0;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .productcarousel .prev {
-    left: -20px; /* Adjusted to be outside the carousel */
-  }
-  
-  .productcarousel .next {
-    right: -20px; /* Adjusted to be outside the carousel */
-  }
-  
-  @media (max-width: 768px) {
-    .productcarousel li {
-      min-width: 50%;
-    }
-
-    .productcarousel .prev, .productcarousel .next {
-      left: 10px; /* Adjusted to be inside the carousel */
-      right: 10px; /* Adjusted to be inside the carousel */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .productcarousel li {
-      min-width: 100%;
-    }
-
-    .productcarousel .prev, .productcarousel .next {
-      left: 10px; /* Adjusted to be inside the carousel */
-      right: 10px; /* Adjusted to be inside the carousel */
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.productcarousel ul');
-    const items = document.querySelectorAll('.productcarousel li');
-    const nextButton = document.querySelector('.next');
-    const prevButton = document.querySelector('.prev');
-    let currentIndex = 0;
-    const itemWidth = items[0].clientWidth + 20; // Adjusted for margin
-  
-    function showSlide(index) {
-      const maxIndex = items.length - Math.floor(carousel.clientWidth / itemWidth);
-      if (index > maxIndex) {
-        currentIndex = 0;
-      } else if (index < 0) {
-        currentIndex = maxIndex;
-      } else {
-        currentIndex = index;
-      }
-      const translateX = -currentIndex * itemWidth;
-      carousel.style.transform = `translateX(${translateX}px)`;
-    }
-  
-    nextButton.addEventListener('click', () => {
-      showSlide(currentIndex + 1);
-    });
-  
-    prevButton.addEventListener('click', () => {
-      showSlide(currentIndex - 1);
-    });
-  });
-</script>
