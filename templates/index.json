@@ -104,6 +104,7 @@
     },
     "featured_collection_q9zhf9": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "BestSeller Collection",
         "heading_size": "h1",
