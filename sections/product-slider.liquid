@@ -133,7 +133,7 @@
     const nextButton = document.querySelector('.next');
     const prevButton = document.querySelector('.prev');
     let currentIndex = 0;
-    const itemWidth = items[0].clientWidth + 20; // Assuming 10px margin on each side
+    const itemWidth = items[0].clientWidth + 20; // Adjusted for margin
   
     function showSlide(index) {
       const maxIndex = items.length - Math.floor(carousel.clientWidth / itemWidth);
@@ -159,8 +159,6 @@
     setInterval(() => {
       showSlide(currentIndex + 1);
     }, 5000); // Change slide every 5 seconds
-  });
-  
-  
+  }); 
 </script>
 
