@@ -15,13 +15,13 @@
             {%- if forloop.index > 2 -%}
               {%- assign lazy_load = true -%}
             {%- endif -%}
-            {% comment %} <li
+            <li
               class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
               {% if settings.animations_reveal_on_scroll %}
                 data-cascade
                 style="--animation-order: {{ forloop.index }};"
               {% endif %}
-            > {% endcomment %}
+            >
               {% render 'card-product',
                 card_product: product,
                 media_aspect_ratio: section.settings.image_ratio,
@@ -33,7 +33,7 @@
                 quick_add: section.settings.quick_add,
                 section_id: section.id
               %}
-            {% comment %} </li> {% endcomment %}
+            </li>
           {%- endfor -%}
     </div>
 </div>
