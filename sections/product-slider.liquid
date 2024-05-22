@@ -61,23 +61,27 @@
     padding: 20px;
   }
   
-  .productcarousel {
-    display: flex;
-    overflow: hidden;
+  .productcarousel-container {
     position: relative;
+    width: 100%;
   }
   
-  .productcarousel li {
-    min-width: 100%;
-    box-sizing: border-box;
+  .productcarousel {
+    overflow: hidden;
+  }
+  
+  .productcarousel ul {
+    display: flex;
     transition: transform 0.5s ease-in-out;
+    padding: 0;
+    margin: 0;
     list-style: none;
   }
   
-  .productcarousel .grid__item {
+  .productcarousel li {
     flex: 1 0 auto;
     margin: 0 10px;
-    transition: transform 0.5s;
+    box-sizing: border-box;
   }
   
   .productcarousel .prev, .productcarousel .next {
@@ -90,6 +94,14 @@
     padding: 10px;
     cursor: pointer;
     z-index: 1;
+    font-size: 24px;
+    line-height: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .productcarousel .prev {
@@ -99,6 +111,7 @@
   .productcarousel .next {
     right: 10px;
   }
+  
   
 </style>
 
