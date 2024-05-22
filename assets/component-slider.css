@@ -361,7 +361,7 @@ slider-component.slider-component-full-width {
 }
 
 .slider-button--next .icon {
-  
+  right: 10px;
   transform: rotate(-90deg);
 }
 
