@@ -1,35 +1,30 @@
-<div class = "page-width">    
-    <h2>{{ section.settings.title }}</h2>
-    <div class = "productcarousel">
+<div class="page-width">    
+  <h2>{{ section.settings.title }}</h2>
+  <div class="productcarousel-container">
+    <button class="prev">&#10094;</button> <!-- Left arrow -->
+    <div class="productcarousel">
+      <ul>
         {% assign collection = collections[section.settings.collection] %}
         {%- for product in collection.products -%}
-            {% assign lazy_load = false %}
-            {%- if forloop.index > 2 -%}
-              {%- assign lazy_load = true -%}
-            {%- endif -%}
-            <li
-              class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-              {% if settings.animations_reveal_on_scroll %}
-                data-cascade
-                style="--animation-order: {{ forloop.index }};"
-              {% endif %}
-            >
-              {% render 'card-product',
-                card_product: product,
-                media_aspect_ratio: section.settings.image_ratio,
-                image_shape: section.settings.image_shape,
-                show_secondary_image: section.settings.show_secondary_image,
-                show_vendor: section.settings.show_vendor,
-                show_rating: section.settings.show_rating,
-                lazy_load: lazy_load,
-                quick_add: section.settings.quick_add,
-                section_id: section.id
-              %}
-            </li>
-          {%- endfor -%}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: section.settings.image_ratio,
+              image_shape: section.settings.image_shape,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              lazy_load: lazy_load,
+              quick_add: section.settings.quick_add,
+              section_id: section.id
+            %}
+          </li>
+        {%- endfor -%}
+      </ul>
     </div>
+    <button class="next">&#10095;</button> <!-- Right arrow -->
+  </div>
 </div>
-
 
 {% schema %}
 {
@@ -42,12 +37,12 @@
       "type": "inline_richtext",
       "id": "title",
       "default": "Featured collection",
-      "label": "t:sections.featured-collection.settings.title.label"
+      "label": "Title"
     },
     {
       "type": "collection",
       "id": "collection",
-      "label": "t:sections.featured-collection.settings.collection.label"
+      "label": "Collection"
     }
   ],
   "presets": [
@@ -57,6 +52,7 @@
   ]
 }
 {% endschema %}
+
 
 <style>
   .page-width {
