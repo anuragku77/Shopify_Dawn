@@ -128,33 +128,24 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.productcarousel');
+    const carousel = document.querySelector('.productcarousel ul');
     const items = document.querySelectorAll('.productcarousel li');
-    const nextButton = document.createElement('button');
-    const prevButton = document.createElement('button');
+    const nextButton = document.querySelector('.next');
+    const prevButton = document.querySelector('.prev');
     let currentIndex = 0;
-  
-    nextButton.classList.add('next');
-    prevButton.classList.add('prev');
-    nextButton.innerText = 'Next';
-    prevButton.innerText = 'Prev';
-  
-    carousel.appendChild(nextButton);
-    carousel.appendChild(prevButton);
+    const itemWidth = items[0].clientWidth + 20; // Assuming 10px margin on each side
   
     function showSlide(index) {
-      if (index >= items.length) {
+      const maxIndex = items.length - Math.floor(carousel.clientWidth / itemWidth);
+      if (index > maxIndex) {
         currentIndex = 0;
       } else if (index < 0) {
-        currentIndex = items.length - 1;
+        currentIndex = maxIndex;
       } else {
         currentIndex = index;
       }
-  
-      const translateX = -currentIndex * 100;
-      items.forEach(item => {
-        item.style.transform = `translateX(${translateX}%)`;
-      });
+      const translateX = -currentIndex * itemWidth;
+      carousel.style.transform = `translateX(${translateX}px)`;
     }
   
     nextButton.addEventListener('click', () => {
@@ -169,6 +160,7 @@
       showSlide(currentIndex + 1);
     }, 5000); // Change slide every 5 seconds
   });
+  
   
 </script>
 
