@@ -53,7 +53,6 @@
 }
 {% endschema %}
 
-
 <style>
   .page-width {
     max-width: 1200px;
@@ -116,14 +115,23 @@
     .productcarousel li {
       min-width: 50%;
     }
+
+    .productcarousel .prev, .productcarousel .next {
+      left: 10px; /* Adjusted to be inside the carousel */
+      right: 10px; /* Adjusted to be inside the carousel */
+    }
   }
   
   @media (max-width: 480px) {
     .productcarousel li {
       min-width: 100%;
     }
+
+    .productcarousel .prev, .productcarousel .next {
+      left: 10px; /* Adjusted to be inside the carousel */
+      right: 10px; /* Adjusted to be inside the carousel */
+    }
   }
-  
 </style>
 
 <script>
@@ -155,10 +163,5 @@
     prevButton.addEventListener('click', () => {
       showSlide(currentIndex - 1);
     });
-  
-    setInterval(() => {
-      showSlide(currentIndex + 1);
-    }, 5000); // Change slide every 5 seconds
-  }); 
+  });
 </script>
-
