@@ -361,11 +361,14 @@ slider-component.slider-component-full-width {
 }
 
 .slider-button--next .icon {
+  
   transform: rotate(-90deg);
 }
 
 .slider-button--prev .icon {
+  left: 10px;
   transform: rotate(90deg);
+
 }
 
 .slider-button--next:not([disabled]):hover .icon {
