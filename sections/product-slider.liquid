@@ -59,7 +59,51 @@
 {% endschema %}
 
 <style>
-
+  .page-width {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .productcarousel {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .productcarousel li {
+    min-width: 100%;
+    box-sizing: border-box;
+    transition: transform 0.5s ease-in-out;
+    list-style: none;
+  }
+  
+  .productcarousel .grid__item {
+    flex: 1 0 auto;
+    margin: 0 10px;
+    transition: transform 0.5s;
+  }
+  
+  .productcarousel .prev, .productcarousel .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .productcarousel .prev {
+    left: 10px;
+  }
+  
+  .productcarousel .next {
+    right: 10px;
+  }
+  
 </style>
 
 <script>
