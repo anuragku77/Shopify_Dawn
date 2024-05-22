@@ -59,7 +59,49 @@
 {% endschema %}
 
 <style>
-
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.productcarousel');
+    const items = document.querySelectorAll('.productcarousel li');
+    const nextButton = document.createElement('button');
+    const prevButton = document.createElement('button');
+    let currentIndex = 0;
+  
+    nextButton.classList.add('next');
+    prevButton.classList.add('prev');
+    nextButton.innerText = 'Next';
+    prevButton.innerText = 'Prev';
+  
+    carousel.appendChild(nextButton);
+    carousel.appendChild(prevButton);
+  
+    function showSlide(index) {
+      if (index >= items.length) {
+        currentIndex = 0;
+      } else if (index < 0) {
+        currentIndex = items.length - 1;
+      } else {
+        currentIndex = index;
+      }
+  
+      const translateX = -currentIndex * 100;
+      items.forEach(item => {
+        item.style.transform = `translateX(${translateX}%)`;
+      });
+    }
+  
+    nextButton.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+    });
+  
+    prevButton.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+    });
+  
+    setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 5000); // Change slide every 5 seconds
+  });
+  
 </style>
 
 <script>
