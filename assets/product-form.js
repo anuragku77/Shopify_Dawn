@@ -115,6 +115,9 @@ if (!customElements.get('product-form')) {
           this.errorMessage.textContent = errorMessage;
         }
       }
+
+
+      
     }
   );
 }
