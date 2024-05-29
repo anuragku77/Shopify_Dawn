@@ -116,6 +116,8 @@ if (!customElements.get('product-form')) {
         }
       }
 
+      
+
       setupAddToCartListener() {
         let btn = this.submitButton;
 
@@ -140,7 +142,7 @@ if (!customElements.get('product-form')) {
         });
       }
 
-      
+
     }
   );
 }
