@@ -43,6 +43,7 @@ if (!customElements.get('product-form')) {
 
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
+          console.log(response);
           .then((response) => {
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
