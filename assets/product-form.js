@@ -167,7 +167,7 @@ if (!customElements.get('product-form')) {
               console.log(`Variant ID ${variantId} expired and removed from the cart.`);
               this.removeExpiredProductFromCart(variantId);
               localStorage.removeItem(key);
-              location.reload();
+              // location.reload();
             }
           });
         }, 1000);
