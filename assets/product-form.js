@@ -116,6 +116,29 @@ if (!customElements.get('product-form')) {
         }
       }
 
+      setupAddToCartListener() {
+        let btn = this.submitButton;
+
+        btn.addEventListener('click', async () => {
+          const formData = new FormData(this.form);
+          const config = fetchConfig('javascript');
+          config.headers['X-Requested-With'] = 'XMLHttpRequest';
+          delete config.headers['Content-Type'];
+          config.body = formData;
+
+          try {
+            const response = await fetch(`${routes.cart_add_url}`, config);
+            const data = await response.json();
+
+            if (!data.status && data.variant_id) {
+              // Set a timestamp in localStorage when the item is added to the cart
+              localStorage.setItem(`cartItemAddedTime-${data.variant_id}`, Date.now());
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        });
+      }
 
       
     }
