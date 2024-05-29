@@ -181,7 +181,7 @@ if (!customElements.get('product-form')) {
           productsInCart.forEach(key => {
             const expirationTime = localStorage.getItem(key);
             const variantId = key.split('-')[1];
-            console.log("")
+            console.log("varientId",)
       
             if (expirationTime && currentTime >= expirationTime) {
               // Remove product from the cart
