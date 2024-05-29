@@ -153,6 +153,7 @@ if (!customElements.get('product-form')) {
           try {
             const response = await fetch(`${routes.cart_add_url}`, config);
             const data = await response.json();
+            console.log(data);
       
             if (!data.status && data.variant_id) {
               const timestamp = Date.now();
