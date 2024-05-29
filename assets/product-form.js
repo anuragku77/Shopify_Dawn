@@ -152,7 +152,7 @@ if (!customElements.get('product-form')) {
       
           try {
             const response = await fetch(`${routes.cart_add_url}`, config);
-            console.log(response);
+            console.log("Response",response);
             const data = await response.json();
             console.log("response Data = ", data);;
       
