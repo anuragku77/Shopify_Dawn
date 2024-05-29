@@ -135,15 +135,39 @@ if (!customElements.get('product-form')) {
 
             if (!data.status && data.variant_id) {
               const timestamp = Date.now();
-              const formattedTime = new Date(timestamp).toLocaleTimeString(); // Format timestamp
-              console.log(`Variant ID ${data.variant_id} timestamp set:`, formattedTime);
-              localStorage.setItem(`cartItemAddedTime-${data.variant_id}`, timestamp);
+              const expirationTime = timestamp + 5 * 60 * 1000; // 5 minutes in milliseconds
+              localStorage.setItem(`cartItemExpirationTime-${data.variant_id}`, expirationTime);
+              console.log(`Variant ID ${data.variant_id} added to cart. Expiration time set to:`, new Date(expirationTime));
             }
           } catch (error) {
             console.error(error);
           }
         });
+
+        // Check for expired products when the page loads
+        this.checkExpiredProducts();
       }
+
+      checkExpiredProducts() {
+        setInterval(() => {
+          const productsInCart = Object.keys(localStorage).filter(key => key.startsWith('cartItemExpirationTime-'));
+          const currentTime = Date.now();
+
+          productsInCart.forEach(key => {
+            const expirationTime = localStorage.getItem(key);
+            const variantId = key.split('-')[1];
+
+            if (expirationTime && currentTime >= expirationTime) {
+              // Remove product from the cart
+              console.log(`Variant ID ${variantId} expired and removed from the cart.`);
+              localStorage.removeItem(key);
+              // Optionally, you can trigger a removal from the cart UI here
+            }
+          });
+        }, 1000); // Check every second
+      }
+
+
 
 
     }
