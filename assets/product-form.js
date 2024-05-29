@@ -134,9 +134,10 @@ if (!customElements.get('product-form')) {
             const data = await response.json();
 
             if (!data.status && data.variant_id) {
-              // Set a timestamp in localStorage when the item is added to the cart
-              localStorage.setItem(`cartItemAddedTime-${data.variant_id}`, Date.now());
-              console.log(`Variant ID ${data.variant_id} timestamp set:`, Date.now());
+              const timestamp = Date.now();
+              const formattedTime = new Date(timestamp).toLocaleTimeString(); // Format timestamp
+              console.log(`Variant ID ${data.variant_id} timestamp set:`, formattedTime);
+              localStorage.setItem(`cartItemAddedTime-${data.variant_id}`, timestamp);
             }
           } catch (error) {
             console.error(error);
