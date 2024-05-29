@@ -129,7 +129,8 @@ if (!customElements.get('product-form')) {
           body: JSON.stringify({ quantity: 0, id: variantId }),
         })
         .then((response) => {
-          console.log()
+          console.log(response)
+          return
           if (!response.ok) {
             throw new Error('Failed to remove item from cart');
           }
