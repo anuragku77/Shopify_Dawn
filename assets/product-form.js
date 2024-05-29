@@ -45,6 +45,7 @@ if (!customElements.get('product-form')) {
           .then((response) => response.json())
           .then((response) => {
             console.log(response);
+            return false;
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
