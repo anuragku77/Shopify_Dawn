@@ -171,7 +171,6 @@ if (!customElements.get('product-form')) {
             console.error(error);
           }
         });
-      
         // Check for expired products when the page loads
         this.checkExpiredProducts();
       }
