@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("Key:", localStorageKey);
         console.log("Countdown Time:", countdownTime);
         timersArray.push({ timerElement: timer, countdownTime, variantId });
-    });
+        });
     return timersArray;
-};
+    };
 
     const displayTimers = (timersArray) => {
         timersArray.forEach(timerData => {
