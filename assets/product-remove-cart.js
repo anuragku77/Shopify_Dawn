@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+
     const timers = document.querySelectorAll('.countdown-timer');
 
     const getTimersFromLocalStorage = () => {
-        const timersArray = [];
-        timers.forEach(timer => {
-            const variantId = timer.getAttribute('data-variant-id');
-            console.log("Var",variantId);
-            const localStorageKey = `countdown-timer-${variantId}`;
-            const localStorageValue = 
-            console.log("Key",localStorageKey)
-            const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
-            console.log("count",countdownTime);
-            timersArray.push({ timerElement: timer, countdownTime, variantId });
-        });
-        return timersArray;
-    };
+    const timersArray = [];
+    timers.forEach(timer => {
+        const variantId = timer.getAttribute('data-variant-id');
+        const localStorageKey = `cartItemExpirationTime-${variantId}`; // Use the correct key
+        const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
+        console.log("Variant:", variantId);
+        console.log("Key:", localStorageKey);
+        console.log("Countdown Time:", countdownTime);
+        timersArray.push({ timerElement: timer, countdownTime, variantId });
+    });
+    return timersArray;
+};
 
     const displayTimers = (timersArray) => {
         timersArray.forEach(timerData => {
