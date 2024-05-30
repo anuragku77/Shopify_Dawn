@@ -51,7 +51,6 @@ if (!customElements.get('product-form')) {
           .then((response) => {
             // console.log(response);
             // return false;
-            this.setExpirationTimer(response);
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
@@ -124,10 +123,8 @@ if (!customElements.get('product-form')) {
       
       setExpirationTimer(response) {
         if (response && response.items && response.items.length > 0) {
-
           response.items.forEach(item => {
             const variantId = item.variant_id;
-            console.log(variantId);
             if (variantId) {
               const timestamp = Date.now();
               const expirationTime = timestamp + 1 * 60 * 1000; // 1 minute
@@ -142,26 +139,6 @@ if (!customElements.get('product-form')) {
           });
         }
       }
-
-      removeExpiredProductFromCart(variantId) {
-        fetch('/cart/change.js', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ quantity: 0, id: variantId }),
-        })
-        .then((response) => {
-            console.log(response);
-            if (!response.ok) {
-            throw new Error('Failed to remove item from cart');
-            }
-            console.log(`Variant ID ${variantId} removed from the cart.`);
-        })
-        .catch((error) => {
-            console.error('Error removing item from cart:', error);
-        });
-    }
       
     
     }
