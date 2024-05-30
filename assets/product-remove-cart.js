@@ -24,7 +24,7 @@ checkExpiredProducts() {
     }, 1000);
   };
   
-  async removeExpiredProductFromCart(variantId) {
+  removeExpiredProductFromCart(variantId) {
     try {
       const response = await fetch('/cart/change.js', {
         method: 'POST',
