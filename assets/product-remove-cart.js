@@ -37,4 +37,4 @@ function removeExpiredProductFromCart(variantId) {
     .catch((error) => {
         console.error('Error removing item from cart:', error);
     });
-};
+}
