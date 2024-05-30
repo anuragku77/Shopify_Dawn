@@ -19,7 +19,7 @@ function checkExpiredProducts(){
     }, 1000);
 }
       
-removeExpiredProductFromCart(variantId) {
+function removeExpiredProductFromCart(variantId) {
     fetch('/cart/change.js', {
         method: 'POST',
         headers: {
