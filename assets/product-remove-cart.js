@@ -4,18 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const timers = document.querySelectorAll('.countdown-timer');
 
     const getTimersFromLocalStorage = () => {
-    const timersArray = [];
-    timers.forEach(timer => {
+        const timersArray = [];
+        timers.forEach(timer => {
+            const variantId = timer.getAttribute('data-variant-id');
+            const localStorageKey = `cartItemExpirationTime-${variantId}`;
+            const expirationValue = localStorage.getItem(localStorageKey); // Get the value from localStorage
 
-        const variantId = timer.getAttribute('data-variant-id');
-        const localStorageKey = `cartItemExpirationTime-${variantId}`; // Use the correct key
-        const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
-        console.log("Variant:", variantId);
-        console.log("Key:", localStorageKey);
-        console.log("Countdown Time:", countdownTime);
-        timersArray.push({ timerElement: timer, countdownTime, variantId });
+            // Split the value by ':' to parse minutes and seconds
+            const [minutes, seconds] = expirationValue.split(':').map(part => parseInt(part));
+            const countdownTime = minutes * 60 + seconds; // Convert minutes to seconds and add seconds
+            timersArray.push({ timerElement: timer, countdownTime, variantId });
         });
-
         return timersArray;
     };
 
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (timeLeft > 0) {
                     timeLeft--;
-                    localStorage.setItem(`countdown-timer-${timerData.variantId}`, timeLeft);
+                    localStorage.setItem(`cartItemExpirationTime-${timerData.variantId}`, `${minutes}:${seconds}`); // Update the timer value in localStorage
                 }
             };
 
