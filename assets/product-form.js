@@ -49,7 +49,7 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
-            console.log("full response =", response);
+            // console.log(response);
             // return false;
             this.setExpirationTimer(response);
             if (response.status) {
@@ -123,25 +123,25 @@ if (!customElements.get('product-form')) {
       }
       
       setExpirationTimer(response) {
-        // Extract the variant ID directly from the response
-        const variantId = response.variant_id;
-        console.log("Variant ID:", variantId);
-        if (variantId) {
-          const timestamp = Date.now();
-          console.log(timestamp);
-          const expirationTime = timestamp + 1 * 60 * 1000; // 1 minute
-          localStorage.setItem(`cartItemExpirationTime-${variantId}`, expirationTime);
-          console.log(`Variant ID ${variantId} added to cart. Expiration time set to:`, new Date(expirationTime));
+        if (response && response.items && response.items.length > 0) {
 
-          // Start timer to remove product after expiration
-          setTimeout(() => {
-            this.removeExpiredProductFromCart(variantId);
-          }, expirationTime - timestamp);
-        } else {
-          console.error("Variant ID not found in the response:", response);
+          response.items.forEach(item => {
+            const variantId = item.variant_id;
+            console.log(variantId);
+            if (variantId) {
+              const timestamp = Date.now();
+              const expirationTime = timestamp + 1 * 60 * 1000; // 1 minute
+              localStorage.setItem(`cartItemExpirationTime-${variantId}`, expirationTime);
+              console.log(`Variant ID ${variantId} added to cart. Expiration time set to:`, new Date(expirationTime));
+
+              // Start timer to remove product after expiration
+              setTimeout(() => {
+                this.removeExpiredProductFromCart(variantId);
+              }, expirationTime - timestamp);
+            }
+          });
         }
       }
-
 
       removeExpiredProductFromCart(variantId) {
         fetch('/cart/change.js', {
