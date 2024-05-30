@@ -12,26 +12,29 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Expiration value from local storage:", expirationValue); // Debugging
 
             const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-            const countdownTime = Math.max(0, Math.floor((expirationValue - currentTime) / 1000)); // Convert milliseconds to seconds and ensure it's not negative
-            console.log("Countdown time:", countdownTime); // Debugging
+            const remainingTime = Math.max(0, expirationValue - currentTime); // Remaining time in seconds
+            const minutes = Math.floor(remainingTime / 60); // Calculate minutes
+            const seconds = remainingTime % 60; // Calculate remaining seconds
+            console.log("Minutes:", minutes, "Seconds:", seconds); // Debugging
 
-            timersArray.push({ timerElement: timer, countdownTime, variantId });
+            timersArray.push({ timerElement: timer, minutes, seconds });
         });
         return timersArray;
     };
 
     const displayTimers = (timersArray) => {
         timersArray.forEach(timerData => {
-            const { timerElement, countdownTime } = timerData;
-            let timeLeft = countdownTime;
+            const { timerElement, minutes, seconds } = timerData;
 
             const updateTimer = () => {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
                 timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-
-                if (timeLeft > 0) {
-                    timeLeft--;
+                
+                // Update seconds and minutes if necessary
+                if (seconds > 0) {
+                    seconds--;
+                } else if (minutes > 0) {
+                    minutes--;
+                    seconds = 59;
                 }
             };
 
