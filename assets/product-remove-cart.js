@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
                 
                 // Update seconds and minutes if necessary
-                if (seconds > 0) {
-                    timerData.seconds--; // Update the seconds value in timerData
-                } else if (minutes > 0) {
-                    timerData.minutes--; // Update the minutes value in timerData
-                    timerData.seconds = 59; // Reset seconds to 59
+                if (timerData.seconds > 0) {
+                    timerData.seconds--;
+                } else if (timerData.minutes > 0) {
+                    timerData.minutes--;
+                    timerData.seconds = 59;
                 }
             };
 
