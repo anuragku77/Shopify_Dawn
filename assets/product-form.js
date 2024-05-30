@@ -15,10 +15,6 @@ if (!customElements.get('product-form')) {
 
         this.hideErrors = this.dataset.hideErrors === 'true';
 
-        this.setupAddToCartListener = this.setupAddToCartListener.bind(this);
-        this.checkExpiredProducts = this.checkExpiredProducts.bind(this);
-        this.removeExpiredProductFromCart = this.removeExpiredProductFromCart.bind(this);
-
         this.setupAddToCartListener();
       }
 
