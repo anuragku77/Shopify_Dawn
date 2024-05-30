@@ -17,27 +17,24 @@ document.addEventListener('DOMContentLoaded', function () {
             let seconds = remainingTime % 60; // Calculate remaining seconds (let instead of const)
             console.log("Minutes:", minutes, "Seconds:", seconds); // Debugging
 
-            timersArray.push({ timerElement: timer, getMinutes: () => minutes, getSeconds: () => seconds });
+            timersArray.push({ timerElement: timer, minutes, seconds });
         });
         return timersArray;
     };
 
     const displayTimers = (timersArray) => {
         timersArray.forEach(timerData => {
-            const { timerElement, getMinutes, getSeconds } = timerData;
+            const { timerElement, minutes, seconds } = timerData;
 
             const updateTimer = () => {
-                let minutes = getMinutes();
-                let seconds = getSeconds();
-
                 timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
                 
                 // Update seconds and minutes if necessary
                 if (seconds > 0) {
-                    seconds--;
+                    timerData.seconds--; // Update the seconds value in timerData
                 } else if (minutes > 0) {
-                    minutes--;
-                    seconds = 59;
+                    timerData.minutes--; // Update the minutes value in timerData
+                    timerData.seconds = 59; // Reset seconds to 59
                 }
             };
 
