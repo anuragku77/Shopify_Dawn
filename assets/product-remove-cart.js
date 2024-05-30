@@ -1,4 +1,43 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    const timers = document.querySelectorAll('.countdown-timer');
+
+    const getTimersFromLocalStorage = () => {
+        const timersArray = [];
+        timers.forEach(timer => {
+            const variantId = timer.getAttribute('data-variant-id');
+            const localStorageKey = `countdown-timer-${variantId}`;
+            const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
+            timersArray.push({ timerElement: timer, countdownTime });
+        });
+        return timersArray;
+    };
+
+    const displayTimers = (timersArray) => {
+        timersArray.forEach(timerData => {
+            const { timerElement, countdownTime } = timerData;
+            let timeLeft = countdownTime;
+
+            const updateTimer = () => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    localStorage.setItem(`countdown-timer-${timerData.variantId}`, timeLeft);
+                }
+            };
+
+            timerData.interval = setInterval(updateTimer, 1000);
+            updateTimer();
+        });
+    };
+
+    const timersArray = getTimersFromLocalStorage();
+    displayTimers(timersArray);
+
+    
     checkExpiredProducts();
     
     // Get expired variant IDs and remove them
