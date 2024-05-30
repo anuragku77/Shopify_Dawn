@@ -126,6 +126,7 @@ if (!customElements.get('product-form')) {
         if (response && response.items && response.items.length > 0) {
           response.items.forEach(item => {
             const variantId = item.variant_id;
+            console.log(variantId)
             if (variantId) {
               const timestamp = Date.now();
               const expirationTime = timestamp + 1 * 60 * 1000; // 1 minute
