@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     checkExpiredProducts();
     
-    removeExpiredProductFromCart(asd);
-
+    removeExpiredProductFromCart();
 
     function checkExpiredProducts() {
         setInterval(() => {
@@ -12,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
             productsInCart.forEach(key => {
                 const expirationTime = localStorage.getItem(key);
                 const variantId = key.split('-')[1];
-                console.log("variantId =", variantId)
             
                 if (expirationTime && currentTime >= expirationTime) {
                     // Remove product from the cart
@@ -25,7 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
       
-    function removeExpiredProductFromCart(variantId) {
+    function removeExpiredProductFromCart() {
+        // Retrieve the variant ID from local storage
+        const variantId = localStorage.getItem('expiredVariantId');
+        if (!variantId) return; // If no variant ID found, exit
+
         fetch('/cart/change.js', {
             method: 'POST',
             headers: {
@@ -42,6 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch((error) => {
             console.error('Error removing item from cart:', error);
+        })
+        .finally(() => {
+            // Remove the variant ID from local storage after processing
+            localStorage.removeItem('expiredVariantId');
         });
     }
 });
