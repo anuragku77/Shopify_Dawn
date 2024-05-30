@@ -121,7 +121,7 @@ if (!customElements.get('product-form')) {
         }
       }
       
-      setupAddToCartListener() {
+      setupAddToCartListener(response) {
         let btn = this.submitButton;
         btn.addEventListener('click', async () => {
           const formData = new FormData(this.form);
