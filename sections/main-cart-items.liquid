@@ -432,7 +432,9 @@
                         {%- endif -%}
                       </div>
                     </td>
-                    
+                    <td class="cart-item__countdown small-hide right">
+                      <span class="countdown-timer" data-variant-id="{{ item.variant.id }}"></span>
+                    </td>
                   </tr>
                 {%- endfor -%}
               </tbody>
