@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         timers.forEach(timer => {
             const variantId = timer.getAttribute('data-variant-id');
             const localStorageKey = `countdown-timer-${variantId}`;
-            const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 3600;
+            const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
             timersArray.push({ variantId, countdownTime });
         });
         return timersArray;
@@ -23,10 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 let countdownTime = timerData.countdownTime;
 
                 const updateTimer = () => {
-                    const hours = Math.floor(countdownTime / 3600);
-                    const minutes = Math.floor((countdownTime % 3600) / 60);
+                    const minutes = Math.floor(countdownTime / 60);
                     const seconds = countdownTime % 60;
-                    timerElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                    timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 
                     if (countdownTime > 0) {
                         countdownTime--;
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     displayTimers(timersArray);
 
     checkExpiredProducts();
-    
+
     // Get expired variant IDs and remove them
     const expiredVariantIds = getExpiredVariantIds();
     expiredVariantIds.forEach(variantId => {
