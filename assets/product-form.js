@@ -124,15 +124,13 @@ if (!customElements.get('product-form')) {
       setupAddToCartListener(response) {
         let btn = this.submitButton;
         btn.addEventListener('click', async () => {
-          const formData = new FormData(this.form);
-          const config = fetchConfig('javascript');
-          config.body = formData;
+          // const formData = new FormData(this.form);
+          // const config = fetchConfig('javascript');
+          // config.body = formData;
       
           try {
-            const response = await fetch(`${routes.cart_add_url}`, config);
-            console.log("Response",response);
-            const data = await response.json();
-            console.log("Response Data = ", data);;
+            const data = response;
+            console.log("Response Data = ", data);
       
             if (!data.status && data.variant_id) {
               const timestamp = Date.now();
