@@ -1,4 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize timers and display them in descending order
+    const timers = document.querySelectorAll('.countdown-timer');
+
+    const getTimersFromLocalStorage = () => {
+        const timersArray = [];
+        timers.forEach(timer => {
+            const variantId = timer.getAttribute('data-variant-id');
+            const localStorageKey = `countdown-timer-${variantId}`;
+            const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 3600;
+            timersArray.push({ variantId, countdownTime });
+        });
+        return timersArray;
+    };
+
+    const displayTimers = (timersArray) => {
+        // Sort timersArray in descending order based on countdownTime
+        timersArray.sort((a, b) => b.countdownTime - a.countdownTime);
+
+        timersArray.forEach(timerData => {
+            const timerElement = document.querySelector(`.countdown-timer[data-variant-id="${timerData.variantId}"]`);
+            if (timerElement) {
+                let countdownTime = timerData.countdownTime;
+
+                const updateTimer = () => {
+                    const hours = Math.floor(countdownTime / 3600);
+                    const minutes = Math.floor((countdownTime % 3600) / 60);
+                    const seconds = countdownTime % 60;
+                    timerElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                    if (countdownTime > 0) {
+                        countdownTime--;
+                        localStorage.setItem(`countdown-timer-${timerData.variantId}`, countdownTime);
+                    } else {
+                        clearInterval(timerData.interval);
+                        removeExpiredProductFromCart(timerData.variantId, true); // Pass true to trigger reload
+                        localStorage.removeItem(`countdown-timer-${timerData.variantId}`);
+                    }
+                };
+
+                timerData.interval = setInterval(updateTimer, 1000);
+                updateTimer();
+            }
+        });
+    };
+
+    const timersArray = getTimersFromLocalStorage();
+    displayTimers(timersArray);
+
     checkExpiredProducts();
     
     // Get expired variant IDs and remove them
