@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const variantId = timer.getAttribute('data-variant-id');
             const localStorageKey = `countdown-timer-${variantId}`;
             const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
-            timersArray.push({ timerElement: timer, countdownTime, variantId });
+            timersArray.push({ timerElement: timer, countdownTime });
         });
         return timersArray;
     };
@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const timersArray = getTimersFromLocalStorage();
     displayTimers(timersArray);
+
+    
+    checkExpiredProducts();
     
     // Get expired variant IDs and remove them
     const expiredVariantIds = getExpiredVariantIds();
