@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const expirationValue = localStorage.getItem(localStorageKey); // Get the value from localStorage
 
             // Split the value by ':' to parse minutes and seconds
-            const [minutes, seconds] = expirationValue.split(':').map(part => parseInt(part));
+            const [minutes, seconds] = expirationValue.split(':').map(part =>(part));
             const countdownTime = minutes * 60 + seconds; // Convert minutes to seconds and add seconds
-            console.log( "count"countdownTime)
+            console.log( "count", countdownTime)
             timersArray.push({ timerElement: timer, countdownTime, variantId });
         });
         return timersArray;
