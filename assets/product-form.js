@@ -49,7 +49,7 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
-            console.log(""response);
+            console.log("full response =", response);
             // return false;
             this.setExpirationTimer(response);
             if (response.status) {
