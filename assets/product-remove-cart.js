@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    
     checkExpiredProducts();
     
     // Get expired variant IDs and remove them
