@@ -17,9 +17,10 @@ checkExpiredProducts() {
             }
           });
         }, 1000);
-      }
+      };
       
-      removeExpiredProductFromCart(variantId) {
+removeExpiredProductFromCart(variantId) {
+    
         fetch('/cart/change.js', {
           method: 'POST',
           headers: {
