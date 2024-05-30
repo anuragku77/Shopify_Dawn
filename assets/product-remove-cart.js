@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     seconds--;
                 } else if (minutes > 0) {
                     minutes--;
-                    let seconds = 59;
+                    seconds = 59;
                 }
             };
 
