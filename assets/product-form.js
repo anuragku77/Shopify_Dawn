@@ -125,6 +125,10 @@ if (!customElements.get('product-form')) {
         let btn = this.submitButton;
         btn.addEventListener('click', async () => {
           const formData = new FormData(this.form);
+          const config = fetchConfig('javascript');
+          config.headers['X-Requested-With'] = 'XMLHttpRequest';
+          delete config.headers['Content-Type'];
+          config.body = formData;
       
           try {
             const response = await fetch(`${routes.cart_add_url}`, config);
