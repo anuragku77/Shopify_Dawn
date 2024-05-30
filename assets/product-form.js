@@ -48,8 +48,7 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
-            this.setupAddToCartListener(response)
-            console.log(response);
+            // console.log(response);
             // return false;
             this.setupAddToCartListener(response)
             if (response.status) {
@@ -130,8 +129,10 @@ if (!customElements.get('product-form')) {
           // config.body = formData;
       
           try {
-            const data = response;
-            console.log("Response Data = ", data);
+            const response = await fetch(`${routes.cart_add_url}`, config);
+            console.log("Response",response);
+            const data = await response.json();
+            console.log("Response Data = ", data);;
       
             if (!data.status && data.variant_id) {
               const timestamp = Date.now();
