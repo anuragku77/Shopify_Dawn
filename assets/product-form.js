@@ -123,24 +123,22 @@ if (!customElements.get('product-form')) {
       }
       
       setExpirationTimer(response) {
-        if (response && response.items && response.items.length > 0) {
-          response.items.forEach(item => {
-            const variantId = item.variant_id;
-            console.log("Variant ID:", variantId);
-            if (variantId) {
-              const timestamp = Date.now();
-              const expirationTime = timestamp + 1 * 60 * 1000; // 1 minute
-              localStorage.setItem(`cartItemExpirationTime-${variantId}`, expirationTime);
-              console.log(`Variant ID ${variantId} added to cart. Expiration time set to:`, new Date(expirationTime));
+        // Extract the variant ID directly from the response
+        const variantId = response.variant_id;
+        console.log("Variant ID:", variantId);
+        if (variantId) {
+          const timestamp = Date.now();
+          console.log 
+          const expirationTime = timestamp + 1 * 60 * 1000; // 1 minute
+          localStorage.setItem(`cartItemExpirationTime-${variantId}`, expirationTime);
+          console.log(`Variant ID ${variantId} added to cart. Expiration time set to:`, new Date(expirationTime));
 
-              // Start timer to remove product after expiration
-              setTimeout(() => {
-                this.removeExpiredProductFromCart(variantId);
-              }, expirationTime - timestamp);
-            }
-          });
+          // Start timer to remove product after expiration
+          setTimeout(() => {
+            this.removeExpiredProductFromCart(variantId);
+          }, expirationTime - timestamp);
         } else {
-          console.error("No items found in the response:", response);
+          console.error("Variant ID not found in the response:", response);
         }
       }
 
