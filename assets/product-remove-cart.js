@@ -17,7 +17,7 @@ checkExpiredProducts() {
         }
       });
     }, 1000);
-  }
+  };
   
   removeExpiredProductFromCart(variantId) {
     fetch('/cart/change.js', {
@@ -37,4 +37,4 @@ checkExpiredProducts() {
     .catch((error) => {
       console.error('Error removing item from cart:', error);
     });
-  }
+  };
