@@ -15,14 +15,14 @@ if (!customElements.get('product-form')) {
 
         this.hideErrors = this.dataset.hideErrors === 'true';
 
-        
+        this.setupAddToCartListener();
       }
 
       onSubmitHandler(evt) {
         evt.preventDefault();
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
-        this.setupAddToCartListener();
+        // this.setupAddToCartListener();
         
         this.handleErrorMessage();
 
