@@ -1,23 +1,23 @@
 checkExpiredProducts() {
-        setInterval(() => {
-          const productsInCart = Object.keys(localStorage).filter(key => key.startsWith('cartItemExpirationTime-'));
-          const currentTime = Date.now();
-      
-          productsInCart.forEach(key => {
-            const expirationTime = localStorage.getItem(key);
-            const variantId = key.split('-')[1];
-            console.log("varientId =", variantId)
-      
-            if (expirationTime && currentTime >= expirationTime) {
-              // Remove product from the cart
-              console.log(`Variant ID ${variantId} expired and removed from the cart.`);
-              this.removeExpiredProductFromCart(variantId);
-              localStorage.removeItem(key);
-              location.reload();
-            }
-          });
-        }, 1000);
-      };
+    setInterval(() => {
+        const productsInCart = Object.keys(localStorage).filter(key => key.startsWith('cartItemExpirationTime-'));
+        const currentTime = Date.now();
+    
+        productsInCart.forEach(key => {
+        const expirationTime = localStorage.getItem(key);
+        const variantId = key.split('-')[1];
+        console.log("varientId =", variantId)
+    
+        if (expirationTime && currentTime >= expirationTime) {
+            // Remove product from the cart
+            console.log(`Variant ID ${variantId} expired and removed from the cart.`);
+            this.removeExpiredProductFromCart(variantId);
+            localStorage.removeItem(key);
+            location.reload();
+        }
+        });
+    }, 1000);
+};
       
 removeExpiredProductFromCart(variantId) {
     fetch('/cart/change.js', {
@@ -37,4 +37,4 @@ removeExpiredProductFromCart(variantId) {
     .catch((error) => {
         console.error('Error removing item from cart:', error);
     });
-    };
+};
