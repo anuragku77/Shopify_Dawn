@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     checkExpiredProducts();
     
-    removeExpiredProductFromCart();
+    // Get expired variant IDs and remove them
+    const expiredVariantIds = getExpiredVariantIds();
+    expiredVariantIds.forEach(variantId => {
+        removeExpiredProductFromCart(variantId);
+    });
 
     function checkExpiredProducts() {
         setInterval(() => {
             const productsInCart = Object.keys(localStorage).filter(key => key.startsWith('cartItemExpirationTime-'));
-            console.log("Product = ", productsInCart)
             const currentTime = Date.now();
-        
+
             productsInCart.forEach(key => {
                 const expirationTime = localStorage.getItem(key);
                 const variantId = key.split('-')[1];
@@ -18,18 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log(`Variant ID ${variantId} expired and removed from the cart.`);
                     removeExpiredProductFromCart(variantId);
                     localStorage.removeItem(key);
+
+                    // Store expired variant ID to local storage
+                    let expiredVariantIds = JSON.parse(localStorage.getItem('expiredVariantIds')) || [];
+                    expiredVariantIds.push(variantId);
+                    localStorage.setItem('expiredVariantIds', JSON.stringify(expiredVariantIds));
+
                     location.reload();
                 }
             });
         }, 1000);
     }
-      
-    function removeExpiredProductFromCart() {
-        // Retrieve the variant ID from local storage
-        const variantId = localStorage.getItem('expiredVariantId');
-        console.log("Expire VariantID =" ,variantId)
-        if (!variantId) return; 
-
+    
+    function removeExpiredProductFromCart(variantId) {
         fetch('/cart/change.js', {
             method: 'POST',
             headers: {
@@ -48,8 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error removing item from cart:', error);
         })
         .finally(() => {
-            // Remove the variant ID from local storage after processing
-            localStorage.removeItem('expiredVariantId');
+            // Remove the variant ID from expired variant IDs after processing
+            let expiredVariantIds = JSON.parse(localStorage.getItem('expiredVariantIds')) || [];
+            expiredVariantIds = expiredVariantIds.filter(id => id !== variantId);
+            localStorage.setItem('expiredVariantIds', JSON.stringify(expiredVariantIds));
         });
+    }
+
+    function getExpiredVariantIds() {
+        return JSON.parse(localStorage.getItem('expiredVariantIds')) || [];
     }
 });
