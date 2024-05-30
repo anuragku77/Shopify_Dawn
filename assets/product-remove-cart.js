@@ -6,11 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const timersArray = [];
         timers.forEach(timer => {
             const variantId = timer.getAttribute('data-variant-id');
-            console.log("Var",variantId);
             const localStorageKey = `countdown-timer-${variantId}`;
-            console.log("Key",localStorageKey)
             const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
-            timersArray.push({ timerElement: timer, countdownTime, variantId });
+            timersArray.push({ timerElement: timer, countdownTime });
         });
         return timersArray;
     };
@@ -38,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const timersArray = getTimersFromLocalStorage();
     displayTimers(timersArray);
-
     
     checkExpiredProducts();
     
