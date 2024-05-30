@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
             const remainingTime = Math.max(0, expirationValue - currentTime); // Remaining time in seconds
-            const minutes = Math.floor(remainingTime / 60); // Calculate minutes
-            const seconds = remainingTime % 60; // Calculate remaining seconds
+            let minutes = Math.floor(remainingTime / 60); // Calculate minutes
+            let seconds = remainingTime % 60; // Calculate remaining seconds
             console.log("Minutes:", minutes, "Seconds:", seconds); // Debugging
 
             timersArray.push({ timerElement: timer, minutes, seconds });
