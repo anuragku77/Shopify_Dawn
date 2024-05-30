@@ -15,7 +15,6 @@ if (!customElements.get('product-form')) {
 
         this.hideErrors = this.dataset.hideErrors === 'true';
 
-        this.setupAddToCartListener();
       }
 
       onSubmitHandler(evt) {
@@ -51,6 +50,8 @@ if (!customElements.get('product-form')) {
           .then((response) => {
             // console.log(response);
             // return false;
+        
+
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
