@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Var",variantId);
             const localStorageKey = `countdown-timer-${variantId}`;
             console.log("Key",localStorageKey)
-            const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
-            console.log("count"=countdownTime);
+            const countdownTime = localStorage.getItem(localStorageValue) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
+            console.log("count",countdownTime);
             timersArray.push({ timerElement: timer, countdownTime, variantId });
         });
         return timersArray;
