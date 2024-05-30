@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const localStorageKey = `countdown-timer-${variantId}`;
             console.log("Key",localStorageKey)
             const countdownTime = localStorage.getItem(localStorageKey) ? parseInt(localStorage.getItem(localStorageKey), 10) : 0; // Default to 0 seconds if not found
+            console.log()
             timersArray.push({ timerElement: timer, countdownTime, variantId });
         });
         return timersArray;
