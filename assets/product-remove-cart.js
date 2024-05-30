@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     checkExpiredProducts();
-    removeExpiredProductFromCart();
+    
+    removeExpiredProductFromCart(asd);
 
 
     function checkExpiredProducts() {
