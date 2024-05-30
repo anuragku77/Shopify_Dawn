@@ -17,16 +17,19 @@ document.addEventListener('DOMContentLoaded', function () {
             let seconds = remainingTime % 60; // Calculate remaining seconds (let instead of const)
             console.log("Minutes:", minutes, "Seconds:", seconds); // Debugging
 
-            timersArray.push({ timerElement: timer, minutes, seconds });
+            timersArray.push({ timerElement: timer, getMinutes: () => minutes, getSeconds: () => seconds });
         });
         return timersArray;
     };
 
     const displayTimers = (timersArray) => {
         timersArray.forEach(timerData => {
-            const { timerElement, minutes, seconds } = timerData;
+            const { timerElement, getMinutes, getSeconds } = timerData;
 
             const updateTimer = () => {
+                let minutes = getMinutes();
+                let seconds = getSeconds();
+
                 timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
                 
                 // Update seconds and minutes if necessary
