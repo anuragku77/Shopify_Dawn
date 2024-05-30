@@ -22,7 +22,7 @@
 {%- unless settings.cart_type == 'drawer' -%}
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
-<script src="{{ 'product-remove-cart.js' | asset_url }}" defer="defer"></script>
+{% comment %} <script src="{{ 'product-remove-cart.js' | asset_url }}" defer="defer"></script> {% endcomment %}
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
