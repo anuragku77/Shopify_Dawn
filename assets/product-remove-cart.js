@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Split the value by ':' to parse minutes and seconds
             const [minutes, seconds] = expirationValue.split(':').map(part => parseInt(part));
             const countdownTime = minutes * 60 + seconds; // Convert minutes to seconds and add seconds
-            console.log(countdownTime)
+            console.log( "count"countdownTime)
             timersArray.push({ timerElement: timer, countdownTime, variantId });
         });
         return timersArray;
