@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let expiredVariantIds = JSON.parse(localStorage.getItem('expiredVariantIds')) || [];
             console.log("GGGGGG", expiredVariantIds)
             expiredVariantIds = expiredVariantIds.filter(id => id !== variantId);
+            console.log("GGGGGG2", expiredVariantIds)
             localStorage.setItem('expiredVariantIds', JSON.stringify(expiredVariantIds));
         });
     }
