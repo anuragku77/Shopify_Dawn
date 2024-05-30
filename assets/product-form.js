@@ -15,7 +15,7 @@ if (!customElements.get('product-form')) {
 
         this.hideErrors = this.dataset.hideErrors === 'true';
 
-        
+        this.setupAddToCartListener();
       }
 
       onSubmitHandler(evt) {
@@ -150,7 +150,7 @@ if (!customElements.get('product-form')) {
         });
         // Check for expired products when the page loads
         this.checkExpiredProducts();
-      };
+      }
 
     }
   );
