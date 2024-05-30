@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function removeExpiredProductFromCart() {
         // Retrieve the variant ID from local storage
         const variantId = localStorage.getItem('expiredVariantId');
-        if (!variantId) return; // If no variant ID found, exit
+        if (!variantId) return; 
 
         fetch('/cart/change.js', {
             method: 'POST',
