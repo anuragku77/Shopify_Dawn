@@ -141,7 +141,25 @@ if (!customElements.get('product-form')) {
         }
       }
 
-      
+      removeExpiredProductFromCart(variantId) {
+        fetch('/cart/change.js', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ quantity: 0, id: variantId }),
+        })
+        .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+            throw new Error('Failed to remove item from cart');
+            }
+            console.log(`Variant ID ${variantId} removed from the cart.`);
+        })
+        .catch((error) => {
+            console.error('Error removing item from cart:', error);
+        });
+    }
       
     
     }
