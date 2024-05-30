@@ -23,8 +23,9 @@ if (!customElements.get('product-form')) {
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
         this.setupAddToCartListener();
-        this.handleErrorMessage();
         
+        this.handleErrorMessage();
+
 
         this.submitButton.setAttribute('aria-disabled', true);
         this.submitButton.classList.add('loading');
