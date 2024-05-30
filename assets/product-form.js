@@ -15,6 +15,7 @@ if (!customElements.get('product-form')) {
 
         this.hideErrors = this.dataset.hideErrors === 'true';
 
+        this.setupAddToCartListener();
       }
 
       onSubmitHandler(evt) {
@@ -50,7 +51,6 @@ if (!customElements.get('product-form')) {
           .then((response) => {
             // console.log(response);
             // return false;
-            this.setupAddToCartListener(response)
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
@@ -121,12 +121,12 @@ if (!customElements.get('product-form')) {
         }
       }
       
-      setupAddToCartListener(response) {
+      setupAddToCartListener() {
         let btn = this.submitButton;
         btn.addEventListener('click', async () => {
-          // const formData = new FormData(this.form);
-          // const config = fetchConfig('javascript');
-          // config.body = formData;
+          const formData = new FormData(this.form);
+          const config = fetchConfig('javascript');
+          config.body = formData;
       
           try {
             const response = await fetch(`${routes.cart_add_url}`, config);
