@@ -122,7 +122,7 @@ if (!customElements.get('product-form')) {
         }
       }
       
-      // setExpirationTimer(response) {
+      setExpirationTimer(response) {
         if (response && response.items && response.items.length > 0) {
           response.items.forEach(item => {
             const variantId = item.variant_id;
