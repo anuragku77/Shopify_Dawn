@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Get expired variant IDs and remove them
     const expiredVariantIds = getExpiredVariantIds();
-    console.log("expire = ")
+    console.log("expire = ", expiredVariantIds);
     expiredVariantIds.forEach(variantId => {
         removeExpiredProductFromCart(variantId);
     });
