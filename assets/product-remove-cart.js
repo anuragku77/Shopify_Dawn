@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let timeLeft = countdownTime;
 
             const updateTimer = () => {
+                console.log("time left =")
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
                 timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
