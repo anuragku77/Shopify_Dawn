@@ -126,8 +126,6 @@ if (!customElements.get('product-form')) {
         btn.addEventListener('click', async () => {
           const formData = new FormData(this.form);
           const config = fetchConfig('javascript');
-          config.headers['X-Requested-With'] = 'XMLHttpRequest';
-          delete config.headers['Content-Type'];
           config.body = formData;
       
           try {
