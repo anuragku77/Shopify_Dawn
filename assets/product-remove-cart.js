@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     checkExpiredProducts();
+    removeExpiredProductFromCart(;)
 
-    
+
     function checkExpiredProducts() {
         setInterval(() => {
             const productsInCart = Object.keys(localStorage).filter(key => key.startsWith('cartItemExpirationTime-'));
