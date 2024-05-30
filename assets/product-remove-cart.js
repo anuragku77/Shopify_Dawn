@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .finally(() => {
             // Remove the variant ID from expired variant IDs after processing
             let expiredVariantIds = JSON.parse(localStorage.getItem('expiredVariantIds')) || [];
+            console.log("")
             expiredVariantIds = expiredVariantIds.filter(id => id !== variantId);
             localStorage.setItem('expiredVariantIds', JSON.stringify(expiredVariantIds));
         });
