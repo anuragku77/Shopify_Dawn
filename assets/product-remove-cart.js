@@ -1,4 +1,4 @@
- function checkExpiredProducts() {
+checkExpiredProducts() => {
     setInterval(() => {
         const productsInCart = Object.keys(localStorage).filter(key => key.startsWith('cartItemExpirationTime-'));
         const currentTime = Date.now();
