@@ -150,7 +150,8 @@ if (!customElements.get('product-form')) {
         });
         // Check for expired products when the page loads
         this.checkExpiredProducts();
-      }
+      };
+
     }
   );
 }
