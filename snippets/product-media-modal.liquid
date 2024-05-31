@@ -9,6 +9,11 @@
   {% render 'product-media-modal' %}
 {% endcomment %}
 
+{% assign variant_grouping_position = section.settings.variant_grouping_position | minus: 1 %}
+{% assign variant_image_groupings = product.metafields.custom.variant_images_grouping_list.value %}
+{% assign featured_media = product.selected_or_first_available_variant.featured_media %}
+{% assign hide_image = false %}
+
 <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
   <div
     class="product-media-modal__dialog color-{{ section.settings.color_scheme }} gradient"
