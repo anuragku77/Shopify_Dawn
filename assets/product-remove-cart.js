@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
         timers.forEach(timer => {
             const variantId = timer.getAttribute('data-variant-id');
             const localStorageKey = `cartItemExpirationTime-${variantId}`;
-            const expirationValue = parseInt(localStorage.getItem(localStorageKey)); // Get the value from localStorage and parse it as an integer
-            console.log("Expiration value from local storage:", expirationValue); // Debugging
+            const expirationValue = parseInt(localStorage.getItem(localStorageKey)); 
+            console.log("Expiration value from local storage:", expirationValue);
 
             const currentTime = Date.now();
             const remainingTime = Math.max(0, expirationValue - currentTime); // Remaining time in milliseconds
