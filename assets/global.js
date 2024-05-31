@@ -1166,6 +1166,8 @@ class VariantSelects extends HTMLElement {
     if (modalContent && newModalContent) modalContent.innerHTML = newModalContent.innerHTML;
   }
 
+  
+
   renderProductInfo() {
     const requestedVariantId = this.currentVariant.id;
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
