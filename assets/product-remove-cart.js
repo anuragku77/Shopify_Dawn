@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
-
     const timers = document.querySelectorAll('.countdown-timer');
 
     const getTimersFromLocalStorage = () => {
@@ -11,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const expirationValue = parseInt(localStorage.getItem(localStorageKey)); // Get the value from localStorage and parse it as an integer
             console.log("Expiration value from local storage:", expirationValue); // Debugging
 
-            const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-            const remainingTime = Math.max(0, expirationValue - currentTime); // Remaining time in seconds
-            let minutes = Math.floor(remainingTime / 60); // Calculate minutes (let instead of const)
-            let seconds = remainingTime % 60; // Calculate remaining seconds (let instead of const)
+            const currentTime = Date.now();
+            const remainingTime = Math.max(0, expirationValue - currentTime); // Remaining time in milliseconds
+            let minutes = Math.floor(remainingTime / 60000); // Calculate minutes
+            let seconds = Math.floor((remainingTime % 60000) / 1000); // Calculate remaining seconds
             console.log("Minutes:", minutes, "Seconds:", seconds); // Debugging
 
             timersArray.push({ timerElement: timer, minutes, seconds });
@@ -28,13 +26,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const updateTimer = () => {
                 timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-                
+
                 // Update seconds and minutes if necessary
                 if (timerData.seconds > 0) {
                     timerData.seconds--;
                 } else if (timerData.minutes > 0) {
                     timerData.minutes--;
                     timerData.seconds = 59;
+                } else {
+                    clearInterval(timerData.interval);
                 }
             };
 
@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const timersArray = getTimersFromLocalStorage();
     displayTimers(timersArray);
-
 
     checkExpiredProducts();
 
