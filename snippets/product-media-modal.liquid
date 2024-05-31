@@ -71,7 +71,6 @@
       {%- liquid
         if product.selected_or_first_available_variant.featured_media != null
           assign media = product.selected_or_first_available_variant.featured_media
-          render 'product-media', media: media, loop: section.settings.enable_video_looping, varian
           render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image, hide_image: hide_image, variant_grouping_name: variant_grouping_name
         endif
       -%}
