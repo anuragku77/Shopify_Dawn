@@ -82,14 +82,52 @@
           else
             assign variant_image = false
           endif
-          -%}
+        -%}
 
+        {% if section.settings.group_variants_enable
+          and product.has_only_default_variant != true
+          and product.metafields.custom.disable_image_grouping.value != true
+        %}
+          {% if section.settings.group_variants_source == 'metafield' %}
+            {%- assign variant_grouping_name = null -%}
+            {% assign hide_image = true %}
+            {% for grouping in variant_image_groupings %}
+              {% assign file_group = grouping.file_grouping.value %}
+              {% assign variant_group = grouping.variants.value %}
+              {% for file in file_group %}
+                {% if media == file %}
+                  {% assign variant_grouping_name = grouping.name.value %}
+                  {% for variant_in_group in variant_group %}
+                    {% if variant_in_group.id == product.selected_or_first_available_variant.id %}
+                      {% assign hide_image = false %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                {% if hide_image == false %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+              {% if hide_image == false %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            {%- assign variant_grouping_name = null -%}
+            {% if section.settings.group_variants_source == 'filename' %}
+              {%- assign extracted_parts = media.src | split: section.settings.variant_grouping_delimiter -%}
+            {% elsif section.settings.group_variants_source == 'alttext' %}
+              {%- assign extracted_parts = media.alt | split: section.settings.variant_grouping_delimiter -%}
+            {% endif %}
+            {%- assign hide_image = true -%}
+            {%- assign variant_grouping_name = extracted_parts[variant_grouping_position] -%}
+            {% if selected_or_first_available_variant_grouping_name == variant_grouping_name %}
+              {%- assign hide_image = false -%}
+            {%- endif -%}
+          {% endif %}
+        {% endif %}
 
-          
-
-
-
-          {%- liquid
+        {%- liquid
           unless media.id == product.selected_or_first_available_variant.featured_media.id
             render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
           endunless
