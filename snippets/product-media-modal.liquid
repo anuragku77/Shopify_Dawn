@@ -83,6 +83,7 @@
             assign variant_image = false
           endif
         -%}
+        
 
         {% if section.settings.group_variants_enable
           and product.has_only_default_variant != true
@@ -126,6 +127,7 @@
             {%- endif -%}
           {% endif %}
         {% endif %}
+
 
         {%- liquid
           unless media.id == product.selected_or_first_available_variant.featured_media.id
