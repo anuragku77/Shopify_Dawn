@@ -11,6 +11,20 @@
   {% render 'product-media-gallery' %}
 {% endcomment %}
 
+{% assign variant_grouping_position = section.settings.variant_grouping_position | minus: 1 %}
+{% assign variant_image_groupings = product.metafields.custom.variant_images_grouping_list.value %}
+
+<style>
+  .hide-image:not(.is-active) {
+    display: none;
+  } 
+  
+  .product-media-modal__content .hide-image:not(.is-active) {
+    display: none;
+  }
+</style>
+
+
 {%- liquid
   if section.settings.hide_variants and variant_images.size == product.media.size
     assign single_media_visible = true
