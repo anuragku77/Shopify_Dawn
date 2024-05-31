@@ -1155,8 +1155,8 @@ class VariantSelects extends HTMLElement {
     }
 
      // Call updateMediaGrouping after the media gallery has been updated
-    const mediaGallery = document.querySelector(`[id^="MediaGallery-${this.dataset.section}"]`);
-  updateMediaGrouping(mediaGallery);
+      const mediaGallery = document.querySelector(`[id^="MediaGallery-${this.dataset.section}"]`);
+      updateMediaGrouping(mediaGallery);
 
     if (this.currentVariant.featured_media) {
       document
