@@ -948,7 +948,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -1154,9 +1154,9 @@ class VariantSelects extends HTMLElement {
       });
     }
 
-     // Call updateMediaGrouping after the media gallery has been updated
-      const mediaGallery = document.querySelector(`[id^="MediaGallery-${this.dataset.section}"]`);
-      updateMediaGrouping(mediaGallery);
+    // Call updateMediaGrouping after the media gallery has been updated
+    const mediaGallery = document.querySelector(`[id^="MediaGallery-${this.dataset.section}"]`);
+    updateMediaGrouping(mediaGallery);
 
     if (this.currentVariant.featured_media) {
       document
@@ -1172,21 +1172,21 @@ class VariantSelects extends HTMLElement {
 
   updateMediaGrouping(mediaGallery) {
     if (!mediaGallery) {
-      return; 
+      return;
     }
     const mediaGalleryId = mediaGallery.id;
     const groupVariants = mediaGallery.getAttribute('data-group-variants');
     const hasOnlyDefaultVariant = mediaGallery.getAttribute('data-has-only-default-variant');
     const disableImageGrouping = mediaGallery.getAttribute('data-disable-image-grouping');
     if (groupVariants == 'false' || hasOnlyDefaultVariant === 'true' || disableImageGrouping === 'true') {
-      return; 
+      return;
     }
     const selectedVariantId = this.currentVariant.id;
     const featuredMedia = document.querySelector('.product__media-item.is-active');
     const featuredVariantGrouping = featuredMedia ? featuredMedia.getAttribute('data-variant-grouping') : null;
-  
+
     document.querySelectorAll(`#${mediaGalleryId} .product__media-item, #${mediaGalleryId} .thumbnail-list__item, .product-media-modal__content .product-modal-image`).forEach((mediaItem) => {
-    const mediaVariantGrouping = mediaItem.getAttribute('data-variant-grouping');
+      const mediaVariantGrouping = mediaItem.getAttribute('data-variant-grouping');
       if (mediaVariantGrouping !== featuredVariantGrouping || mediaVariantGrouping === '') {
         mediaItem.classList.add('hide-image');
       } else {
@@ -1194,15 +1194,14 @@ class VariantSelects extends HTMLElement {
       }
     });
   }
-  
+
 
   renderProductInfo() {
     const requestedVariantId = this.currentVariant.id;
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
