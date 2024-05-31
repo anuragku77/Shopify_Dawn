@@ -83,7 +83,7 @@
             assign variant_image = false
           endif
         -%}
-        
+
 
         {% if section.settings.group_variants_enable
           and product.has_only_default_variant != true
@@ -132,6 +132,8 @@
         {%- liquid
           unless media.id == product.selected_or_first_available_variant.featured_media.id
             render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
+            render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image, hide_image: hide_image, variant_grouping_name: variant_grouping_name
+
           endunless
         -%}
       {%- endfor -%}
