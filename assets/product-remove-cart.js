@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 console.log(`Variant ID ${variantId} removed from the cart.`);
                 if (shouldReload) {
-                    location.reload(); // Reload the page after removing the product
+                    location.reload();
                 }
             })
             .catch((error) => {
