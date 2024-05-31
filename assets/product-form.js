@@ -23,7 +23,7 @@ if (!customElements.get('product-form')) {
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
         // this.setupAddToCartListener();
-        
+
         this.handleErrorMessage();
 
 
@@ -120,39 +120,39 @@ if (!customElements.get('product-form')) {
           this.errorMessage.textContent = errorMessage;
         }
       }
-      
+
       setupAddToCartListener() {
         let btn = this.submitButton;
         btn.addEventListener('click', async () => {
-            const formData = new FormData(this.form);
-            const config = fetchConfig('javascript');
-            config.headers['X-Requested-With'] = 'XMLHttpRequest';
-            delete config.headers['Content-Type'];
-            config.body = formData;
-    
-            try {
-                const response = await fetch(`${routes.cart_add_url}`, config);
-                const data = await response.json();
-                console.log("Response Data = ", data);
-    
-                if (!data.status && data.variant_id) {
-                    const timestamp = Date.now();
-                    const expirationTime = timestamp + 1 * 60 * 1000;
-                    localStorage.setItem(`cartItemExpirationTime-${data.variant_id}`, expirationTime);
-                    console.log(`Variant ID ${data.variant_id} added to cart. Expiration time set to:`, new Date(expirationTime));
-    
-                    // Start timer to remove product after expiration
-                    setTimeout(() => {
-                        this.removeExpiredProductFromCart(data.variant_id);
-                    }, expirationTime - timestamp);
-                }
-            } catch (error) {
-                console.error(error);
+          const formData = new FormData(this.form);
+          const config = fetchConfig('javascript');
+          config.headers['X-Requested-With'] = 'XMLHttpRequest';
+          delete config.headers['Content-Type'];
+          config.body = formData;
+
+          try {
+            const response = await fetch(`${routes.cart_add_url}`, config);
+            const data = await response.json();
+            console.log("Response Data = ", data);
+
+            if (!data.status && data.variant_id) {
+              const timestamp = Date.now();
+              const expirationTime = timestamp + 1 * 60 * 1000;
+              localStorage.setItem(`cartItemExpirationTime-${data.variant_id}`, expirationTime);
+              console.log(`Variant ID ${data.variant_id} added to cart. Expiration time set to:`, new Date(expirationTime));
+
+              // Start timer to remove product after expiration
+              setTimeout(() => {
+                this.removeExpiredProductFromCart(data.variant_id);
+              }, expirationTime - timestamp);
             }
+          } catch (error) {
+            console.error(error);
+          }
         });
         // Check for expired products when the page loads
         this.checkExpiredProducts();
-    }
+      }
     }
   );
 }
