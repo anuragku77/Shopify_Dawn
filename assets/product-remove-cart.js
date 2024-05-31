@@ -25,17 +25,21 @@ document.addEventListener('DOMContentLoaded', function () {
             const { timerElement, minutes, seconds } = timerData;
 
             const updateTimer = () => {
-                timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-
-                // Update seconds and minutes if necessary
-                if (timerData.seconds > 0) {
-                    timerData.seconds--;
-                } else if (timerData.minutes > 0) {
-                    timerData.minutes--;
-                    timerData.seconds = 59;
-                } else {
+                if (timerData.seconds === 0 && timerData.minutes === 0) {
                     clearInterval(timerData.interval);
+                    return;
                 }
+                
+                if (timerData.seconds === 0) {
+                    if (timerData.minutes > 0) {
+                        timerData.minutes--;
+                        timerData.seconds = 59;
+                    }
+                } else {
+                    timerData.seconds--;
+                }
+
+                timerElement.textContent = `${timerData.minutes}:${timerData.seconds < 10 ? '0' + timerData.seconds : timerData.seconds}`;
             };
 
             timerData.interval = setInterval(updateTimer, 1000);
