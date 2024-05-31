@@ -50,56 +50,9 @@
 <script src="{{ 'product-remove-cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
-<div class="cart-container" id="cart-container"></div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Fetch the cart contents
-      fetch('/cart.js')
-        .then(response => response.json())
-        .then(cart => {
-          // Check if the cart quantity is greater than zero
-          if (cart.items.length > 0) {
-            // Create the Clear Cart button
-            const clearCartButton = document.createElement('a');
-            clearCartButton.href = '/cart/clear';
-            clearCartButton.className = 'clear-cart';
-            clearCartButton.textContent = 'Clear Cart';
-
-            // Add click event listener to the Clear Cart button
-            clearCartButton.addEventListener('click', function(e) {
-              e.preventDefault();
-
-              fetch('/cart/clear.js', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
-              })
-              .then(response => {
-                if (response.ok) {
-                  alert('Cleared the cart!');
-                  response.json().then(() => {
-                    window.location.reload(); // Reload the page after successful cart clearing
-                  });
-                } else {
-                  throw new Error('Failed to clear the cart.');
-                }
-              })
-              .catch(error => {
-                console.error('Error:', error);
-              });
-            });
-
-            // Append the Clear Cart button to the container
-            document.getElementById('cart-container').appendChild(clearCartButton);
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching cart contents:', error);
-        });
-    });
-  </script>
+<div class="cart-container">
+  <a href="/cart/clear" class="clear-cart">Clear Cart</a>
+</div>
 
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
