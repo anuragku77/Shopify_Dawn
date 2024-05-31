@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
         timers.forEach(timer => {
             const variantId = timer.getAttribute('data-variant-id');
             const localStorageKey = `cartItemExpirationTime-${variantId}`;
-            const expirationValue = parseInt(localStorage.getItem(localStorageKey)); 
+            const expirationValue = parseInt(localStorage.getItem(localStorageKey));
             console.log("Expiration value from local storage:", expirationValue);
 
             const currentTime = Date.now();
-            const remainingTime = Math.max(0, expirationValue - currentTime); 
-            let minutes = Math.floor(remainingTime / 60000); 
-            let seconds = Math.floor((remainingTime % 60000) / 1000); 
+            const remainingTime = Math.max(0, expirationValue - currentTime);
+            let minutes = Math.floor(remainingTime / 60000);
+            let seconds = Math.floor((remainingTime % 60000) / 1000);
             console.log("Minutes:", minutes, "Seconds:", seconds);
 
             timersArray.push({ timerElement: timer, minutes, seconds });
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     clearInterval(timerData.interval);
                     return;
                 }
-                
+
                 if (timerData.seconds === 0) {
                     if (timerData.minutes > 0) {
                         timerData.minutes--;
