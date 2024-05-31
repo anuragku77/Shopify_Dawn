@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Expiration value from local storage:", expirationValue);
 
             const currentTime = Date.now();
-            const remainingTime = Math.max(0, expirationValue - currentTime); // Remaining time in milliseconds
-            let minutes = Math.floor(remainingTime / 60000); // Calculate minutes
+            const remainingTime = Math.max(0, expirationValue - currentTime); 
+            let minutes = Math.floor(remainingTime / 60000); 
             let seconds = Math.floor((remainingTime % 60000) / 1000); // Calculate remaining seconds
             console.log("Minutes:", minutes, "Seconds:", seconds); // Debugging
 
