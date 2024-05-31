@@ -495,3 +495,15 @@
   ]
 }
 {% endschema %}
+script>
+$('.clear-cart').on('click',function(e){
+  e.preventDefault();
+  $.ajax({
+    type: "POST",
+    url: '/cart/clear.js',
+    success: function(){
+      alert('Cleared the cart!');
+    },
+    dataType: 'json'
+  });
+})
