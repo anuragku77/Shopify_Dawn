@@ -63,6 +63,10 @@
   {% endif %}
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
+  data-group-variants="{{ section.settings.group_variants_enable }}"
+  data-has-only-default-variant="{{ product.has_only_default_variant }}"
+  data-disable-image-grouping="{{ product.metafields.custom.disable_image_grouping.value }}"
+
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
   <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
