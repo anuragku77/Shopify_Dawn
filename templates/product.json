@@ -73,7 +73,7 @@
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": false,
-        "group_variants_enable": true,
+        "group_variants_enable": false,
         "group_variants_source": "metafield",
         "variant_grouping_delimiter": "__",
         "variant_grouping_position": 1,
