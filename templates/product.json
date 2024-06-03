@@ -70,7 +70,7 @@
         "gallery_layout": "stacked",
         "media_position": "left",
         "image_zoom": "lightbox",
-        "mobile_thumbnails": "hide",
+        "mobile_thumbnails": "columns",
         "hide_variants": false,
         "enable_video_looping": false,
         "group_variants_enable": true,
