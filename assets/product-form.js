@@ -137,7 +137,7 @@ if (!customElements.get('product-form')) {
 
             if (!data.status && data.variant_id) {
               const timestamp = Date.now();
-              const expirationTime = timestamp + 55 * 60 * 1000;
+              const expirationTime = timestamp + 0.5 * 60 * 1000;
               localStorage.setItem(`cartItemExpirationTime-${data.variant_id}`, expirationTime);
               console.log(`Variant ID ${data.variant_id} added to cart. Expiration time set to:`, new Date(expirationTime));
 
