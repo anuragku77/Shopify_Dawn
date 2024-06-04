@@ -144,9 +144,9 @@ if (!customElements.get('product-form')) {
               // Start timer to remove product after expiration
               setTimeout(() => {
                 if(removeExpiredProductFromCart){
+                  this.removeExpiredProductFromCart(data.variant_id);
 
                 }
-                
               }, expirationTime - timestamp);
             }
           } catch (error) {
