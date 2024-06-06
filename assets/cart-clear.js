@@ -1,4 +1,3 @@
-
 document.querySelector('.clear-cart').addEventListener('click', function (e) {
     e.preventDefault();
 
