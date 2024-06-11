@@ -38,14 +38,14 @@
               <span class="original-price">{{ product.price | money }}</span>
             </p>
           </a>
-          <button type="button" class="add-to-bundle-btn" data-product-id="{{ product.id }}">Add to bundle</button>
+          <button type="button" class="add-to-bundle-btn" data-product-id="{{ product.id }}" data-product-title="{{ product.title }}">Add to bundle</button>
         </div>
       {% endif %}
     {% endfor %}
   </div>
   <div class="bundle-contents">
     <h4>Bundle contents</h4>
-    <p>Add 2 items to get a discount</p>
+    <p id="bundle-message">Add 2 items to get a discount</p>
     <ul id="bundle-list"></ul>
     <button type="button" id="add-bundle-to-cart">Add to cart</button>
   </div>
@@ -56,20 +56,28 @@
 
   function updateBundleList() {
     const bundleList = document.getElementById('bundle-list');
+    const bundleMessage = document.getElementById('bundle-message');
     bundleList.innerHTML = '';
     bundle.forEach(product => {
       const listItem = document.createElement('li');
       listItem.textContent = product.title;
       bundleList.appendChild(listItem);
     });
+    
+    const remaining = 2 - bundle.length;
+    if (remaining > 0) {
+      bundleMessage.textContent = `Add ${remaining} more item${remaining > 1 ? 's' : ''} to get a discount`;
+    } else {
+      bundleMessage.textContent = 'You qualify for a discount!';
+    }
   }
 
   document.querySelectorAll('.add-to-bundle-btn').forEach(button => {
     button.addEventListener('click', function() {
       const productId = this.getAttribute('data-product-id');
-      const product = Shopify.products.find(p => p.id == productId);
+      const productTitle = this.getAttribute('data-product-title');
       if (!bundle.some(p => p.id == productId)) {
-        bundle.push(product);
+        bundle.push({ id: productId, title: productTitle });
         updateBundleList();
         alert('Product added to bundle!');
       } else {
@@ -80,24 +88,28 @@
 
   document.getElementById('add-bundle-to-cart').addEventListener('click', function() {
     if (bundle.length >= 2) {
-      bundle.forEach(product => {
-        fetch('/cart/add.js', {
+      const requests = bundle.map(product => {
+        return fetch('/cart/add.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
           },
           body: JSON.stringify({
-            id: product.variants[0].id,
+            id: product.id,
             quantity: 1
           })
-        }).then(response => response.json()).then(data => {
-          if (data.status !== 200) {
-            console.error('Error adding product to cart:', data);
+        }).then(response => response.json());
+      });
+      
+      Promise.all(requests)
+        .then(results => {
+          if (results.every(result => result.status === 200)) {
+            alert('Bundle added to cart!');
+          } else {
+            console.error('Error adding some products to cart:', results);
           }
         });
-      });
-      alert('Bundle added to cart!');
     } else {
       alert('Please add at least 2 items to the bundle.');
     }
@@ -182,4 +194,3 @@
     background-color: #218838;
   }
 </style>
-
