@@ -136,23 +136,31 @@
   
 
 <style>
-    .product-bundles {
-        display: flex;
-        flex-direction: row; /* Change to row */
-        align-items: flex-start; /* Align items to the start */
+    .product-bundles-container {
         background-color: white;
         padding: 20px;
         border-radius: 10px;
-        color: black; /* Changed color to black for better readability */
+        color: black;
       }
       
-      .product-bundles h3,
+      .product-bundles {
+        display: flex;
+        flex-direction: row; /* Ensure row layout */
+        align-items: flex-start; /* Align items to the start */
+      }
+      
+      .product-bundles h3 {
+        width: 100%;
+        margin-bottom: 20px; /* Space below the heading */
+      }
+      
       .product-bundles h4 {
         margin-bottom: 20px;
       }
       
       .bundle-items {
         display: flex;
+        flex-wrap: wrap; /* Allow wrapping if needed */
         justify-content: space-around;
         width: 70%; /* Adjust width */
       }
@@ -269,5 +277,6 @@
       #add-bundle-to-cart:hover {
         background-color: #218838;
       }
+      
       
 </style>
