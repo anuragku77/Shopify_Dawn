@@ -1,0 +1,149 @@
+{% schema %}
+{
+  "name": "Product Bundles",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Bundle Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="product-bundles">
+  <h3>Products Bundle</h3>
+  <div class="bundle-items">
+    {% for block in section.blocks %}
+      {% assign product = all_products[block.settings.product] %}
+      {% if product %}
+        <div class="bundle-item">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <p>{{ product.title }}</p>
+            <p class="product-price">
+              <span class="original-price">{{ product.price | money }}</span>
+            </p>
+          </a>
+          <button type="button" class="add-to-bundle-btn" data-product-id="{{ product.id }}">Add to bundle</button>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="bundle-contents">
+    <h4>Bundle contents</h4>
+    <p>Add 2 items to get a discount</p>
+    <ul id="bundle-list"></ul>
+    <button type="button" id="add-bundle-to-cart">Add to cart</button>
+  </div>
+</div>
+
+<script>
+  let bundle = [];
+
+  function updateBundleList() {
+    const bundleList = document.getElementById('bundle-list');
+    bundleList.innerHTML = '';
+    bundle.forEach(product => {
+      const listItem = document.createElement('li');
+      listItem.textContent = product.title;
+      bundleList.appendChild(listItem);
+    });
+  }
+
+  document.querySelectorAll('.add-to-bundle-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const productId = this.getAttribute('data-product-id');
+      const product = Shopify.products.find(p => p.id == productId);
+      if (!bundle.some(p => p.id == productId)) {
+        bundle.push(product);
+        updateBundleList();
+        alert('Product added to bundle!');
+      } else {
+        alert('Product already in bundle!');
+      }
+    });
+  });
+
+  document.getElementById('add-bundle-to-cart').addEventListener('click', function() {
+    if (bundle.length >= 2) {
+      bundle.forEach(product => {
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify({
+            id: product.variants[0].id,
+            quantity: 1
+          })
+        }).then(response => response.json()).then(data => {
+          if (data.status !== 200) {
+            console.error('Error adding product to cart:', data);
+          }
+        });
+      });
+      alert('Bundle added to cart!');
+    } else {
+      alert('Please add at least 2 items to the bundle.');
+    }
+  });
+</script>
+
+<style>
+  .product-bundles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1d1d1f;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+  }
+  .product-bundles h3, .product-bundles h4 {
+    margin-bottom: 20px;
+  }
+  .bundle-items {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .bundle-item {
+    background-color: #2c2c2e;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .bundle-item img {
+    max-width: 100px;
+    margin-bottom: 10px;
+  }
+  .bundle-item p {
+    color: white;
+  }
+  .product-price .original-price {
+    color: #e0e0e0;
+  }
+  .add-to-bundle-btn {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .
