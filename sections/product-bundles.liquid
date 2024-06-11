@@ -126,9 +126,14 @@
           items: cartItems
         })
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to add bundle to cart');
+        }
+        return response.json();
+      })
       .then(result => {
-        if (result.status === 'success') {
+        if (result && result.status === 'success') {
           alert('Bundle added to cart!');
         } else {
           console.error('Error adding bundle to cart:', result);
@@ -141,6 +146,7 @@
       alert('Please add at least 2 items to the bundle.');
     }
   });
+  
   
 </script>
 
