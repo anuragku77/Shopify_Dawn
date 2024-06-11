@@ -32,10 +32,11 @@
       {% if product %}
         <div class="bundle-item">
           <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" height=150 width>
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
             <p>{{ product.title }}</p>
             <p class="product-price">
-              <span class="original-price">{{ product.price | money }}</span>
+              <span class="original-price">{{ product.compare_at_price | money }}</span>
+              <span class="discounted-price">{{ product.price | money }}</span>
             </p>
           </a>
           <button type="button" class="add-to-bundle-btn" data-product-id="{{ product.variants.first.id }}" data-product-title="{{ product.title }}" data-product-image="{{ product.featured_image | img_url: 'small' }}">Add to bundle</button>
@@ -146,9 +147,8 @@
       alert('Please add at least 2 items to the bundle.');
     }
   });
-  
-  
 </script>
+
 
 <style>
   .product-bundles {
