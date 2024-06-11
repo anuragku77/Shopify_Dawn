@@ -99,11 +99,6 @@
         "padding_bottom": 28
       }
     },
-    "product_bundles_6x8gxy": {
-      "type": "product-bundles",
-      "settings": {
-      }
-    },
     "product_bundles_BaTnTQ": {
       "type": "product-bundles",
       "blocks": {
@@ -138,7 +133,6 @@
   "order": [
     "main",
     "related-products",
-    "product_bundles_6x8gxy",
     "product_bundles_BaTnTQ"
   ]
 }
