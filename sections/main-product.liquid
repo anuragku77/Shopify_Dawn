@@ -45,6 +45,7 @@
   {%- if request.design_mode -%}
     <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
+
   {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
@@ -55,8 +56,8 @@
       media="print"
       onload="this.media='all'"
     >
-      <link
-        id="ModelViewerOverride"
+    <link
+      id="ModelViewerOverride"
       rel="stylesheet"
       href="{{ 'component-model-viewer-ui.css' | asset_url }}"
       media="print"
@@ -78,9 +79,8 @@
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
-          
+
           {%- for block in section.blocks -%}
-            Stock 2 {{ block.settings.show_inventory_quantity }}
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
@@ -165,7 +165,6 @@
                           -}}
                         {%- else -%}
                           {{- 'products.product.inventory_in_stock' | t -}}
-                          Stock {{ 'products.product.inventory' }}
                         {%- endif -%}
                       {%- endif -%}
                     {%- else -%}
