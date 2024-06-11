@@ -1,3 +1,29 @@
+{% schema %}
+{
+  "name": "Product Bundles",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Bundle Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Bundles",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
+
 <div class="product-bundles-container">
     <h3>Products Bundle</h3>
     <div class="product-bundles">
