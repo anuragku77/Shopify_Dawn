@@ -98,10 +98,47 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "product_bundles_6x8gxy": {
+      "type": "product-bundles",
+      "settings": {
+      }
+    },
+    "product_bundles_BaTnTQ": {
+      "type": "product-bundles",
+      "blocks": {
+        "product_WdAkTk": {
+          "type": "product",
+          "settings": {
+            "product": "black-t-shirts"
+          }
+        },
+        "product_fG6ERA": {
+          "type": "product",
+          "settings": {
+            "product": "men-black-shoes"
+          }
+        },
+        "product_Mh7xnp": {
+          "type": "product",
+          "settings": {
+            "product": "red-t-shirts"
+          }
+        }
+      },
+      "block_order": [
+        "product_WdAkTk",
+        "product_fG6ERA",
+        "product_Mh7xnp"
+      ],
+      "settings": {
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "product_bundles_6x8gxy",
+    "product_bundles_BaTnTQ"
   ]
 }
