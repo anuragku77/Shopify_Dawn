@@ -110,7 +110,7 @@
   });
 
   document.getElementById('add-bundle-to-cart').addEventListener('click', function() {
-    conole.log()
+    cosnole.log(bundle.length)
     if (bundle.length >= 2) {
       const requests = bundle.map(product => {
         return fetch('/cart/add.js', {
