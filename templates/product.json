@@ -128,17 +128,11 @@
       ],
       "settings": {
       }
-    },
-    "product_bundles_3GWfL7": {
-      "type": "product-bundles",
-      "settings": {
-      }
     }
   },
   "order": [
     "main",
     "related-products",
-    "product_bundles_BaTnTQ",
-    "product_bundles_3GWfL7"
+    "product_bundles_BaTnTQ"
   ]
 }
