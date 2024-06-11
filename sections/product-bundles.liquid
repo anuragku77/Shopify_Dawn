@@ -32,7 +32,7 @@
       {% if product %}
         <div class="bundle-item">
           <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" height>
             <p>{{ product.title }}</p>
             <p class="product-price">
               <span class="original-price">{{ product.price | money }}</span>
