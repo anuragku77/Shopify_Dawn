@@ -1,162 +1,139 @@
-{% schema %}
-{
-  "name": "Product Bundles",
-  "settings": [],
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Bundle Product",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Select Product"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Product Bundles",
-      "category": "Product"
-    }
-  ]
-}
-{% endschema %}
-
-<div class="product-bundles">
-  <h3>Products Bundle</h3>
-  <div class="bundle-items">
-    {% for block in section.blocks %}
-      {% assign product = all_products[block.settings.product] %}
-      {% if product %}
-        <div class="bundle-item">
-          <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width= 240, height= 240>
-            <p>{{ product.title }}</p>
-            <p class="product-price">
-              <span class="original-price">{{ product.compare_at_price | money }}</span>
-              <span class="discounted-price">{{ product.price | money }}</span>
-            </p>
-          </a>
-          <button
-            type="button"
-            class="add-to-bundle-btn"
-            data-product-id="{{ product.variants.first.id }}"
-            data-product-title="{{ product.title }}"
-            data-product-image="{{ product.featured_image | img_url: 'small' }}"
-          >
-            Add to bundle
-          </button>
-        </div>
-      {% endif %}
-    {% endfor %}
+<div class="product-bundles-container">
+    <h3>Products Bundle</h3>
+    <div class="product-bundles">
+      <div class="bundle-items">
+        {% for block in section.blocks %}
+          {% assign product = all_products[block.settings.product] %}
+          {% if product %}
+            <div class="bundle-item">
+              <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width="240" height="240">
+                <p>{{ product.title }}</p>
+                <p class="product-price">
+                  <span class="original-price">{{ product.compare_at_price | money }}</span>
+                  <span class="discounted-price">{{ product.price | money }}</span>
+                </p>
+              </a>
+              <button
+                type="button"
+                class="add-to-bundle-btn"
+                data-product-id="{{ product.variants.first.id }}"
+                data-product-title="{{ product.title }}"
+                data-product-image="{{ product.featured_image | img_url: 'small' }}"
+              >
+                Add to bundle
+              </button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="bundle-contents">
+        <h4>Bundle contents</h4>
+        <p id="bundle-message">Add 2 items to get a discount</p>
+        <ul id="bundle-list"></ul>
+        <button type="button" id="add-bundle-to-cart">Add to cart</button>
+      </div>
+    </div>
   </div>
   
-  <div class="bundle-contents">
-    <h4>Bundle contents</h4>
-    <p id="bundle-message">Add 2 items to get a discount</p>
-    <ul id="bundle-list"></ul>
-    <button type="button" id="add-bundle-to-cart">Add to cart</button>
-  </div>
-</div>
-
-<script>
-  let bundle = [];
-
-  function updateBundleList() {
-    const bundleList = document.getElementById('bundle-list');
-    const bundleMessage = document.getElementById('bundle-message');
-    bundleList.innerHTML = '';
-    bundle.forEach((product) => {
-      const listItem = document.createElement('li');
-      listItem.classList.add('bundle-list-item');
-
-      const productImage = document.createElement('img');
-      productImage.src = product.image;
-      productImage.alt = product.title;
-      productImage.classList.add('bundle-product-image');
-
-      const productTitle = document.createElement('span');
-      productTitle.textContent = product.title;
-      productTitle.classList.add('bundle-product-title');
-
-      const removeButton = document.createElement('button');
-      removeButton.textContent = '×';
-      removeButton.classList.add('remove-from-bundle-btn');
-      removeButton.addEventListener('click', function () {
-        bundle = bundle.filter((p) => p.id !== product.id);
-        updateBundleList();
+  <script>
+    let bundle = [];
+  
+    function updateBundleList() {
+      const bundleList = document.getElementById('bundle-list');
+      const bundleMessage = document.getElementById('bundle-message');
+      bundleList.innerHTML = '';
+      bundle.forEach((product) => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('bundle-list-item');
+  
+        const productImage = document.createElement('img');
+        productImage.src = product.image;
+        productImage.alt = product.title;
+        productImage.classList.add('bundle-product-image');
+  
+        const productTitle = document.createElement('span');
+        productTitle.textContent = product.title;
+        productTitle.classList.add('bundle-product-title');
+  
+        const removeButton = document.createElement('button');
+        removeButton.textContent = '×';
+        removeButton.classList.add('remove-from-bundle-btn');
+        removeButton.addEventListener('click', function () {
+          bundle = bundle.filter((p) => p.id !== product.id);
+          updateBundleList();
+        });
+  
+        listItem.appendChild(productImage);
+        listItem.appendChild(productTitle);
+        listItem.appendChild(removeButton);
+  
+        bundleList.appendChild(listItem);
       });
-
-      listItem.appendChild(productImage);
-      listItem.appendChild(productTitle);
-      listItem.appendChild(removeButton);
-
-      bundleList.appendChild(listItem);
-    });
-
-    const remaining = 2 - bundle.length;
-    if (remaining > 0) {
-      bundleMessage.textContent = `Add ${remaining} more item${remaining > 1 ? 's' : ''} to get a discount`;
-    } else {
-      bundleMessage.textContent = 'You qualify for a discount!';
-    }
-  }
-
-  document.querySelectorAll('.add-to-bundle-btn').forEach((button) => {
-    button.addEventListener('click', function () {
-      const productId = this.getAttribute('data-product-id');
-      const productTitle = this.getAttribute('data-product-title');
-      const productImage = this.getAttribute('data-product-image');
-      if (!bundle.some((p) => p.id == productId)) {
-        bundle.push({ id: productId, title: productTitle, image: productImage });
-        updateBundleList();
-        alert('Product added to bundle!');
+  
+      const remaining = 2 - bundle.length;
+      if (remaining > 0) {
+        bundleMessage.textContent = `Add ${remaining} more item${remaining > 1 ? 's' : ''} to get a discount`;
       } else {
-        alert('Product already in bundle!');
+        bundleMessage.textContent = 'You qualify for a discount!';
+      }
+    }
+  
+    document.querySelectorAll('.add-to-bundle-btn').forEach((button) => {
+      button.addEventListener('click', function () {
+        const productId = this.getAttribute('data-product-id');
+        const productTitle = this.getAttribute('data-product-title');
+        const productImage = this.getAttribute('data-product-image');
+        if (!bundle.some((p) => p.id == productId)) {
+          bundle.push({ id: productId, title: productTitle, image: productImage });
+          updateBundleList();
+          alert('Product added to bundle!');
+        } else {
+          alert('Product already in bundle!');
+        }
+      });
+    });
+  
+    document.getElementById('add-bundle-to-cart').addEventListener('click', function () {
+      if (bundle.length >= 2) {
+        const cartItems = bundle.map((product) => ({
+          id: product.id,
+          quantity: 1,
+        }));
+  
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+          body: JSON.stringify({
+            items: cartItems,
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Failed to add bundle to cart');
+            }
+            return response.json();
+          })
+          .then((result) => {
+            if (result && result.status === 'success') {
+              alert('Bundle added to cart!');
+            } else {
+              console.error('Error adding bundle to cart:', result);
+            }
+          })
+          .catch((error) => {
+            console.error('Error adding bundle to cart:', error);
+          });
+      } else {
+        alert('Please add at least 2 items to the bundle.');
       }
     });
-  });
-
-  document.getElementById('add-bundle-to-cart').addEventListener('click', function () {
-    if (bundle.length >= 2) {
-      const cartItems = bundle.map((product) => ({
-        id: product.id,
-        quantity: 1,
-      }));
-
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        body: JSON.stringify({
-          items: cartItems,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to add bundle to cart');
-          }
-          return response.json();
-        })
-        .then((result) => {
-          if (result && result.status === 'success') {
-            alert('Bundle added to cart!');
-          } else {
-            console.error('Error adding bundle to cart:', result);
-          }
-        })
-        .catch((error) => {
-          console.error('Error adding bundle to cart:', error);
-        });
-    } else {
-      alert('Please add at least 2 items to the bundle.');
-    }
-  });
-</script>
+  </script>
+  
 
 <style>
     .product-bundles {
