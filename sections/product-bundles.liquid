@@ -110,34 +110,38 @@
   });
 
   document.getElementById('add-bundle-to-cart').addEventListener('click', function() {
-    console.log(bundle.length)
     if (bundle.length >= 2) {
-      const requests = bundle.map(product => {
-        return fetch('/cart/add.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
-          },
-          body: JSON.stringify({
-            id: product.id,
-            quantity: 1
-          })
-        }).then(response => response.json());
+      const cartItems = bundle.map(product => ({
+        id: product.id,
+        quantity: 1
+      }));
+  
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+          items: cartItems
+        })
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result.status === 'success') {
+          alert('Bundle added to cart!');
+        } else {
+          console.error('Error adding bundle to cart:', result);
+        }
+      })
+      .catch(error => {
+        console.error('Error adding bundle to cart:', error);
       });
-
-      Promise.all(requests)
-        .then(results => {
-          if (results.every(result => result.status === 'success')) {
-            alert('Bundle added to cart!');
-          } else {
-            console.error('Error adding some products to cart:', results);
-          }
-        });
     } else {
       alert('Please add at least 2 items to the bundle.');
     }
   });
+  
 </script>
 
 <style>
