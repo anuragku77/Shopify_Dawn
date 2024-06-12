@@ -27,6 +27,8 @@
 {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 
+{%  render 'quick-view' %}
+
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -46,7 +48,7 @@
   <button class="quick-view-button" data-product-handle="{{ product.handle }}">Quick View</button>
 </div>
 
-{%  render 'quick-view' %}
+
 
     <div
       class="
