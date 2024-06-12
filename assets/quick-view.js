@@ -50,18 +50,67 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(product) {
-        var title = product.title;
-        var desc = product.body_html;
-        var images = product.images || []; // Handle if images array is not present
-
-        var imageElements = images.map(image => `<img src="${image.src}" alt="${title}">`).join(''); // Access src property of image object
+        let variantsOptionsHtml = product.variants.map(variant => `
+            <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
+        `).join('');
 
         productDetails.innerHTML = `
-            <h2>${title}</h2>
-            <div>${desc}</div>
-            <div>${imageElements}</div>
+            <h2>${product.title}</h2>
+            <p>${product.body_html}</p>
+            <img src="${product.images[0]}" alt="${product.title}">
+            <form id="add-to-cart-form">
+                <label for="variant">Options:</label>
+                <select id="variant">${variantsOptionsHtml}</select>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                <button type="submit">Add to Cart</button>
+            </form>
+            <p>Price: $<span id="product-price">${(product.variants[0].price / 100).toFixed(2)}</span></p>
         `;
 
-        modal.style.display = 'block';
+        document.getElementById('variant').addEventListener('change', function() {
+            let selectedOption = this.options[this.selectedIndex];
+            let price = selectedOption.getAttribute('data-price');
+            document.getElementById('product-price').textContent = parseFloat(price).toFixed(2);
+        });
+
+        document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            addToCart(product.id);
+        });
+    }
+
+    function addToCart(productId) {
+        var form = document.getElementById('add-to-cart-form');
+        var variantId = form.variant.value;
+        var quantity = form.quantity.value;
+
+        fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: variantId,
+                quantity: quantity
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('Product added to cart!');
+            modal.style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Error adding product to cart:', error);
+            alert('Failed to add product to cart.');
+        });
+    }
+});
+
     }
 });
