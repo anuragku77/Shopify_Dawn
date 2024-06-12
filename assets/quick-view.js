@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fetchProductDetails(handle) {
         console.log('Fetching product details for:', handle);
-        fetch(`/products/${handle}.js`)
+        fetch(`/products/${handle}.json`)
             .then(response => {
                 console.log('Response status:', response.status);
                 if (!response.ok) {
