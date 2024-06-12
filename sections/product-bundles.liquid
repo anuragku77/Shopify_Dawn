@@ -61,7 +61,7 @@
 
     <div class="bundle-contents">
       <h4>Bundle contents</h4>
-      <p id="bundle-message">Add 2 items to get a discount</p>
+      <p id="bundle-message">Add 2 or items to get a discount</p>
       <ul id="bundle-list"></ul>
       <button type="button" id="add-bundle-to-cart">Add to cart</button>
     </div>
@@ -105,7 +105,7 @@
 
     const remaining = 2 - bundle.length;
     if (remaining > 0) {
-      bundleMessage.textContent = `Add ${remaining} or more item${remaining > 1 ? 's' : ''} to get a discount`;
+      bundleMessage.textContent = `Add ${remaining} more item${remaining > 1 ? 's' : ''} to get a discount`;
     } else {
       bundleMessage.textContent = 'You qualify for a discount!';
     }
