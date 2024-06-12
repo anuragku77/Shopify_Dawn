@@ -62,7 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
             variantsOptionsHtml = product.variants.map(variant => `
                 <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
             `).join('');
+        }
     
+        if (variantsOptionsHtml) {
             // Only create form HTML if there are variant options available
             let formHtml = `
                 <form id="add-to-cart-form">
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         }
     }
+    
     
     
 
