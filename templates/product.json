@@ -119,19 +119,12 @@
           "settings": {
             "product": "red-t-shirts"
           }
-        },
-        "product_AiJghB": {
-          "type": "product",
-          "settings": {
-            "product": "shirts"
-          }
         }
       },
       "block_order": [
         "product_WdAkTk",
         "product_fG6ERA",
-        "product_Mh7xnp",
-        "product_AiJghB"
+        "product_Mh7xnp"
       ],
       "settings": {
       }
