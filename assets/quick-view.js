@@ -60,7 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
         let productImage = '';
         if (product.images && product.images.length > 0) {
-            productImage = `<img src="${product.images[0]}" alt="${product.title}">`;
+            // Assuming product.images[0] contains the image URL
+            productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
         } else {
             productImage = '<p>No image available</p>';
         }
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
             addToCart(product.id);
         });
     }
+    
     
 
     function addToCart(productId) {
