@@ -4,8 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             var productHandle = this.getAttribute('data-product-handle');
-            console.log('Button clicked. Fetching details for product handle:', productHandle);
-            fetchProductDetails(productHandle);
+            if (productHandle) {
+                console.log('Button clicked. Fetching details for product handle:', productHandle);
+                fetchProductDetails(productHandle);
+            } else {
+                console.error('Product handle is missing.');
+            }
         });
     });
 
