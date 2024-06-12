@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    function fetchProductDetails(handle) {
+    function fetchProductDetails(productHandle) {
         console.log('Fetching product details for:', handle);
         fetch(`/products/${handle}.js`)
             .then(response => {
