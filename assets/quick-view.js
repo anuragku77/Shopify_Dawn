@@ -49,25 +49,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(product) {
-        let variantsOptionsHtml = '';
-        if (product.variants && product.variants.length > 0) {
-            if (product.variants.length === 1) {
-                // Only one variant available
-                variantsOptionsHtml = `<option value="${product.variants[0].id}" data-price="${product.variants[0].price / 100}">${product.variants[0].title} - $${(product.variants[0].price / 100).toFixed(2)}</option>`;
-            } else {
-                // Multiple variants available
-                variantsOptionsHtml = product.variants.map(variant => `
-                    <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
-                `).join('');
-            }
-        }
-    
         let productImage = '';
         if (product.images && product.images.length > 0) {
             // Assuming product.images[0] contains the image URL
             productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
         } else {
             productImage = '<p>No image available</p>';
+        }
+    
+        let variantsOptionsHtml = '';
+        if (product.variants && product.variants.length > 0) {
+            variantsOptionsHtml = product.variants.map(variant => `
+                <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
+            `).join('');
         }
     
         productDetails.innerHTML = `
@@ -81,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                     <button type="submit">Add to Cart</button>
+                    <p>Price: $<span id="product-price">${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</span></p>
                 </form>
-                <p>Price: $<span id="product-price">${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</span></p>
             ` : ''}
         `;
     
@@ -99,8 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    
-    
     
     
 
