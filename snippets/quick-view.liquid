@@ -13,7 +13,6 @@
         var productDetails = document.getElementById('product-details');
     
         quickViewButtons.forEach(function(button) {
-            console.log("Hello");
             button.addEventListener('click', function() {
                 var productHandle = this.getAttribute('data-product-handle');
                 fetchProductDetails(productHandle);
@@ -32,13 +31,19 @@
     
         function fetchProductDetails(handle) {
             fetch(`/products/${handle}.js`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(product => {
                     displayProductDetails(product);
                     modal.style.display = 'block';
                 })
                 .catch(error => {
                     console.error('Error fetching product details:', error);
+                    alert('Failed to fetch product details. Please try again later.');
                 });
         }
     
