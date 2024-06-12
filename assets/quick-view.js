@@ -64,9 +64,14 @@ document.addEventListener('DOMContentLoaded', function() {
             `).join('');
         }
     
-        let formHtml = '';
+        productDetails.innerHTML = `
+            <h2>${product.title}</h2>
+            <p>${product.body_html}</p>
+            ${productImage}
+        `;
+    
         if (variantsOptionsHtml) {
-            formHtml = `
+            let formHtml = `
                 <form id="add-to-cart-form">
                     <label for="variant">Options:</label>
                     <select id="variant">${variantsOptionsHtml}</select>
@@ -76,16 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>Price: $<span id="product-price">${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</span></p>
                 </form>
             `;
-        }
+            productDetails.insertAdjacentHTML('beforeend', formHtml);
     
-        productDetails.innerHTML = `
-            <h2>${product.title}</h2>
-            <p>${product.body_html}</p>
-            ${productImage}
-            ${formHtml}
-        `;
-    
-        if (variantsOptionsHtml) {
             document.getElementById('variant').addEventListener('change', function() {
                 let selectedOption = this.options[this.selectedIndex];
                 let price = selectedOption.getAttribute('data-price');
