@@ -6,9 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            var productHandle = this.getAttribute('data-handle');
+            var productHandle = this.getAttribute('data-handle'); // Change to data-handle
+            console.log('Button clicked. Product handle:', productHandle); // Add this line for debugging
             if (productHandle) {
-                console.log('Button clicked. Fetching details for product handle:', productHandle);
+                console.log('Fetching details for product handle:', productHandle);
                 fetchProductDetails(productHandle);
             } else {
                 console.error('Product handle is missing.');
@@ -28,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fetchProductDetails(handle) {
         console.log('Fetching product details for:', handle);
+        // Here, you should make your fetch request to fetch product details
+        // You can replace this placeholder code with your actual fetch request
         fetch(`/products/${handle}.json`)
             .then(response => {
                 console.log('Response status:', response.status);
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(product => {
                 console.log('Product details fetched:', product);
-                displayProductDetails(product);
+                displayProductDetails(product.product); // Access product object from the response
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
@@ -49,9 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayProductDetails(product) {
         var title = product.title;
         var desc = product.body_html;
-        var images = product.images;
+        var images = product.images || []; // Handle if images array is not present
 
-        var imageElements = images.map(image => `<img src="${image}" alt="${title}">`).join('');
+        var imageElements = images.map(image => `<img src="${image.src}" alt="${title}">`).join(''); // Access src property of image object
 
         productDetails.innerHTML = `
             <h2>${title}</h2>
