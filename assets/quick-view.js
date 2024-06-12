@@ -95,7 +95,55 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
             event.preventDefault();
             addToCart(product.id);
-        });
+        });function displayProductDetails(product) {
+            let variantsOptionsHtml = '';
+            if (product.variants && product.variants.length > 0) {
+                if (product.variants.length === 1) {
+                    // Only one variant available
+                    variantsOptionsHtml = `<option value="${product.variants[0].id}" data-price="${product.variants[0].price / 100}">${product.variants[0].title} - $${(product.variants[0].price / 100).toFixed(2)}</option>`;
+                } else {
+                    // Multiple variants available
+                    variantsOptionsHtml = product.variants.map(variant => `
+                        <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
+                    `).join('');
+                }
+            } else {
+                variantsOptionsHtml = '<option value="">No options available</option>';
+            }
+        
+            let productImage = '';
+            if (product.images && product.images.length > 0) {
+                // Assuming product.images[0] contains the image URL
+                productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
+            } else {
+                productImage = '<p>No image available</p>';
+            }
+        
+            productDetails.innerHTML = `
+                <h2>${product.title}</h2>
+                <p>${product.body_html}</p>
+                ${productImage}
+                <form id="add-to-cart-form">
+                    <label for="variant">Options:</label>
+                    <select id="variant">${variantsOptionsHtml}</select>
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <p>Price: $<span id="product-price">${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</span></p>
+            `;
+        
+            document.getElementById('variant').addEventListener('change', function() {
+                let selectedOption = this.options[this.selectedIndex];
+                let price = selectedOption.getAttribute('data-price');
+                document.getElementById('product-price').textContent = parseFloat(price).toFixed(2);
+            });
+        
+            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                addToCart(product.id);
+            });
+        }
     }
     
     
