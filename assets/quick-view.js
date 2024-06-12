@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     
+    
 
     function addToCart(productId) {
         var form = document.getElementById('add-to-cart-form');
