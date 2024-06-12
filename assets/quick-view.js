@@ -51,9 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayProductDetails(product) {
         let variantsOptionsHtml = '';
         if (product.variants && product.variants.length > 0) {
-            variantsOptionsHtml = product.variants.map(variant => `
-                <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
-            `).join('');
+            if (product.variants.length === 1) {
+                // Only one variant available
+                variantsOptionsHtml = `<option value="${product.variants[0].id}" data-price="${product.variants[0].price / 100}">${product.variants[0].title} - $${(product.variants[0].price / 100).toFixed(2)}</option>`;
+            } else {
+                // Multiple variants available
+                variantsOptionsHtml = product.variants.map(variant => `
+                    <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
+                `).join('');
+            }
         } else {
             variantsOptionsHtml = '<option value="">No options available</option>';
         }
@@ -91,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             addToCart(product.id);
         });
     }
+    
     
     
 
