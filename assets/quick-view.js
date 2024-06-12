@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            var productHandle = this.getAttribute('data-handle'); // Change to data-handle
-            console.log('Button clicked. Product handle:', productHandle); // Add this line for debugging
+            var productHandle = this.getAttribute('data-handle');
+            console.log('Button clicked. Product handle:', productHandle);
             if (productHandle) {
                 console.log('Fetching details for product handle:', productHandle);
                 fetchProductDetails(productHandle);
@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fetchProductDetails(handle) {
         console.log('Fetching product details for:', handle);
-        // Here, you should make your fetch request to fetch product details
-        // You can replace this placeholder code with your actual fetch request
         fetch(`/products/${handle}.json`)
             .then(response => {
                 console.log('Response status:', response.status);
@@ -41,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(product => {
                 console.log('Product details fetched:', product);
-                displayProductDetails(product.product); // Access product object from the response
+                displayProductDetails(product.product);
+                modal.style.display = 'block'; // Display the modal after fetching product details
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
