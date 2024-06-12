@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             var productHandle = this.getAttribute('data-product-handle');
-            console.log(productHandle);
+            console.log('Button clicked. Fetching details for product handle:', productHandle); // Debugging statement
             fetchProductDetails(productHandle);
         });
     });
@@ -23,14 +23,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchProductDetails(handle) {
+        console.log('Fetching product details for:', handle); // Debugging statement
         fetch(`/products/${handle}.js`)
             .then(response => {
+                console.log('Response status:', response.status); // Debugging statement
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
             .then(product => {
+                console.log('Product details fetched:', product); // Debugging statement
                 displayProductDetails(product);
                 modal.style.display = 'block';
             })
@@ -67,11 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            addToCart(product.id);
+            addToCart();
         });
     }
 
-    function addToCart(productId) {
+    function addToCart() {
         var form = document.getElementById('add-to-cart-form');
         var variantId = form.variant.value;
         var quantity = form.quantity.value;
