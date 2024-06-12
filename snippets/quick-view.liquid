@@ -15,6 +15,7 @@
         quickViewButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 var productHandle = this.getAttribute('data-product-handle');
+                console.log(pr)
                 fetchProductDetails(productHandle);
             });
         });
