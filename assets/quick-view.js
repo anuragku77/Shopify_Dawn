@@ -62,15 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
             variantsOptionsHtml = product.variants.map(variant => `
                 <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
             `).join('');
-        }
     
-        productDetails.innerHTML = `
-            <h2>${product.title}</h2>
-            <p>${product.body_html}</p>
-            ${productImage}
-        `;
-    
-        if (variantsOptionsHtml) {
+            // Only create form HTML if there are variant options available
             let formHtml = `
                 <form id="add-to-cart-form">
                     <label for="variant">Options:</label>
@@ -81,8 +74,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>Price: $<span id="product-price">${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</span></p>
                 </form>
             `;
-            productDetails.innerHTML += formHtml;
     
+            // Append the form HTML to the product details only if there are variant options available
+            productDetails.innerHTML = `
+                <h2>${product.title}</h2>
+                <p>${product.body_html}</p>
+                ${productImage}
+                ${formHtml}
+            `;
+    
+            // Add event listeners only if there are variant options available
             document.getElementById('variant').addEventListener('change', function() {
                 let selectedOption = this.options[this.selectedIndex];
                 let price = selectedOption.getAttribute('data-price');
@@ -93,8 +94,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 addToCart(product.id);
             });
+        } else {
+            // If no variant options available, display product details without form
+            productDetails.innerHTML = `
+                <h2>${product.title}</h2>
+                <p>${product.body_html}</p>
+                ${productImage}
+            `;
         }
     }
+    
     
 
     function addToCart(productId) {
