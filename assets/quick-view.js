@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            var productHandle = this.getAttribute('data-product-handle');
+            var data-handle = this.getAttribute('data-handle');
             if (productHandle) {
                 console.log('Button clicked. Fetching details for product handle:', productHandle);
                 fetchProductDetails(productHandle);
