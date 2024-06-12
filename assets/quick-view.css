@@ -1,7 +1,7 @@
-.product {
+/* .product {
     z-index: 2;
     position: relative;
-}
+} */
 #quick-view-modal {
     display: none;
     position: fixed;
