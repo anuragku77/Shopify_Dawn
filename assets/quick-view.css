@@ -36,6 +36,10 @@
     object-fit: cover;
     max-width: 300px; /* Limit max width */
     margin-right: 20px; /* Space between image and details */
+    width: 100%; /* Full width */
+    height: auto;
+    object-fit: cover;
+    max-width: 100%; /
 }
 
 /* Product details */
