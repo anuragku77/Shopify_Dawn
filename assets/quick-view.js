@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
-                alert('Failed to fetch product details. Please try again later.');
+                // alert('Failed to fetch product details. Please try again later.');
             });
     }
 
