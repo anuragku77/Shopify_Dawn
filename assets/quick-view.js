@@ -109,8 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
             productDetailsContainer.addEventListener('change', function(event) {
                 if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
                     let selectedVariant = event.target.value;
-                    console.log(se)
+                    console.log(selectedVariant)
                     let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
+                    console.log(selectedPrice)
                     document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
                 }
             });
