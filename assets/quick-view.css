@@ -1,3 +1,4 @@
+/* Default styles for desktop */
 .product {
     z-index: 2;
     position: relative;
@@ -31,7 +32,6 @@
     overflow: auto; /* Hide overflow */
 }
 
-/* Ensure the modal content is scrollable if necessary */
 .modal-content-inner {
     display: flex;
     width: 100%;
@@ -46,7 +46,6 @@
     overflow: hidden; /* Prevent overflow of content */
 }
 
-/* Product image container */
 .product-media {
     width: 300px; /* Fixed width */
     min-width: 300px; /* Prevent shrinking */
@@ -56,7 +55,6 @@
     justify-content: center; /* Center image horizontally */
 }
 
-/* Product image */
 .product-media img {
     max-width: 100%; /* Full width */
     height: auto;
@@ -64,7 +62,6 @@
     max-height: 400px; /* Limit max height */
 }
 
-/* Product details */
 .pro-information {
     display: flex;
     flex-direction: column;
@@ -72,7 +69,6 @@
     overflow: auto; /* Ensure text content is scrollable if it overflows */
 }
 
-/* Ensure title and description do not exceed their container */
 .pro-information h2 {
     word-wrap: break-word; /* Break long words to avoid overflow */
     margin: 0 0 10px; /* Space below title */
@@ -85,7 +81,6 @@
     font-size: 16px; /* Increase font size */
 }
 
-/* Close button */
 .close-button {
     color: #aaa;
     float: right;
@@ -100,7 +95,6 @@
     text-decoration: none;
 }
 
-/* Variant options */
 .option-Size, .option-Color, .option-Material {
     margin-bottom: 15px; /* Increase margin */
 }
@@ -117,7 +111,6 @@
     font-size: 16px; /* Increase font size */
 }
 
-/* Quantity input */
 #quantity {
     width: 80px; /* Increase width */
     margin-bottom: 20px;
@@ -125,7 +118,6 @@
     font-size: 16px; /* Increase font size */
 }
 
-/* Add to cart button */
 #add-to-cart-button {
     background-color: #4CAF50;
     color: white;
@@ -140,7 +132,6 @@
     background-color: #45a049;
 }
 
-/* Product description */
 .product-description {
     margin-top: 20px;
     font-size: 16px; /* Increase font size */
@@ -148,4 +139,62 @@
 
 .product-description p {
     margin: 0;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%; /* Adjust modal width for smaller screens */
+        margin: 10% auto; /* Centered */
+        padding: 10px; /* Adjust padding */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center content horizontally */
+    }
+
+    .product-media {
+        width: 100%; /* Full width for product image */
+        min-width: 0; /* Remove minimum width */
+        margin-right: 0; /* No margin between image and details */
+    }
+
+    .pro-information {
+        padding: 10px; /* Adjust padding for product information */
+        text-align: center; /* Center text content */
+    }
+
+    .pro-information h2 {
+        font-size: 20px; /* Decrease font size for title */
+    }
+
+    .pro-information p {
+        font-size: 14px; /* Decrease font size for description */
+    }
+
+    .option-Size h6,
+    .option-Color h6,
+    .option-Material h6 {
+        font-size: 16px; /* Decrease font size for options */
+    }
+
+    .option-Size label,
+    .option-Color label,
+    .option-Material label {
+        font-size: 14px; /* Decrease font size for labels */
+    }
+
+    #quantity {
+        width: 60px; /* Decrease width of quantity input */
+        padding: 6px; /* Decrease padding */
+        font-size: 14px; /* Decrease font size */
+    }
+
+    #add-to-cart-button {
+        padding: 10px 20px; /* Adjust padding */
+        font-size: 16px; /* Decrease font size */
+    }
+
+    .product-description {
+        font-size: 14px; /* Decrease font size */
+    }
 }
