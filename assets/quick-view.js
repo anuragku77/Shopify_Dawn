@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(product) {
+        console.log('Displaying product details for:', product);
         let productImage = '';
         if (product.images && product.images.length > 0) {
             productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
@@ -75,26 +76,24 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     
             // Construct form HTML if options exist
-            if (sizeOptionsHtml || colorOptionsHtml) {
-                formHtml = `
-                    <form id="add-to-cart-form">
-                        ${sizeOptionsHtml ? `
-                            <label for="size">Size:</label>
-                            <select id="size">${sizeOptionsHtml}</select>
-                            <br><br>
-                        ` : ''}
-                        ${colorOptionsHtml ? `
-                            <label for="color">Color:</label>
-                            <select id="color">${colorOptionsHtml}</select>
-                            <br><br>
-                        ` : ''}
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1">
-                        <button type="submit">Add to Cart</button>
-                        <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
-                    </form>
-                `;
-            }
+            formHtml = `
+                <form id="add-to-cart-form">
+                    ${sizeOptionsHtml ? `
+                        <label for="size">Size:</label>
+                        <select id="size">${sizeOptionsHtml}</select>
+                        <br><br>
+                    ` : ''}
+                    ${colorOptionsHtml ? `
+                        <label for="color">Color:</label>
+                        <select id="color">${colorOptionsHtml}</select>
+                        <br><br>
+                    ` : ''}
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    <button type="submit">Add to Cart</button>
+                    <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
+                </form>
+            `;
         } else {
             // If no options, show default quantity input and add to cart button
             formHtml = `
@@ -114,11 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ${productImage}
             ${formHtml}
         `;
-    
-        // If formHtml is empty, display a message indicating no variants/options are available
-        if (!formHtml) {
-            productDetails.innerHTML += '<p>No variants available for this product.</p>';
-        }
     
         // Update price when variant selection changes
         document.getElementById('size')?.addEventListener('change', updatePrice);
@@ -156,17 +150,25 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             let size = document.getElementById('size')?.value;
             let color = document.getElementById('color')?.value;
+            let variantId;
     
             if (size && color) {
                 let selectedVariant = findVariant(product.variants, size, color);
                 if (selectedVariant) {
-                    addToCart(selectedVariant.id);
+                    variantId = selectedVariant.id;
                 } else {
-                    alert('Please select a variant before adding to cart.');
+                    alert('Please select a valid variant before adding to cart.');
+                    return;
                 }
+            } else if (product.variants.length === 1) {
+                // If there's only one variant, select it
+                variantId = product.variants[0].id;
             } else {
                 alert('Please select size and color before adding to cart.');
+                return;
             }
+    
+            addToCart(variantId);
         });
     
         // Function to add selected variant to cart
@@ -197,5 +199,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Failed to add product to cart.');
             });
         }
-    }    
+    }
+
+    function findVariantPrice(variants, optionName, optionValue) {
+        // Implement the logic to find and return the price of the variant based on the option
+        // This function is a placeholder and should be customized as per your data structure
+        let variant = variants.find(v => v[`option${optionName === 'Size' ? 1 : 2}`] === optionValue);
+        return variant ? (variant.price / 100).toFixed(2) : '0.00';
+    }
 });
