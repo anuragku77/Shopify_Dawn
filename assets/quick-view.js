@@ -26,17 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchProductDetails(handle) {
-        console.log(`Fetching product details for handle: ${handle}`); // Log handle
+        console.log(`Fetching product details for handle: ${handle}`);
         fetch(`/products/${handle}.json`)
             .then(response => {
-                console.log('Fetch response:', response); // Log the response
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
             .then(product => {
-                console.log('Product data:', product); // Log the product data
                 displayProductDetails(product.product);
                 modal.style.display = 'block'; // Display the modal after fetching product details
             })
@@ -55,8 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let formHtml = '';
-        if (product.options && product.options.length > 0
-            && !(product.options.length === 1 && product.options[0].name === "Title" && product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
+        if (product.options && product.options.length > 0 && !(product.options.length === 1 && product.options[0].name === "Title" && product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
             formHtml = '<form id="add-to-cart-form">';
             product.options.forEach(option => {
                 let optionHtml = option.values.map(value => `
@@ -80,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             formHtml += '</form>';
         } else {
-            // If no options, show default quantity input and add to cart button
             formHtml = `
                 <form id="add-to-cart-form">
                     <div class="option-Quantity">
@@ -158,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return 'Price not available';
             }
         }
-        
 
         // Add to cart form submission handling
         document.getElementById('add-to-cart-form')?.addEventListener('submit', function(event) {
