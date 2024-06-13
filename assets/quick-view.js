@@ -107,11 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Event delegation for variant options
             productDetailsContainer.addEventListener('change', function(event) {
-                if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
+                if (event.target && event.target.matches('input[name="variant"]:checked')) {
                     let selectedVariant = event.target.value;
-                    console.log(selectedVariant)
                     let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
-                    console.log(selectedPrice)
                     document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
                 }
             });
@@ -150,10 +148,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name="variant"]:checked');
-            console.log(selectedVariant);
+            console.log(selectedVariant)
             if (selectedVariant) {
                 variantId = selectedVariant.value;
-                console.log(variantId);
             } else {
                 alert('Please select a variant.');
                 return;
