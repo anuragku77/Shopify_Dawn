@@ -105,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 addToCart(product);
             });
 
-            // Add event listeners for variant options
-            document.querySelectorAll('input[name="variant"]').forEach(input => {
-                input.addEventListener('change', function() {
-                    let selectedVariant = this.value;
+            // Event delegation for variant options
+            productDetailsContainer.addEventListener('change', function(event) {
+                if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
+                    let selectedVariant = event.target.value;
                     let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
                     document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
-                });
+                }
             });
 
         } else {
@@ -148,10 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name="variant"]:checked');
-            console.log("SelectedVarient : ",selectedVariant);
             if (selectedVariant) {
                 variantId = selectedVariant.value;
-                console.log("Varient ID ",variantId);
             } else {
                 alert('Please select a variant.');
                 return;
