@@ -139,18 +139,27 @@ document.addEventListener('DOMContentLoaded', function() {
             return 0.00;
         }
 
-        // Function to format the price according to the store's currency
         function formatPrice(price) {
             console.log('Formatting price:', price); // Log the price
-            if (typeof price === 'string') {
-                price = parseFloat(price);
-            }
-            if (isNaN(price)) {
+        
+            // Check if price is a number or can be converted to a number
+            if (typeof price === 'number' && !isNaN(price)) {
+                return `Rs. ${price.toFixed(2)}`;
+            } else if (typeof price === 'string') {
+                // Try to parse the price as a float
+                let parsedPrice = parseFloat(price);
+                if (!isNaN(parsedPrice)) {
+                    return `Rs. ${parsedPrice.toFixed(2)}`;
+                } else {
+                    console.error('Invalid price value:', price);
+                    return 'Price not available';
+                }
+            } else {
                 console.error('Invalid price value:', price);
-                return 'N/A';
+                return 'Price not available';
             }
-            return `Rs. ${price.toFixed(2)}`;
         }
+        
 
         // Add to cart form submission handling
         document.getElementById('add-to-cart-form')?.addEventListener('submit', function(event) {
