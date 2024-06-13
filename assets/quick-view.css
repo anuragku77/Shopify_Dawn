@@ -153,6 +153,8 @@
     }
 
     .product-media {
+        flex-direction: column;
+        gap: 30px;
         align-items: center; /* Center image vertically */
         justify-content: center;
         width: 100%; /* Full width for product image */
