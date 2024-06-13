@@ -51,92 +51,141 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayProductDetails(product) {
         let productImage = '';
         if (product.images && product.images.length > 0) {
-            // Assuming product.images[0] contains the image URL
             productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
         } else {
             productImage = '<p>No image available</p>';
         }
     
-        let variantsOptionsHtml = '';
-        if (product.variants && product.variants.length > 0) {
-            variantsOptionsHtml = product.variants.map(variant => `
-                <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
-            `).join('');
-        }
+        let formHtml = '';
+        if (product.options) {
+            let sizeOptionsHtml = '';
+            let colorOptionsHtml = '';
     
-        if (variantsOptionsHtml) {
-            // Only create form HTML if there are variant options available
-            let formHtml = `
-                <form id="add-to-cart-form">
-                    <label for="variant">Options:</label>
-                    <select id="variant">${variantsOptionsHtml}</select>
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1">
-                    <button type="submit">Add to Cart</button>
-                    <p>Price: $<span id="product-price">${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</span></p>
-                </form>
-            `;
-    
-            // Append the form HTML to the product details only if there are variant options available
-            productDetails.innerHTML = `
-                <h2>${product.title}</h2>
-                <p>${product.body_html}</p>
-                ${productImage}
-                ${formHtml}
-            `;
-    
-            // Add event listeners only if there are variant options available
-            document.getElementById('variant').addEventListener('change', function() {
-                let selectedOption = this.options[this.selectedIndex];
-                let price = selectedOption.getAttribute('data-price');
-                document.getElementById('product-price').textContent = parseFloat(price).toFixed(2);
+            // Check for size and color options
+            product.options.forEach(option => {
+                if (option.name === 'Size') {
+                    sizeOptionsHtml = option.values.map(value => `
+                        <option value="${value}" data-price="${findVariantPrice(product.variants, option.name, value)}">${value}</option>
+                    `).join('');
+                } else if (option.name === 'Color') {
+                    colorOptionsHtml = option.values.map(value => `
+                        <option value="${value}" data-price="${findVariantPrice(product.variants, option.name, value)}">${value}</option>
+                    `).join('');
+                }
             });
     
-            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                addToCart(product.id);
-            });
-        } else {
-            // If no variant options available, display product details without form
-            productDetails.innerHTML = `
-                <h2>${product.title}</h2>
-                <p>${product.body_html}</p>
-                ${productImage}
-            `;
-        }
-    }
-    
-    
-    
-
-    function addToCart(productId) {
-        var form = document.getElementById('add-to-cart-form');
-        var variantId = form.variant.value;
-        var quantity = form.quantity.value;
-
-        fetch('/cart/add.js', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: variantId,
-                quantity: quantity
-            })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            // Construct form HTML if options exist
+            if (sizeOptionsHtml || colorOptionsHtml) {
+                formHtml = `
+                    <form id="add-to-cart-form">
+                        ${sizeOptionsHtml ? `
+                            <label for="size">Size:</label>
+                            <select id="size">${sizeOptionsHtml}</select>
+                            <br><br>
+                        ` : ''}
+                        ${colorOptionsHtml ? `
+                            <label for="color">Color:</label>
+                            <select id="color">${colorOptionsHtml}</select>
+                            <br><br>
+                        ` : ''}
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                        <button type="submit">Add to Cart</button>
+                        <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
+                    </form>
+                `;
             }
-            return response.json();
-        })
-        .then(data => {
-            alert('Product added to cart!');
-            modal.style.display = 'none';
-        })
-        .catch(error => {
-            console.error('Error adding product to cart:', error);
-            alert('Failed to add product to cart.');
+        }
+    
+        // Display product details including image and form
+        productDetails.innerHTML = `
+            <h2>${product.title}</h2>
+            <p>${product.body_html}</p>
+            ${productImage}
+            ${formHtml}
+        `;
+    
+        // If formHtml is empty, display a message indicating no variants/options are available
+        if (!formHtml) {
+            productDetails.innerHTML += '<p>No variants available for this product.</p>';
+        }
+    
+        // Update price when variant selection changes
+        document.getElementById('size')?.addEventListener('change', updatePrice);
+        document.getElementById('color')?.addEventListener('change', updatePrice);
+    
+        // Function to update price based on selected options
+        function updatePrice() {
+            let size = document.getElementById('size')?.value;
+            let color = document.getElementById('color')?.value;
+            if (size && color) {
+                let selectedVariant = findVariant(product.variants, size, color);
+                if (selectedVariant) {
+                    document.getElementById('product-price').textContent = (selectedVariant.price / 100).toFixed(2);
+                }
+            }
+        }
+    
+        // Function to find variant based on selected size and color
+        function findVariant(variants, size, color) {
+            return variants.find(variant => {
+                return variant.option1 === size && variant.option2 === color;
+            });
+        }
+    
+        // Function to get initial price of the first variant
+        function getInitialPrice(variants) {
+            if (variants && variants.length > 0) {
+                return (variants[0].price / 100).toFixed(2);
+            }
+            return '0.00';
+        }
+    
+        // Add to cart form submission handling
+        document.getElementById('add-to-cart-form')?.addEventListener('submit', function(event) {
+            event.preventDefault();
+            let size = document.getElementById('size')?.value;
+            let color = document.getElementById('color')?.value;
+    
+            if (size && color) {
+                let selectedVariant = findVariant(product.variants, size, color);
+                if (selectedVariant) {
+                    addToCart(selectedVariant.id);
+                } else {
+                    alert('Please select a variant before adding to cart.');
+                }
+            } else {
+                alert('Please select size and color before adding to cart.');
+            }
         });
-    }
+    
+        // Function to add selected variant to cart
+        function addToCart(variantId) {
+            let quantity = document.getElementById('quantity').value;
+    
+            fetch('/cart/add.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: variantId,
+                    quantity: quantity
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Product added to cart!');
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+                alert('Failed to add product to cart.');
+            });
+        }
+    }    
 });
