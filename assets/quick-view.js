@@ -34,30 +34,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(product => {
-                if (product && product.product) {
-                    displayProductDetails(product.product);
-                    modal.style.display = 'block'; // Display the modal after fetching product details
-                } else {
-                    throw new Error('Product data not found.');
-                }
+                displayProductDetails(product.product);
+                modal.style.display = 'block'; // Display the modal after fetching product details
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
-                // alert('Failed to fetch product details. Please try again later.');
+                alert('Failed to fetch product details. Please try again later.');
             });
     }
 
     function displayProductDetails(product) {
         // Clear previous content
         productDetailsContainer.innerHTML = '';
-    
+
         // Set product image
         const productImage = `
             <div class="product-media">
                 <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
             </div>
         `;
-    
+
         // Create product details HTML
         const productHtml = `
             <div class="product-main">
@@ -75,25 +71,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-    
+
         productDetailsContainer.innerHTML = productHtml;
-    
+
         // Add event listener for "Add to cart" button
         document.getElementById('add-to-cart-button').addEventListener('click', function() {
             addToCart(product);
         });
-    
+
         // Event delegation for variant options
         if (product.variants && product.variants.length > 0) {
             productDetailsContainer.addEventListener('change', function(event) {
                 if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
                     let selectedVariantId = event.target.value;
+                    console.log("Selected One",selectedVariantId)
                     updatePrice(selectedVariantId, product);
                 }
             });
         }
     }
-    
 
     function generateVariantOptions(options, variants) {
         let variantOptionsHtml = '';
@@ -112,43 +108,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function generateOptionValues(values, optionName, variants) {
         let optionValuesHtml = '';
-        console.log('Option values:', values);
-        console.log('Option name:', optionName);
-        console.log('Variants:', variants);
-    
-        // Check if variants exist and are not empty
-        if (variants && variants.length > 0) {
-            values.forEach((value, index) => {
-                let variant = findVariantByOptionValue(variants, optionName, value);
-                if (variant) {
-                    optionValuesHtml += `
-                        <label for="${index}-${value}">
-                            <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
-                            ${value}
-                        </label>
-                    `;
-                }
-            });
-        } else {
-            // Handle the case where there are no variants (optional)
-            optionValuesHtml = `<p>No variants available.</p>`;
-        }
-    
+
+        values.forEach((value, index) => {
+            let variant = findVariantByOptionValue(variants, optionName, value);
+            if (variant) {
+                optionValuesHtml += `
+                    <label for="${index}-${value}">
+                        <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
+                        ${value}
+                    </label>
+                `;
+            }
+        });
+
         return optionValuesHtml;
     }
-    
-    
-    
 
     function findVariantByOptionValue(variants, optionName, value) {
-        if (variants && variants.length > 0) {
-            return variants.find(variant => {
-                return variant.options && variant.options[optionName] === value;
-            });
-        }
-        return null; // Return null or handle the case where no variants are found
+        return variants.find(variant => {
+            return variant.options[optionName] === value;
+        });
     }
-    
 
     function updatePrice(selectedVariantId, product) {
         let selectedPrice = product.variants.find(variant => variant.id == selectedVariantId).price / 100;
@@ -162,8 +142,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name^="option-"]:checked');
+            console.log("sle",selectedVariant);
             if (selectedVariant) {
                 variantId = selectedVariant.value;
+                console.log("Vai", variantId);
             } else {
                 alert('Please select a variant.');
                 return;
@@ -182,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
         .then(response => {
+            console.log(response);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
