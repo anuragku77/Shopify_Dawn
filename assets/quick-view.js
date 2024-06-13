@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productDetailsContainer.addEventListener('change', function(event) {
                 if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
                     let selectedVariantId = event.target.value;
-                    console.log("Selected One",selectedVariantId)
+                    console.log("Selected",selectedVariantId)
                     updatePrice(selectedVariantId, product);
                 }
             });
@@ -142,10 +142,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name^="option-"]:checked');
-            console.log("sle",selectedVariant);
             if (selectedVariant) {
                 variantId = selectedVariant.value;
-                console.log("Vai", variantId);
             } else {
                 alert('Please select a variant.');
                 return;
@@ -164,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
         .then(response => {
-            console.log(res)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
