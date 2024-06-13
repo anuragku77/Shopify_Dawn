@@ -112,6 +112,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function generateOptionValues(values, optionName, variants) {
         let optionValuesHtml = '';
+
+        console.log('Option values:', values);
+        console.log('Option name:', optionName);
+        console.log('Variants:', variants);
     
         values.forEach((value, index) => {
             let variant = findVariantByOptionValue(variants, optionName, value);
