@@ -26,14 +26,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchProductDetails(handle) {
+        console.log(`Fetching product details for handle: ${handle}`); // Log handle
         fetch(`/products/${handle}.json`)
             .then(response => {
+                console.log('Fetch response:', response); // Log the response
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
             .then(product => {
+                console.log('Product data:', product); // Log the product data
                 displayProductDetails(product.product);
                 modal.style.display = 'block'; // Display the modal after fetching product details
             })
