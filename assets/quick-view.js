@@ -141,9 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function formatPrice(price) {
             console.log('Formatting price:', price);
-        
-            // Check if price is a number or can be converted to a number
-            if (typeof price === 'number' && !isNaN(price)) {
+            if (typeof price === 'number' && !isNaN(price))
+                {
                 return `Rs. ${price.toFixed(2)}`;
             } else if (typeof price === 'string') {
                 
