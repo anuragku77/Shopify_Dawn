@@ -44,102 +44,95 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(product) {
-        // Check if variants exist
-        if (product.variants && product.variants.length > 0) {
-            let variantOptionsHtml = '';
-            let hiddenVariantsHtml = '';
+        // Clear previous content
+        productDetailsContainer.innerHTML = '';
 
-            // Create variant options
-            product.options.forEach(option => {
-                let optionHtml = `
-                    <div class="option-${option.name}">
-                        <h6>${option.name}</h6>`;
-                option.values.forEach((value, index) => {
-                    optionHtml += `
-                        <label for="${index}-${value}">
-                            <input type="radio" name="${option.name}" value="${value}" id="${index}-${value}">
-                            ${value}
-                        </label>`;
-                });
-                optionHtml += '</div>';
-                variantOptionsHtml += optionHtml;
-            });
+        // Set product image
+        const productImage = `
+            <div class="product-media">
+                <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
+            </div>
+        `;
 
-            // Create hidden variants
-            product.variants.forEach(variant => {
-                hiddenVariantsHtml += `
-                    <input type="hidden" name="variant" value="${variant.id}" data-title="${variant.title}">
-                `;
-            });
-
-            // Set product image
-            const productImage = `
-                <div class="product-media">
-                    <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
-                </div>
-            `;
-
-            // Create product details HTML
-            const productHtml = `
-                <div class="product-main">
-                    ${productImage}
-                    <div class="pro-information">
-                        <div>${hiddenVariantsHtml}</div>
-                        <h5>${product.title}</h5>
-                        <p class="price">$${(product.variants[0].price / 100).toFixed(2)}</p>
-                        <div>${variantOptionsHtml}</div>
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1">
-                        <button type="button" id="add-to-cart-button">Add to cart</button>
-                        <div class="product-description">
-                            <p>${product.body_html}</p>
-                        </div>
+        // Create product details HTML
+        const productHtml = `
+            <div class="product-main">
+                ${productImage}
+                <div class="pro-information">
+                    <h5>${product.title}</h5>
+                    <p class="price">$${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
+                    ${product.variants && product.variants.length > 0 ? generateVariantOptions(product.options, product.variants) : ''}
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    <button type="button" id="add-to-cart-button">Add to cart</button>
+                    <div class="product-description">
+                        <p>${product.body_html}</p>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
 
-            productDetailsContainer.innerHTML = productHtml;
+        productDetailsContainer.innerHTML = productHtml;
 
-            // Add event listener for "Add to cart" button
-            document.getElementById('add-to-cart-button').addEventListener('click', function() {
-                addToCart(product);
-            });
+        // Add event listener for "Add to cart" button
+        document.getElementById('add-to-cart-button').addEventListener('click', function() {
+            addToCart(product);
+        });
 
-            // Event delegation for variant options
+        // Event delegation for variant options
+        if (product.variants && product.variants.length > 0) {
             productDetailsContainer.addEventListener('change', function(event) {
-                if (event.target && event.target.matches('input[name="variant"]:checked')) {
-                    let selectedVariant = event.target.value;
-                    console.log(selectedVariant);
-                    let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
-                    document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
+                if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
+                    let selectedVariantId = event.target.value;
+                    console.log("Selected One",selectedVariantId)
+                    updatePrice(selectedVariantId, product);
                 }
             });
+        }
+    }
 
-        } else {
-            // If no variants exist, handle this scenario
-            productDetailsContainer.innerHTML = `
-                <div class="product-main">
-                    <div class="product-media">
-                        <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
-                    </div>
-                    <div class="pro-information">
-                        <h5>${product.title}</h5>
-                        <p class="price">$0.00</p>
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1">
-                        <button type="button" id="add-to-cart-button">Add to cart</button>
-                        <div class="product-description">
-                            <p>${product.body_html}</p>
-                        </div>
-                    </div>
+    function generateVariantOptions(options, variants) {
+        let variantOptionsHtml = '';
+
+        options.forEach(option => {
+            variantOptionsHtml += `
+                <div class="option-${option.name}">
+                    <h6>${option.name}</h6>
+                    ${generateOptionValues(option.values, option.name, variants)}
                 </div>
             `;
+        });
 
-            // Add event listener for "Add to cart" button
-            document.getElementById('add-to-cart-button').addEventListener('click', function() {
-                addToCart(product);
-            });
-        }
+        return variantOptionsHtml;
+    }
+
+    function generateOptionValues(values, optionName, variants) {
+        let optionValuesHtml = '';
+
+        values.forEach((value, index) => {
+            let variant = findVariantByOptionValue(variants, optionName, value);
+            if (variant) {
+                optionValuesHtml += `
+                    <label for="${index}-${value}">
+                        <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
+                        ${value}
+                    </label>
+                `;
+            }
+        });
+
+        return optionValuesHtml;
+    }
+
+    function findVariantByOptionValue(variants, optionName, value) {
+        return variants.find(variant => {
+            return variant.options[optionName] === value;
+        });
+    }
+
+    function updatePrice(selectedVariantId, product) {
+        let selectedPrice = product.variants.find(variant => variant.id == selectedVariantId).price / 100;
+        document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
     }
 
     function addToCart(product) {
@@ -148,10 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
-            var selectedVariant = document.querySelector('input[name="variant"]:checked');
-            console.log(selectedVariant);
+            var selectedVariant = document.querySelector('input[name^="option-"]:checked');
+            console.log("sle",selectedVariant);
             if (selectedVariant) {
                 variantId = selectedVariant.value;
+                console.log("Vai", variantId);
             } else {
                 alert('Please select a variant.');
                 return;
@@ -170,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
         .then(response => {
+            console.log(response);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
