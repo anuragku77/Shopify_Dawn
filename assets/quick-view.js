@@ -134,9 +134,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function findVariantByOptionValue(variants, optionName, value) {
         return variants.find(variant => {
-            return variant.options[optionName] === value;
+            if (variant.options && variant.options[optionName]) {
+                return variant.options[optionName] === value;
+            }
+            return false;
         });
     }
+    
 
     function updatePrice(selectedVariantId, product) {
         let selectedPrice = product.variants.find(variant => variant.id == selectedVariantId).price / 100;
