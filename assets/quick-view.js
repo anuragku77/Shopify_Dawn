@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("sle",selectedVariant)
             if (selectedVariant) {
                 variantId = selectedVariant.value;
+                console.log("Vai")
             } else {
                 alert('Please select a variant.');
                 return;
