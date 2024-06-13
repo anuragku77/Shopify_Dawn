@@ -143,8 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Formatting price:', price);
             if (typeof price === 'number' && !isNaN(price)){
                 return `Rs. ${price.toFixed(2)}`;
-            } else if (typeof price === 'string') {
-                
+            }
+            else if (typeof price === 'string') {
                 let parsedPrice = parseFloat(price);
                 if (!isNaN(parsedPrice)) {
                     return `Rs. ${parsedPrice.toFixed(2)}`;
