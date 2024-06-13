@@ -112,6 +112,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function generateOptionValues(values, optionName, variants) {
         let optionValuesHtml = '';
+        console.log('Option values:', values);
+        console.log('Option name:', optionName);
+        console.log('Variants:', variants);
     
         // Check if variants exist and are not empty
         if (variants && variants.length > 0) {
