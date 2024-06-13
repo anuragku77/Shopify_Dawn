@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                 </div>
                 <button type="submit" id="add-to-cart-button">Add to Cart</button>
-                <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
+                <p>Price: Rs<span id="product-price">${getInitialPrice(product.variants)}</span></p>
             `;
             formHtml += '</form>';
         } else {
