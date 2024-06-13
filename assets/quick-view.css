@@ -29,13 +29,17 @@
     border-radius: 8px;
 }
 
+.product-media {
+    width: 300px; /* Adjust width as needed */
+    margin-right: 20px; /* Space between image and details */
+}
+
 /* Product image */
 .product-media img {
     width: 100%; /* Full width */
     height: auto;
     object-fit: cover;
     max-width: 100%;  /* Limit max width */
-    margin-right: 20px; /* Space between image and details */
 }
 
 /* Product details */
