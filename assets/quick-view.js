@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name^="option-"]:checked');
-            console.log(,selectedVariant)
+            console.log(selectedVariant)
             if (selectedVariant) {
                 variantId = selectedVariant.value;
             } else {
