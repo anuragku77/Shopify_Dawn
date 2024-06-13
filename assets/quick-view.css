@@ -1,3 +1,8 @@
+.product {
+    z-index: 2;
+    position: relative;
+}
+
 /* Modal container */
 #quick-view-modal {
     display: none; /* Hidden by default */
