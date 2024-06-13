@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist
         let variantOptionsHtml = '';
         let hiddenVariantsHtml = '';
-
+    
         if (product.variants && product.variants.length > 0) {
             // Create variant options
             product.options.forEach(option => {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 optionHtml += '</div>';
                 variantOptionsHtml += optionHtml;
             });
-
+    
             // Create hidden variants
             product.variants.forEach(variant => {
                 hiddenVariantsHtml += `
@@ -72,14 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             });
         }
-
+    
         // Set product image
         const productImage = `
             <div class="product-media">
                 <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
             </div>
         `;
-
+    
         // Create product details HTML
         const productHtml = `
             <div class="product-main">
@@ -98,14 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-
+    
         productDetailsContainer.innerHTML = productHtml;
-
+    
         // Add event listener for "Add to cart" button
         document.getElementById('add-to-cart-button').addEventListener('click', function() {
             addToCart(product);
         });
-
+    
         // Add event listeners for variant options if they exist
         if (product.variants && product.variants.length > 0) {
             document.querySelectorAll('input[name="variant"]').forEach(input => {
@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    
 
     function addToCart(product) {
         var quantity = document.getElementById('quantity').value;
