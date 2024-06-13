@@ -142,10 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name^="option-"]:checked');
-            console.log("sle",selectedVariant);
+            console.log(,selectedVariant)
             if (selectedVariant) {
                 variantId = selectedVariant.value;
-                console.log("Vai", variantId);
             } else {
                 alert('Please select a variant.');
                 return;
@@ -164,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
         .then(response => {
-            console.log(response);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
