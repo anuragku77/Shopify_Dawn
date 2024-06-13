@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let selectedVariant = findVariant(product.variants, selectedOptions);
             if (selectedVariant) {
-                document.getElementById('product-price').textContent = formatPrice(selectedVariant.price / 100);
+                document.getElementById('product-price').textContent = formatPrice(selectedVariant.price);
             }
         }
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Function to get initial price of the first variant
         function getInitialPrice(variants) {
             if (variants && variants.length > 0) {
-                return variants[0].price / 100;
+                return variants[0].price;
             }
             return 0.00;
         }
