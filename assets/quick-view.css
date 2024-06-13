@@ -154,8 +154,9 @@
     }
 
     .product-main{
-        
+        flex-direction: column;
     }
+    
 
     .product-media {
         flex-direction: column;
