@@ -34,6 +34,11 @@
     margin-right: 20px; /* Space between image and details */
 }
 
+.product-main {
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+}
+
 /* Product image */
 .product-media img {
     width: 100%; /* Full width */
