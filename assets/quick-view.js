@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var quickViewButtons = document.querySelectorAll('.quick-view-button');
     var modal = document.getElementById('quick-view-modal');
     var closeButton = document.querySelector('.close-button');
-    var productDetailsContainer = document.getElementById('product-details'); // Renamed to avoid confusion with CSS class
+    var productDetailsContainer = document.getElementById('product-details');
 
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -44,9 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(product) {
-        // Create variant options
+        // Check if variants exist
         let variantOptionsHtml = '';
-        if (product.options && product.options.length > 0) {
+        let hiddenVariantsHtml = '';
+
+        if (product.variants && product.variants.length > 0) {
+            // Create variant options
             product.options.forEach(option => {
                 let optionHtml = `
                     <div class="option-${option.name}">
@@ -61,11 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 optionHtml += '</div>';
                 variantOptionsHtml += optionHtml;
             });
-        }
 
-        // Create hidden variants
-        let hiddenVariantsHtml = '';
-        if (product.variants && product.variants.length > 0) {
+            // Create hidden variants
             product.variants.forEach(variant => {
                 hiddenVariantsHtml += `
                     <input type="hidden" name="variant" value="${variant.id}" data-title="${variant.title}">
@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="product-main">
                 ${productImage}
                 <div class="pro-information">
-                    ${hiddenVariantsHtml}
+                    ${hiddenVariantsHtml ? `<div>${hiddenVariantsHtml}</div>` : ''}
                     <h5>${product.title}</h5>
                     <p class="price">$${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
-                    ${variantOptionsHtml}
+                    ${variantOptionsHtml ? `<div>${variantOptionsHtml}</div>` : ''}
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                     <button type="button" id="add-to-cart-button">Add to cart</button>
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         productDetailsContainer.innerHTML = productHtml;
 
-        // Add event listeners
+        // Add event listeners for variant options
         document.querySelectorAll('input[name="variant"]').forEach(input => {
             input.addEventListener('change', function() {
                 let selectedVariant = this.value;
@@ -110,13 +110,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
+        // Add event listener for "Add to cart" button
         document.getElementById('add-to-cart-button').addEventListener('click', function() {
             addToCart(product.id);
         });
     }
 
     function addToCart(productId) {
-        var variantId = document.querySelector('input[name="variant"]:checked').value;
+        var variantId = document.querySelector('input[name="variant"]:checked');
+        if (!variantId) {
+            alert('Please select a variant.');
+            return;
+        }
+        variantId = variantId.value;
         var quantity = document.getElementById('quantity').value;
 
         fetch('/cart/add.js', {
