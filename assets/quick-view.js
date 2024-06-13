@@ -34,12 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(product => {
-                displayProductDetails(product.product);
-                modal.style.display = 'block'; // Display the modal after fetching product details
+                if (product && product.product) {
+                    displayProductDetails(product.product);
+                    modal.style.display = 'block'; // Display the modal after fetching product details
+                } else {
+                    throw new Error('Product data not found.');
+                }
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
-                alert('Failed to fetch product details. Please try again later.');
+                // alert('Failed to fetch product details. Please try again later.');
             });
     }
 
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="pro-information">
                     <h5>${product.title}</h5>
                     <p class="price">$${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
-                    ${product.variants && product.variants.length > 0 ? generateVariantOptions(product.options, product.variants) : ''}
+                    ${generateVariantOptions(product.options, product.variants)}
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                     <button type="button" id="add-to-cart-button">Add to cart</button>
@@ -84,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
             productDetailsContainer.addEventListener('change', function(event) {
                 if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
                     let selectedVariantId = event.target.value;
-                    console.log("Selected One",selectedVariantId)
                     updatePrice(selectedVariantId, product);
                 }
             });
@@ -94,14 +97,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateVariantOptions(options, variants) {
         let variantOptionsHtml = '';
 
-        options.forEach(option => {
-            variantOptionsHtml += `
-                <div class="option-${option.name}">
-                    <h6>${option.name}</h6>
-                    ${generateOptionValues(option.values, option.name, variants)}
-                </div>
-            `;
-        });
+        // Check if variants exist and are not empty
+        if (variants && variants.length > 0) {
+            options.forEach(option => {
+                variantOptionsHtml += `
+                    <div class="option-${option.name}">
+                        <h6>${option.name}</h6>
+                        ${generateOptionValues(option.values, option.name, variants)}
+                    </div>
+                `;
+            });
+        } else {
+            // Handle the case where there are no variants
+            variantOptionsHtml = `<p>No variants available.</p>`;
+        }
 
         return variantOptionsHtml;
     }
@@ -109,25 +118,34 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateOptionValues(values, optionName, variants) {
         let optionValuesHtml = '';
 
-        values.forEach((value, index) => {
-            let variant = findVariantByOptionValue(variants, optionName, value);
-            if (variant) {
-                optionValuesHtml += `
-                    <label for="${index}-${value}">
-                        <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
-                        ${value}
-                    </label>
-                `;
-            }
-        });
+        // Check if variants exist and are not empty
+        if (variants && variants.length > 0) {
+            values.forEach((value, index) => {
+                let variant = findVariantByOptionValue(variants, optionName, value);
+                if (variant) {
+                    optionValuesHtml += `
+                        <label for="${index}-${value}">
+                            <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
+                            ${value}
+                        </label>
+                    `;
+                }
+            });
+        } else {
+            // Handle the case where there are no variants
+            optionValuesHtml = `<p>No variants available.</p>`;
+        }
 
         return optionValuesHtml;
     }
 
     function findVariantByOptionValue(variants, optionName, value) {
-        return variants.find(variant => {
-            return variant.options[optionName] === value;
-        });
+        if (variants && variants.length > 0) {
+            return variants.find(variant => {
+                return variant.options && variant.options[optionName] === value;
+            });
+        }
+        return null; // Return null or handle the case where no variants are found
     }
 
     function updatePrice(selectedVariantId, product) {
@@ -142,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name^="option-"]:checked');
-            console.log(selectedVariant)
             if (selectedVariant) {
                 variantId = selectedVariant.value;
             } else {
