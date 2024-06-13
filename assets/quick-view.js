@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="pro-information">
                     <h5>${product.title}</h5>
                     <p class="price">$${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
-                    ${product.variants && product.variants.length > 0 ? generateVariantOptions(product.options) : ''}
+                    ${product.variants && product.variants.length > 0 ? generateVariantOptions(product.options, product.variants) : ''}
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                     <button type="button" id="add-to-cart-button">Add to cart</button>
@@ -90,14 +90,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function generateVariantOptions(options) {
+    function generateVariantOptions(options, variants) {
         let variantOptionsHtml = '';
 
         options.forEach(option => {
             variantOptionsHtml += `
                 <div class="option-${option.name}">
                     <h6>${option.name}</h6>
-                    ${generateOptionValues(option.values, option.name)}
+                    ${generateOptionValues(option.values, option.name, variants)}
                 </div>
             `;
         });
@@ -105,19 +105,28 @@ document.addEventListener('DOMContentLoaded', function() {
         return variantOptionsHtml;
     }
 
-    function generateOptionValues(values, optionName) {
+    function generateOptionValues(values, optionName, variants) {
         let optionValuesHtml = '';
 
         values.forEach((value, index) => {
-            optionValuesHtml += `
-                <label for="${index}-${value}">
-                    <input type="radio" name="${optionName}" value="${value}" id="${index}-${value}">
-                    ${value}
-                </label>
-            `;
+            let variant = findVariantByOptionValue(variants, optionName, value);
+            if (variant) {
+                optionValuesHtml += `
+                    <label for="${index}-${value}">
+                        <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
+                        ${value}
+                    </label>
+                `;
+            }
         });
 
         return optionValuesHtml;
+    }
+
+    function findVariantByOptionValue(variants, optionName, value) {
+        return variants.find(variant => {
+            return variant.options[optionName] === value;
+        });
     }
 
     function updatePrice(selectedVariantId, product) {
@@ -131,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
-            var selectedVariant = document.querySelector('input[name="variant"]:checked');
+            var selectedVariant = document.querySelector('input[name^="option-"]:checked');
             if (selectedVariant) {
                 variantId = selectedVariant.value;
             } else {
