@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Displaying product details for:', product);
         let productImage = '';
         if (product.images && product.images.length > 0) {
-            productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
+            productImage = `<img src="${product.images[0].src}" alt="${product.title}" class="product-media">`;
         } else {
-            productImage = '<p>No image available</p>';
+            productImage = '<p class="product-media">No image available</p>';
         }
 
         let formHtml = '';
@@ -65,17 +65,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     <option value="${value}" data-option-name="${option.name}">${value}</option>
                 `).join('');
                 formHtml += `
-                    <label for="${option.name.toLowerCase()}">${option.name}:</label>
-                    <select id="${option.name.toLowerCase()}" data-option-name="${option.name}">
-                        ${optionHtml}
-                    </select>
-                    <br><br>
+                    <div class="option-${option.name}">
+                        <h6>${option.name}:</h6>
+                        <select id="${option.name.toLowerCase()}" data-option-name="${option.name}">
+                            ${optionHtml}
+                        </select>
+                    </div>
                 `;
             });
             formHtml += `
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1">
-                <button type="submit">Add to Cart</button>
+                <div class="option-Quantity">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                </div>
+                <button type="submit" id="add-to-cart-button">Add to Cart</button>
                 <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
             `;
             formHtml += '</form>';
@@ -83,9 +86,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // If no options, show default quantity input and add to cart button
             formHtml = `
                 <form id="add-to-cart-form">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1">
-                    <button type="submit">Add to Cart</button>
+                    <div class="option-Quantity">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    </div>
+                    <button type="submit" id="add-to-cart-button">Add to Cart</button>
                     <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
                 </form>
             `;
@@ -93,10 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Display product details including image and form
         productDetails.innerHTML = `
-            <h2>${product.title}</h2>
-            <p>${product.body_html}</p>
-            ${productImage}
-            ${formHtml}
+            <div class="product-main">
+                <div class="product-media">${productImage}</div>
+                <div class="pro-information">
+                    <h2>${product.title}</h2>
+                    <p>${product.body_html}</p>
+                    ${formHtml}
+                </div>
+            </div>
         `;
 
         // Update price when variant selection changes
