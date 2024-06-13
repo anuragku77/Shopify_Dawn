@@ -24,7 +24,7 @@
     border: 1px solid #888;
     width: 80%; /* Adjust as needed */
     display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Vertical layout by default */
+    flex-direction: row; /* Horizontal layout */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     max-height: 100%; /* Ensure modal does not exceed the viewport height */
@@ -41,15 +41,16 @@
 
 .product-main {
     display: flex;
-    flex-direction: column; /* Vertical layout for mobile */
+    flex-direction: row; /* Horizontal layout */
     width: 100%;
     overflow: hidden; /* Prevent overflow of content */
 }
 
 /* Product image container */
 .product-media {
-    width: 100%; /* Full width for mobile */
-    margin-bottom: 20px; /* Space between image and details */
+    width: 300px; /* Fixed width */
+    min-width: 300px; /* Prevent shrinking */
+    margin-right: 20px; /* Space between image and details */
     display: flex;
     align-items: center; /* Center image vertically */
     justify-content: center; /* Center image horizontally */
@@ -69,19 +70,18 @@
     flex-direction: column;
     flex-grow: 1;
     overflow: auto; /* Ensure text content is scrollable if it overflows */
-    padding: 0 10px; /* Padding for mobile */
 }
 
 /* Ensure title and description do not exceed their container */
 .pro-information h2 {
     word-wrap: break-word; /* Break long words to avoid overflow */
-    margin: 10px 0; /* Space above and below title */
+    margin: 0 0 10px; /* Space below title */
     font-size: 24px; /* Increase font size */
 }
 
 .pro-information p {
     word-wrap: break-word; /* Break long words to avoid overflow */
-    margin: 10px 0; /* Space above and below paragraphs */
+    margin: 0 0 20px; /* Space below description */
     font-size: 16px; /* Increase font size */
 }
 
@@ -92,7 +92,6 @@
     font-size: 28px; /* Increase font size */
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px; /* Space above close button */
 }
 
 .close-button:hover,
@@ -107,7 +106,7 @@
 }
 
 .option-Size h6, .option-Color h6, .option-Material h6 {
-    margin: 8px 0; /* Adjust margin */
+    margin: 0 0 8px; /* Adjust margin */
     font-weight: bold;
     font-size: 18px; /* Increase font size */
 }
@@ -135,7 +134,6 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 18px; /* Increase font size */
-    margin-top: 20px; /* Space above button */
 }
 
 #add-to-cart-button:hover {
@@ -150,59 +148,4 @@
 
 .product-description p {
     margin: 0;
-}
-
-/* Media Queries for Responsive Design */
-
-/* For tablets and smaller screens */
-@media screen and (max-width: 1024px) {
-    .modal-content {
-        width: 90%; /* Adjust width */
-    }
-}
-
-/* For mobile devices */
-@media screen and (max-width: 768px) {
-    .modal-content {
-        width: 95%; /* Adjust width */
-    }
-
-    .product-main {
-        align-items: center; /* Center content vertically */
-    }
-
-    .product-media {
-        margin-bottom: 10px; /* Reduce margin */
-    }
-
-    .pro-information h2 {
-        font-size: 20px; /* Decrease font size */
-    }
-
-    .pro-information p {
-        font-size: 14px; /* Decrease font size */
-    }
-
-    .option-Size h6, .option-Color h6, .option-Material h6 {
-        font-size: 16px; /* Decrease font size */
-    }
-
-    .option-Size label, .option-Color label, .option-Material label {
-        font-size: 14px; /* Decrease font size */
-    }
-
-    #quantity {
-        width: 60px; /* Decrease width */
-        font-size: 14px; /* Decrease font size */
-    }
-
-    #add-to-cart-button {
-        padding: 10px 20px; /* Decrease padding */
-        font-size: 16px; /* Decrease font size */
-    }
-
-    .close-button {
-        font-size: 24px; /* Decrease font size */
-        margin-top: 5px; /* Reduce space above button */
-    }
 }
