@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productDetailsContainer.addEventListener('change', function(event) {
                 if (event.target && event.target.matches('input[name="variant"]:checked')) {
                     let selectedVariant = event.target.value;
-                    co
+                    console.log(selectedVariant)
                     let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
                     document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
                 }
