@@ -134,12 +134,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     function findVariantByOptionValue(variants, optionName, value) {
-        return variants.find(variant => {
-            if (variant.options && variant.options[optionName]) {
-                return variant.options[optionName] === value;
-            }
-            return false;
-        });
+        if (variants && variants.length > 0) {
+            return variants.find(variant => {
+                return variant.options && variant.options[optionName] === value;
+            });
+        }
+        return null; // Return null or handle the case where no variants are found
     }
     
 
