@@ -51,7 +51,6 @@
     min-width: 300px; /* Prevent shrinking */
     margin-right: 20px; /* Space between image and details */
     display: flex;
-    object-fit: cover;
     align-items: center; /* Center image vertically */
     justify-content: center; /* Center image horizontally */
 }
@@ -59,7 +58,7 @@
 .product-media img {
     max-width: 100%; /* Full width */
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
     max-height: 400px; /* Limit max height */
 }
 
