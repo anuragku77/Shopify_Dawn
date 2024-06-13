@@ -179,11 +179,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-
-    function findVariantPrice(variants, optionName, optionValue) {
-        // Implement the logic to find and return the price of the variant based on the option
-        // This function is a placeholder and should be customized as per your data structure
-        let variant = variants.find(v => v[`option${optionName === 'Size' ? 1 : 2}`] === optionValue);
-        return variant ? (variant.price / 100).toFixed(2) : '0.00';
-    }
 });
