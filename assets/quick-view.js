@@ -112,25 +112,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function generateOptionValues(values, optionName, variants) {
         let optionValuesHtml = '';
-
-        console.log('Option values:', values);
-        console.log('Option name:', optionName);
-        console.log('Variants:', variants);
     
-        values.forEach((value, index) => {
-            let variant = findVariantByOptionValue(variants, optionName, value);
-            if (variant) {
-                optionValuesHtml += `
-                    <label for="${index}-${value}">
-                        <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
-                        ${value}
-                    </label>
-                `;
-            }
-        });
+        // Check if variants exist and are not empty
+        if (variants && variants.length > 0) {
+            values.forEach((value, index) => {
+                let variant = findVariantByOptionValue(variants, optionName, value);
+                if (variant) {
+                    optionValuesHtml += `
+                        <label for="${index}-${value}">
+                            <input type="radio" name="${optionName}" value="${variant.id}" id="${index}-${value}">
+                            ${value}
+                        </label>
+                    `;
+                }
+            });
+        } else {
+            // Handle the case where there are no variants (optional)
+            optionValuesHtml = `<p>No variants available.</p>`;
+        }
     
         return optionValuesHtml;
     }
+    
     
     
 
