@@ -59,41 +59,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
         let formHtml = '';
         if (product.options && product.options.length > 0) {
-            let sizeOptionsHtml = '';
-            let colorOptionsHtml = '';
-    
-            // Check for size and color options
+            formHtml = '<form id="add-to-cart-form">';
             product.options.forEach(option => {
-                if (option.name === 'Size') {
-                    sizeOptionsHtml = option.values.map(value => `
-                        <option value="${value}" data-price="${findVariantPrice(product.variants, option.name, value)}">${value}</option>
-                    `).join('');
-                } else if (option.name === 'Color') {
-                    colorOptionsHtml = option.values.map(value => `
-                        <option value="${value}" data-price="${findVariantPrice(product.variants, option.name, value)}">${value}</option>
-                    `).join('');
-                }
+                let optionHtml = option.values.map(value => `
+                    <option value="${value}" data-option-name="${option.name}">${value}</option>
+                `).join('');
+                formHtml += `
+                    <label for="${option.name.toLowerCase()}">${option.name}:</label>
+                    <select id="${option.name.toLowerCase()}" data-option-name="${option.name}">
+                        ${optionHtml}
+                    </select>
+                    <br><br>
+                `;
             });
-    
-            // Construct form HTML if options exist
-            formHtml = `
-                <form id="add-to-cart-form">
-                    ${sizeOptionsHtml ? `
-                        <label for="size">Size:</label>
-                        <select id="size">${sizeOptionsHtml}</select>
-                        <br><br>
-                    ` : ''}
-                    ${colorOptionsHtml ? `
-                        <label for="color">Color:</label>
-                        <select id="color">${colorOptionsHtml}</select>
-                        <br><br>
-                    ` : ''}
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1">
-                    <button type="submit">Add to Cart</button>
-                    <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
-                </form>
+            formHtml += `
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                <button type="submit">Add to Cart</button>
+                <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
             `;
+            formHtml += '</form>';
         } else {
             // If no options, show default quantity input and add to cart button
             formHtml = `
@@ -115,25 +100,29 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     
         // Update price when variant selection changes
-        document.getElementById('size')?.addEventListener('change', updatePrice);
-        document.getElementById('color')?.addEventListener('change', updatePrice);
-    
+        document.querySelectorAll('select[data-option-name]').forEach(selectElement => {
+            selectElement.addEventListener('change', updatePrice);
+        });
+
         // Function to update price based on selected options
         function updatePrice() {
-            let size = document.getElementById('size')?.value;
-            let color = document.getElementById('color')?.value;
-            if (size && color) {
-                let selectedVariant = findVariant(product.variants, size, color);
-                if (selectedVariant) {
-                    document.getElementById('product-price').textContent = (selectedVariant.price / 100).toFixed(2);
-                }
+            let selectedOptions = {};
+            document.querySelectorAll('select[data-option-name]').forEach(selectElement => {
+                selectedOptions[selectElement.getAttribute('data-option-name')] = selectElement.value;
+            });
+
+            let selectedVariant = findVariant(product.variants, selectedOptions);
+            if (selectedVariant) {
+                document.getElementById('product-price').textContent = (selectedVariant.price / 100).toFixed(2);
             }
         }
     
-        // Function to find variant based on selected size and color
-        function findVariant(variants, size, color) {
+        // Function to find variant based on selected options
+        function findVariant(variants, selectedOptions) {
             return variants.find(variant => {
-                return variant.option1 === size && variant.option2 === color;
+                return Object.keys(selectedOptions).every(optionName => {
+                    return variant[`option${Object.keys(selectedOptions).indexOf(optionName) + 1}`] === selectedOptions[optionName];
+                });
             });
         }
     
@@ -148,27 +137,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add to cart form submission handling
         document.getElementById('add-to-cart-form')?.addEventListener('submit', function(event) {
             event.preventDefault();
-            let size = document.getElementById('size')?.value;
-            let color = document.getElementById('color')?.value;
-            let variantId;
-    
-            if (size && color) {
-                let selectedVariant = findVariant(product.variants, size, color);
-                if (selectedVariant) {
-                    variantId = selectedVariant.id;
-                } else {
-                    alert('Please select a valid variant before adding to cart.');
-                    return;
-                }
-            } else if (product.variants.length === 1) {
-                // If there's only one variant, select it
-                variantId = product.variants[0].id;
+            let selectedOptions = {};
+            document.querySelectorAll('select[data-option-name]').forEach(selectElement => {
+                selectedOptions[selectElement.getAttribute('data-option-name')] = selectElement.value;
+            });
+
+            let selectedVariant = findVariant(product.variants, selectedOptions);
+            if (selectedVariant) {
+                addToCart(selectedVariant.id);
             } else {
-                alert('Please select size and color before adding to cart.');
-                return;
+                alert('Please select valid options before adding to cart.');
             }
-    
-            addToCart(variantId);
         });
     
         // Function to add selected variant to cart
