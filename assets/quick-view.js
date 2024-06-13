@@ -55,8 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let formHtml = '';
-        if (product.options && product.options.length > 0
-            && !(product.options.length === 1 && product.options[0].name === "Title" && product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
+        if (product.options && product.options.length > 0 && !(product.options.length === 1 && product.options[0].name === "Title" && product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
             formHtml = '<form id="add-to-cart-form">';
             product.options.forEach(option => {
                 let optionHtml = option.values.map(value => `
@@ -158,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return 'Price not available';
             }
         }
-        
 
         // Add to cart form submission handling
         document.getElementById('add-to-cart-form')?.addEventListener('submit', function(event) {
@@ -204,5 +202,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Failed to add product to cart.');
             });
         }
-    }
+    });
 });
