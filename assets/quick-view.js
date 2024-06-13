@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(selectedVariant);
             if (selectedVariant) {
                 variantId = selectedVariant.value;
+                console.log(b)
             } else {
                 alert('Please select a variant.');
                 return;
