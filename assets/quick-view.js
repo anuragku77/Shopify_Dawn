@@ -140,13 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function formatPrice(price) {
-            console.log('Formatting price:', price); // Log the price
+            console.log('Formatting price:', price);
         
             // Check if price is a number or can be converted to a number
             if (typeof price === 'number' && !isNaN(price)) {
                 return `Rs. ${price.toFixed(2)}`;
             } else if (typeof price === 'string') {
-                // Try to parse the price as a float
+                
                 let parsedPrice = parseFloat(price);
                 if (!isNaN(parsedPrice)) {
                     return `Rs. ${parsedPrice.toFixed(2)}`;
