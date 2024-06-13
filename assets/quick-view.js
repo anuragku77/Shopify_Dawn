@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             productImage = '<p>No image available</p>';
         }
-    
+
         let formHtml = '';
-        if (product.options && product.options.length > 0) {
+        if (product.options && product.options.length > 0 && !(product.options.length === 1 && product.options[0].name === "Title" && product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
             formHtml = '<form id="add-to-cart-form">';
             product.options.forEach(option => {
                 let optionHtml = option.values.map(value => `
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </form>
             `;
         }
-    
+
         // Display product details including image and form
         productDetails.innerHTML = `
             <h2>${product.title}</h2>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ${productImage}
             ${formHtml}
         `;
-    
+
         // Update price when variant selection changes
         document.querySelectorAll('select[data-option-name]').forEach(selectElement => {
             selectElement.addEventListener('change', updatePrice);
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('product-price').textContent = (selectedVariant.price / 100).toFixed(2);
             }
         }
-    
+
         // Function to find variant based on selected options
         function findVariant(variants, selectedOptions) {
             return variants.find(variant => {
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
-    
+
         // Function to get initial price of the first variant
         function getInitialPrice(variants) {
             if (variants && variants.length > 0) {
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return '0.00';
         }
-    
+
         // Add to cart form submission handling
         document.getElementById('add-to-cart-form')?.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -149,11 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Please select valid options before adding to cart.');
             }
         });
-    
+
         // Function to add selected variant to cart
         function addToCart(variantId) {
             let quantity = document.getElementById('quantity').value;
-    
+
             fetch('/cart/add.js', {
                 method: 'POST',
                 headers: {
