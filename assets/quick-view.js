@@ -50,14 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayProductDetails(product) {
         // Clear previous content
         productDetailsContainer.innerHTML = '';
-
+    
         // Set product image
         const productImage = `
             <div class="product-media">
                 <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
             </div>
         `;
-
+    
         // Create product details HTML
         const productHtml = `
             <div class="product-main">
@@ -75,14 +75,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-
+    
         productDetailsContainer.innerHTML = productHtml;
-
+    
         // Add event listener for "Add to cart" button
         document.getElementById('add-to-cart-button').addEventListener('click', function() {
             addToCart(product);
         });
-
+    
         // Event delegation for variant options
         if (product.variants && product.variants.length > 0) {
             productDetailsContainer.addEventListener('change', function(event) {
@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    
 
     function generateVariantOptions(options, variants) {
         let variantOptionsHtml = '';
