@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         let formHtml = '';
-        if (product.options) {
+        if (product.options && product.options.length > 0) {
             let sizeOptionsHtml = '';
             let colorOptionsHtml = '';
     
@@ -95,6 +95,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     </form>
                 `;
             }
+        } else {
+            // If no options, show default quantity input and add to cart button
+            formHtml = `
+                <form id="add-to-cart-form">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    <button type="submit">Add to Cart</button>
+                    <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
+                </form>
+            `;
         }
     
         // Display product details including image and form
