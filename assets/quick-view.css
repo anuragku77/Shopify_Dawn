@@ -155,8 +155,9 @@
 
     .product-main{
         flex-direction: column;
+        gap: 30px;
     }
-    
+
 
     .product-media {
         flex-direction: column;
