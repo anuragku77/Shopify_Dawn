@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="pro-information">
                     <h5>${product.title}</h5>
                     <p class="price">$${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
-                    ${product.options ? generateVariantOptions(product.options) : ''}
+                    ${product.variants && product.variants.length > 0 ? generateVariantOptions(product.options) : ''}
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                     <button type="button" id="add-to-cart-button">Add to cart</button>
@@ -78,6 +78,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('add-to-cart-button').addEventListener('click', function() {
             addToCart(product);
         });
+
+        // Event delegation for variant options
+        if (product.variants && product.variants.length > 0) {
+            productDetailsContainer.addEventListener('change', function(event) {
+                if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
+                    let selectedVariantId = event.target.value;
+                    updatePrice(selectedVariantId, product);
+                }
+            });
+        }
     }
 
     function generateVariantOptions(options) {
@@ -108,6 +118,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         return optionValuesHtml;
+    }
+
+    function updatePrice(selectedVariantId, product) {
+        let selectedPrice = product.variants.find(variant => variant.id == selectedVariantId).price / 100;
+        document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
     }
 
     function addToCart(product) {
