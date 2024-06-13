@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var quickViewButtons = document.querySelectorAll('.quick-view-button');
     var modal = document.getElementById('quick-view-modal');
     var closeButton = document.querySelector('.close-button');
-    var productDetails = document.getElementById('product-details');
+    var productDetailsContainer = document.getElementById('product-details'); // Renamed to avoid confusion with CSS class
 
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     window.addEventListener('click', function(event) {
-        if (event.target == modal) {
+        if (event.target === modal) {
             modal.style.display = 'none';
         }
     });
@@ -73,16 +73,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Set product image
+        const productImage = `
+            <div class="product-media">
+                <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
+            </div>
+        `;
+
         // Create product details HTML
         const productHtml = `
             <div class="product-main">
-                <div class="product-media">
-                    <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
-                </div>
+                ${productImage}
                 <div class="pro-information">
                     ${hiddenVariantsHtml}
                     <h5>${product.title}</h5>
-                    <p class="price">₹${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
+                    <p class="price">$${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
                     ${variantOptionsHtml}
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
@@ -94,14 +99,14 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-        productDetails.innerHTML = productHtml;
+        productDetailsContainer.innerHTML = productHtml;
 
         // Add event listeners
         document.querySelectorAll('input[name="variant"]').forEach(input => {
             input.addEventListener('change', function() {
                 let selectedVariant = this.value;
                 let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
-                document.querySelector('.price').textContent = `₹${selectedPrice.toFixed(2)}`;
+                document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
             });
         });
 
