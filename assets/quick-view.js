@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             var productHandle = this.getAttribute('data-handle');
-            console.log('Button clicked. Product handle:', productHandle);
             if (productHandle) {
-                console.log('Fetching details for product handle:', productHandle);
                 fetchProductDetails(productHandle);
             } else {
                 console.error('Product handle is missing.');
@@ -28,17 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchProductDetails(handle) {
-        console.log('Fetching product details for:', handle);
         fetch(`/products/${handle}.json`)
             .then(response => {
-                console.log('Response status:', response.status);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
             .then(product => {
-                console.log('Product details fetched:', product);
                 displayProductDetails(product.product);
                 modal.style.display = 'block'; // Display the modal after fetching product details
             })
@@ -49,12 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(product) {
-        console.log('Displaying product details for:', product);
         let productImage = '';
         if (product.images && product.images.length > 0) {
-            productImage = `<img src="${product.images[0].src}" alt="${product.title}" class="product-media">`;
+            productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
         } else {
-            productImage = '<p class="product-media">No image available</p>';
+            productImage = '<p>No image available</p>';
         }
 
         let formHtml = '';
@@ -79,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                 </div>
                 <button type="submit" id="add-to-cart-button">Add to Cart</button>
-                <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
             `;
             formHtml += '</form>';
         } else {
@@ -91,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <input type="number" id="quantity" name="quantity" value="1" min="1">
                     </div>
                     <button type="submit" id="add-to-cart-button">Add to Cart</button>
-                    <p>Price: $<span id="product-price">${getInitialPrice(product.variants)}</span></p>
                 </form>
             `;
         }
@@ -102,7 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="product-media">${productImage}</div>
                 <div class="pro-information">
                     <h2>${product.title}</h2>
-                    <p>${product.body_html}</p>
+                    <p>Price: <span id="product-price">${formatPrice(getInitialPrice(product.variants))}</span></p>
+                    <p class="product-description">${product.body_html}</p>
                     ${formHtml}
                 </div>
             </div>
@@ -122,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let selectedVariant = findVariant(product.variants, selectedOptions);
             if (selectedVariant) {
-                document.getElementById('product-price').textContent = (selectedVariant.price / 100).toFixed(2);
+                document.getElementById('product-price').textContent = formatPrice(selectedVariant.price / 100);
             }
         }
 
@@ -138,9 +131,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Function to get initial price of the first variant
         function getInitialPrice(variants) {
             if (variants && variants.length > 0) {
-                return (variants[0].price / 100).toFixed(2);
+                return variants[0].price / 100;
             }
-            return '0.00';
+            return 0.00;
+        }
+
+        // Function to format the price according to the store's currency
+        function formatPrice(price) {
+            return `Rs. ${price.toFixed(2)}`;
         }
 
         // Add to cart form submission handling
