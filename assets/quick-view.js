@@ -101,30 +101,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
         productDetailsContainer.innerHTML = productHtml;
 
-        // Add event listeners for variant options
-        document.querySelectorAll('input[name="variant"]').forEach(input => {
-            input.addEventListener('change', function() {
-                let selectedVariant = this.value;
-                let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
-                document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
-            });
-        });
-
         // Add event listener for "Add to cart" button
         document.getElementById('add-to-cart-button').addEventListener('click', function() {
-            addToCart(product.id);
+            addToCart(product);
         });
+
+        // Add event listeners for variant options if they exist
+        if (product.variants && product.variants.length > 0) {
+            document.querySelectorAll('input[name="variant"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    let selectedVariant = this.value;
+                    let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
+                    document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
+                });
+            });
+        }
     }
 
-    function addToCart(productId) {
-        var variantId = document.querySelector('input[name="variant"]:checked');
-        if (!variantId) {
-            alert('Please select a variant.');
-            return;
-        }
-        variantId = variantId.value;
+    function addToCart(product) {
         var quantity = document.getElementById('quantity').value;
+        var variantId = null;
 
+        // Check if variants exist and a variant is selected
+        if (product.variants && product.variants.length > 0) {
+            var selectedVariant = document.querySelector('input[name="variant"]:checked');
+            if (selectedVariant) {
+                variantId = selectedVariant.value;
+            } else {
+                alert('Please select a variant.');
+                return;
+            }
+        }
+
+        // Perform the add to cart action
         fetch('/cart/add.js', {
             method: 'POST',
             headers: {
