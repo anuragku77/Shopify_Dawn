@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productDetailsContainer.addEventListener('change', function(event) {
                 if (event.target && event.target.matches('input[name="variant"]:checked')) {
                     let selectedVariant = event.target.value;
+                    co
                     let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
                     document.querySelector('.price').textContent = `$${selectedPrice.toFixed(2)}`;
                 }
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if variants exist and a variant is selected
         if (product.variants && product.variants.length > 0) {
             var selectedVariant = document.querySelector('input[name="variant"]:checked');
-            console.log(selectedVariant)
+            console.log(selectedVariant);
             if (selectedVariant) {
                 variantId = selectedVariant.value;
             } else {
