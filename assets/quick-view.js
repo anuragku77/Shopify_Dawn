@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productDetailsContainer.addEventListener('change', function(event) {
                 if (event.target && event.target.matches('input[type="radio"][name^="option-"]')) {
                     let selectedVariantId = event.target.value;
-                    
+                    console.log(,selectedVariantId)
                     updatePrice(selectedVariantId, product);
                 }
             });
