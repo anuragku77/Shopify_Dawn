@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    
 
     function addToCart(product) {
         var quantity = document.getElementById('quantity').value;
