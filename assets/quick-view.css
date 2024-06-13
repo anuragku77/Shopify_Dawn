@@ -153,6 +153,8 @@
     }
 
     .product-media {
+        align-items: center; /* Center image vertically */
+        justify-content: center;
         width: 100%; /* Full width for product image */
         min-width: 0; /* Remove minimum width */
         margin-right: 0; /* No margin between image and details */
