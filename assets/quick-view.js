@@ -141,6 +141,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to format the price according to the store's currency
         function formatPrice(price) {
+            console.log('Formatting price:', price); // Log the price
+            if (typeof price === 'string') {
+                price = parseFloat(price);
+            }
+            if (isNaN(price)) {
+                console.error('Invalid price value:', price);
+                return 'N/A';
+            }
             return `Rs. ${price.toFixed(2)}`;
         }
 
