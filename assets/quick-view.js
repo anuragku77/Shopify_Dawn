@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     quickViewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             var productHandle = this.getAttribute('data-handle');
-            console.log('Button clicked. Product handle:', productHandle);
             if (productHandle) {
-                console.log('Fetching details for product handle:', productHandle);
                 fetchProductDetails(productHandle);
             } else {
                 console.error('Product handle is missing.');
@@ -28,17 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchProductDetails(handle) {
-        console.log('Fetching product details for:', handle);
         fetch(`/products/${handle}.json`)
             .then(response => {
-                console.log('Response status:', response.status);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
             .then(product => {
-                console.log('Product details fetched:', product);
                 displayProductDetails(product.product);
                 modal.style.display = 'block'; // Display the modal after fetching product details
             })
@@ -49,70 +44,75 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(product) {
-        let productImage = '';
-        if (product.images && product.images.length > 0) {
-            // Assuming product.images[0] contains the image URL
-            productImage = `<img src="${product.images[0].src}" alt="${product.title}">`;
-        } else {
-            productImage = '<p>No image available</p>';
+        // Create variant options
+        let variantOptionsHtml = '';
+        if (product.options && product.options.length > 0) {
+            product.options.forEach(option => {
+                let optionHtml = `
+                    <div class="option-${option.name}">
+                        <h6>${option.name}</h6>`;
+                option.values.forEach((value, index) => {
+                    optionHtml += `
+                        <label for="${index}-${value}">
+                            <input type="radio" name="${option.name}" value="${value}" id="${index}-${value}">
+                            ${value}
+                        </label>`;
+                });
+                optionHtml += '</div>';
+                variantOptionsHtml += optionHtml;
+            });
         }
-    
-        let variantsOptionsHtml = '';
+
+        // Create hidden variants
+        let hiddenVariantsHtml = '';
         if (product.variants && product.variants.length > 0) {
-            variantsOptionsHtml = product.variants.map(variant => `
-                <option value="${variant.id}" data-price="${variant.price / 100}">${variant.title} - $${(variant.price / 100).toFixed(2)}</option>
-            `).join('');
+            product.variants.forEach(variant => {
+                hiddenVariantsHtml += `
+                    <input type="hidden" name="variant" value="${variant.id}" data-title="${variant.title}">
+                `;
+            });
         }
-    
-        if (variantsOptionsHtml) {
-            // Only create form HTML if there are variant options available
-            let formHtml = `
-                <form id="add-to-cart-form">
-                    <label for="variant">Options:</label>
-                    <select id="variant">${variantsOptionsHtml}</select>
+
+        // Create product details HTML
+        const productHtml = `
+            <div class="product-main">
+                <div class="product-media">
+                    <img src="${product.images && product.images.length > 0 ? product.images[0].src : ''}" alt="${product.title}">
+                </div>
+                <div class="pro-information">
+                    ${hiddenVariantsHtml}
+                    <h5>${product.title}</h5>
+                    <p class="price">₹${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</p>
+                    ${variantOptionsHtml}
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
-                    <button type="submit">Add to Cart</button>
-                    <p>Price: $<span id="product-price">${(product.variants && product.variants.length > 0) ? (product.variants[0].price / 100).toFixed(2) : '0.00'}</span></p>
-                </form>
-            `;
-    
-            // Append the form HTML to the product details only if there are variant options available
-            productDetails.innerHTML = `
-                <h2>${product.title}</h2>
-                <p>${product.body_html}</p>
-                ${productImage}
-                ${formHtml}
-            `;
-    
-            // Add event listeners only if there are variant options available
-            document.getElementById('variant').addEventListener('change', function() {
-                let selectedOption = this.options[this.selectedIndex];
-                let price = selectedOption.getAttribute('data-price');
-                document.getElementById('product-price').textContent = parseFloat(price).toFixed(2);
+                    <button type="button" id="add-to-cart-button">Add to cart</button>
+                    <div class="product-description">
+                        <p>${product.body_html}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        productDetails.innerHTML = productHtml;
+
+        // Add event listeners
+        document.querySelectorAll('input[name="variant"]').forEach(input => {
+            input.addEventListener('change', function() {
+                let selectedVariant = this.value;
+                let selectedPrice = product.variants.find(variant => variant.id == selectedVariant).price / 100;
+                document.querySelector('.price').textContent = `₹${selectedPrice.toFixed(2)}`;
             });
-    
-            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                addToCart(product.id);
-            });
-        } else {
-            // If no variant options available, display product details without form
-            productDetails.innerHTML = `
-                <h2>${product.title}</h2>
-                <p>${product.body_html}</p>
-                ${productImage}
-            `;
-        }
+        });
+
+        document.getElementById('add-to-cart-button').addEventListener('click', function() {
+            addToCart(product.id);
+        });
     }
-    
-    
-    
 
     function addToCart(productId) {
-        var form = document.getElementById('add-to-cart-form');
-        var variantId = form.variant.value;
-        var quantity = form.quantity.value;
+        var variantId = document.querySelector('input[name="variant"]:checked').value;
+        var quantity = document.getElementById('quantity').value;
 
         fetch('/cart/add.js', {
             method: 'POST',
