@@ -28,8 +28,13 @@
   
             products.forEach(product => {
               const variant = product.variants[0]; // Assuming the first variant for simplicity
-              const size = variant.option1 || 'N/A'; // Assuming size is stored in option1
-              {% comment %} const customField = product.metafields.custom.field_name || 'N/A'; // Replace with actual metafield path {% endcomment %}
+              let size = 'N/A'; // Default size value
+              if (product.options && product.options.length > 0 &&
+                  !(product.options.length === 1 && product.options[0].name === "Title" &&
+                  product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
+                size = variant.option1 || 'N/A'; // Use variant option1 as size
+              }
+              const customField = product.metafields?.custom?.field_name || 'N/A'; // Replace with actual metafield path
   
               const row = document.createElement('tr');
               row.innerHTML = `
@@ -37,7 +42,7 @@
                 <td>${product.title}</td>
                 <td>${variant.price} ${Shopify.currency.active}</td>
                 <td>${size}</td>
-                {% comment %} <td>${customField}</td> {% endcomment %}
+                <td>${customField}</td>
               `;
               tableBody.appendChild(row);
             });
