@@ -44,7 +44,7 @@
       // Loop through productIds and fetch details
       productIds.forEach((productId) => {
         let product = JSON.parse(localStorage.getItem(productId));
-        cossole.log(product)
+        console.log(product)
         if (product) {
           products.push(product);
         }
