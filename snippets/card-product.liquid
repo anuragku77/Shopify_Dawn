@@ -612,6 +612,7 @@
     compareButtons.forEach((button) => {
       button.addEventListener('click', function () {
         const productId = this.getAttribute('data-product-id');
+        console.log(productId)
         let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
 
         if (compareProducts.includes(productId)) {
