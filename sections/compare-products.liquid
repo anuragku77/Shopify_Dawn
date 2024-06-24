@@ -29,7 +29,7 @@
             products.forEach(product => {
               const variant = product.variants[0]; // Assuming the first variant for simplicity
               const size = variant.option1 || 'N/A'; // Assuming size is stored in option1
-              const customField = product.metafields.custom.field_name || 'N/A'; // Replace with actual metafield path
+              {% comment %} const customField = product.metafields.custom.field_name || 'N/A'; // Replace with actual metafield path {% endcomment %}
   
               const row = document.createElement('tr');
               row.innerHTML = `
