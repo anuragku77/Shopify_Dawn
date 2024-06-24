@@ -3,7 +3,7 @@
     {% for id in request.cookies.compareProducts %}
         {% assign product = all_products[id] %}
         {% if product %}
-            {% assign compare_products = compareProducts | append: product.handle | append: ',' %}
+            {% assign compare_products = compare_products | append: product.handle | append: ',' %}
         {% endif %}
     {% endfor %}
     {% assign compare_products = compareProducts | split: ',' %}
