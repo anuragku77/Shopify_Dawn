@@ -30,7 +30,7 @@
 {{ 'quick-view.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
 
-
+<div id="compare-notification" style="display:none; position: fixed; bottom: 10px; right: 10px; background: #f0f0f0; padding: 10px; border: 1px solid #ccc;"></div>
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
