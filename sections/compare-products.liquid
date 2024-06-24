@@ -27,13 +27,16 @@
             tableBody.innerHTML = '';
   
             products.forEach(product => {
-              const sizes = [];
-              product.variants.forEach(variant => {
-                if (variant.option1 && !sizes.includes(variant.option1)) {
-                  sizes.push(variant.option1);
-                }
-              });
-  
+              let sizes = [];
+              if (product.options && product.options.length > 0 &&
+                  !(product.options.length === 1 && product.options[0].name === "Title" &&
+                  product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
+                product.variants.forEach(variant => {
+                  if (variant.option1 && !sizes.includes(variant.option1)) {
+                    sizes.push(variant.option1);
+                  }
+                });
+              }
               const sizeString = sizes.length > 0 ? sizes.join(', ') : 'N/A';
               {% comment %} const customField = product.metafields?.custom?.field_name || 'N/A'; {% endcomment %}
   
