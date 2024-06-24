@@ -1,4 +1,10 @@
 /* Default styles for desktop */
+<style>
+  .compare-button {
+    z-index: 2;
+    position: relative;
+
+
 .product {
     z-index: 2;
     position: relative;
