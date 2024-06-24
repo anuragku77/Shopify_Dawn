@@ -1,9 +1,9 @@
 /* Default styles for desktop */
 
-  .compare-button {
+.compare-button {
     z-index: 2;
     position: relative;
-  }
+}
 
 .product {
     z-index: 2;
@@ -12,30 +12,43 @@
 
 /* Modal container */
 #quick-view-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1000;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black with opacity */
 }
 
 /* Modal content */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; /* Centered */
+    margin: 5% auto;
+    /* Centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Adjust as needed */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: row; /* Horizontal layout */
+    width: 80%;
+    /* Adjust as needed */
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: row;
+    /* Horizontal layout */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-    max-height: 100%; /* Ensure modal does not exceed the viewport height */
-    overflow: auto; /* Hide overflow */
+    max-height: 100%;
+    /* Ensure modal does not exceed the viewport height */
+    overflow: auto;
+    /* Hide overflow */
 }
 
 .modal-content-inner {
@@ -47,50 +60,67 @@
 
 .product-main {
     display: flex;
-    flex-direction: row; /* Horizontal layout */
+    flex-direction: row;
+    /* Horizontal layout */
     width: 100%;
-    overflow: hidden; /* Prevent overflow of content */
+    overflow: hidden;
+    /* Prevent overflow of content */
 }
 
 .product-media {
-    width: 300px; /* Fixed width */
-    min-width: 300px; /* Prevent shrinking */
-    margin-right: 20px; /* Space between image and details */
+    width: 300px;
+    /* Fixed width */
+    min-width: 300px;
+    /* Prevent shrinking */
+    margin-right: 20px;
+    /* Space between image and details */
     display: flex;
-    align-items: center; /* Center image vertically */
-    justify-content: center; /* Center image horizontally */
+    align-items: center;
+    /* Center image vertically */
+    justify-content: center;
+    /* Center image horizontally */
 }
 
 .product-media img {
-    max-width: 100%; /* Full width */
+    max-width: 100%;
+    /* Full width */
     height: auto;
     object-fit: contain;
-    max-height: 400px; /* Limit max heigcoverht */
+    max-height: 400px;
+    /* Limit max heigcoverht */
 }
 
 .pro-information {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    overflow: auto; /* Ensure text content is scrollable if it overflows */
+    overflow: auto;
+    /* Ensure text content is scrollable if it overflows */
 }
 
 .pro-information h2 {
-    word-wrap: break-word; /* Break long words to avoid overflow */
-    margin: 0 0 10px; /* Space below title */
-    font-size: 24px; /* Increase font size */
+    word-wrap: break-word;
+    /* Break long words to avoid overflow */
+    margin: 0 0 10px;
+    /* Space below title */
+    font-size: 24px;
+    /* Increase font size */
 }
 
 .pro-information p {
-    word-wrap: break-word; /* Break long words to avoid overflow */
-    margin: 0 0 20px; /* Space below description */
-    font-size: 16px; /* Increase font size */
+    word-wrap: break-word;
+    /* Break long words to avoid overflow */
+    margin: 0 0 20px;
+    /* Space below description */
+    font-size: 16px;
+    /* Increase font size */
 }
 
 .close-button {
     color: #aaa;
     float: right;
-    font-size: 28px; /* Increase font size */
+    font-size: 28px;
+    /* Increase font size */
     font-weight: bold;
     cursor: pointer;
 }
@@ -101,37 +131,52 @@
     text-decoration: none;
 }
 
-.option-Size, .option-Color, .option-Material {
-    margin-bottom: 15px; /* Increase margin */
+.option-Size,
+.option-Color,
+.option-Material {
+    margin-bottom: 15px;
+    /* Increase margin */
 }
 
-.option-Size h6, .option-Color h6, .option-Material h6 {
-    margin: 0 0 8px; /* Adjust margin */
+.option-Size h6,
+.option-Color h6,
+.option-Material h6 {
+    margin: 0 0 8px;
+    /* Adjust margin */
     font-weight: bold;
-    font-size: 18px; /* Increase font size */
+    font-size: 18px;
+    /* Increase font size */
 }
 
-.option-Size label, .option-Color label, .option-Material label {
+.option-Size label,
+.option-Color label,
+.option-Material label {
     display: inline-block;
     margin-right: 10px;
-    font-size: 16px; /* Increase font size */
+    font-size: 16px;
+    /* Increase font size */
 }
 
 #quantity {
-    width: 80px; /* Increase width */
+    width: 80px;
+    /* Increase width */
     margin-bottom: 20px;
-    padding: 8px; /* Increase padding */
-    font-size: 16px; /* Increase font size */
+    padding: 8px;
+    /* Increase padding */
+    font-size: 16px;
+    /* Increase font size */
 }
 
 #add-to-cart-button {
     background-color: #4CAF50;
     color: white;
-    padding: 12px 24px; /* Increase padding */
+    padding: 12px 24px;
+    /* Increase padding */
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    font-size: 18px; /* Increase font size */
+    font-size: 18px;
+    /* Increase font size */
 }
 
 #add-to-cart-button:hover {
@@ -140,7 +185,8 @@
 
 .product-description {
     margin-top: 20px;
-    font-size: 16px; /* Increase font size */
+    font-size: 16px;
+    /* Increase font size */
 }
 
 .product-description p {
@@ -150,71 +196,94 @@
 /* Media query for smaller screens */
 @media (max-width: 768px) {
     .modal-content {
-        width: 90%; /* Adjust modal width for smaller screens */
-        margin: 10% auto; /* Centered */
-        padding: 10px; /* Adjust padding */
+        width: 90%;
+        /* Adjust modal width for smaller screens */
+        margin: 10% auto;
+        /* Centered */
+        padding: 10px;
+        /* Adjust padding */
         display: flex;
         flex-direction: column;
-        align-items: center; /* Center content horizontally */
+        align-items: center;
+        /* Center content horizontally */
     }
 
-    .product-main{
+    .product-main {
         flex-direction: column;
         gap: 30px;
     }
 
 
     .product-media {
-        align-items: center; /* Center image vertically */
+        align-items: center;
+        /* Center image vertically */
         justify-content: center;
-        width: 100%; /* Full width for product image */
-        min-width: 0; /* Remove minimum width */
-        margin-right: 0; /* No margin between image and details */
+        width: 100%;
+        /* Full width for product image */
+        min-width: 0;
+        /* Remove minimum width */
+        margin-right: 0;
+        /* No margin between image and details */
     }
 
     .product-media img {
-        width: 100%; /* Ensure image takes full width */
-        height: auto; /* Maintain aspect ratio */
-        max-height: 300px; /* Limit max height */
+        width: 100%;
+        /* Ensure image takes full width */
+        height: auto;
+        /* Maintain aspect ratio */
+        max-height: 300px;
+        /* Limit max height */
     }
 
     .pro-information {
-        padding: 10px; /* Adjust padding for product information */
-        text-align: center; /* Center text content */
+        padding: 10px;
+        /* Adjust padding for product information */
+        text-align: center;
+        /* Center text content */
     }
 
     .pro-information h2 {
-        font-size: 20px; /* Decrease font size for title */
+        font-size: 20px;
+        /* Decrease font size for title */
     }
 
     .pro-information p {
-        font-size: 14px; /* Decrease font size for description */
+        font-size: 14px;
+        /* Decrease font size for description */
     }
 
     .option-Size h6,
     .option-Color h6,
     .option-Material h6 {
-        font-size: 16px; /* Decrease font size for options */
+        font-size: 16px;
+        /* Decrease font size for options */
     }
 
     .option-Size label,
     .option-Color label,
     .option-Material label {
-        font-size: 14px; /* Decrease font size for labels */
+        font-size: 14px;
+        /* Decrease font size for labels */
     }
 
     #quantity {
-        width: 60px; /* Decrease width of quantity input */
-        padding: 6px; /* Decrease padding */
-        font-size: 14px; /* Decrease font size */
+        width: 60px;
+        /* Decrease width of quantity input */
+        padding: 6px;
+        /* Decrease padding */
+        font-size: 14px;
+        /* Decrease font size */
     }
 
     #add-to-cart-button {
-        padding: 10px 20px; /* Adjust padding */
-        font-size: 16px; /* Decrease font size */
+        padding: 10px 20px;
+        /* Adjust padding */
+        font-size: 16px;
+        /* Decrease font size */
     }
 
     .product-description {
-        font-size: 14px; /* Decrease font size */
+        font-size: 14px;
+        /* Decrease font size */
     }
 }
