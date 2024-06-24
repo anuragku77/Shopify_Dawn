@@ -1,89 +1,91 @@
 <div id="compare-products">
-    {% assign compare_products = '' %}
-    {% for id in request.cookies.compareProducts %}
-        {% assign product = all_products[id] %}
-        {% if product %}
-            {% assign compare_products = compare_products | append: product.handle | append: ',' %}
-        {% endif %}
-    {% endfor %}
-    {% assign compare_products = compare_products | split: ',' %}
-
-    {% if compare_products.size > 0 %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    {% comment %} <th>Size</th> {% endcomment %}
-                    <th>Price</th>
-                    {% comment %} <th>Custom Field</th> {% endcomment %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for handle in compare_products %}
-                    {% assign product = all_products[handle] %}
-                    {% if product %}
-                        <tr>
-                            <td>{{ product.title }}</td>
-                            {% comment %} <td>{{ product.metafields.custom.size }}</td> {% endcomment %}
-                            <td>{{ product.price | money }}</td>
-                            {% comment %} <td>{{ product.metafields.custom.field_name }}</td> {% endcomment %}
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No products to compare.</p>
+  {% assign compare_products = '' %}
+  {% for id in request.cookies.compareProducts %}
+    {% assign product = all_products[id] %}
+    {% if product %}
+      {% assign compare_products = compare_products | append: product.handle | append: ',' %}
     {% endif %}
+  {% endfor %}
+  {% assign compare_products = compare_products | split: ',' %}
+
+  {% if compare_products.size > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          {% comment %} <th>Size</th> {% endcomment %}
+          <th>Price</th>
+          {% comment %} <th>Custom Field</th> {% endcomment %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for handle in compare_products %}
+          {% assign product = all_products[handle] %}
+          {% if product %}
+            <tr>
+              <td>{{ product.title }}</td>
+              {% comment %} <td>{{ product.metafields.custom.size }}</td> {% endcomment %}
+              <td>{{ product.price | money }}</td>
+              {% comment %} <td>{{ product.metafields.custom.field_name }}</td> {% endcomment %}
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No products to compare.</p>
+  {% endif %}
 </div>
 
 <style>
-    .compare-button {
-        
-    }
-table {
+  .compare-button {
+    z-index: 2;
+    position: relative;
+  }
+  table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-}
+  }
 
-thead {
+  thead {
     background-color: #f4f4f4;
-}
+  }
 
-th, td {
+  th,
+  td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
-}
+  }
 
-th {
+  th {
     background-color: #f8f8f8;
-}
+  }
 </style>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const compareButtons = document.querySelectorAll('.compare-button');
-        const maxCompareItems = 3; // Set the maximum number of products to compare
-    
-        compareButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const productId = this.getAttribute('data-product-id');
-                let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
-    
-                if (compareProducts.includes(productId)) {
-                    compareProducts = compareProducts.filter(id => id !== productId);
-                    alert('Product removed from comparison.');
-                } else if (compareProducts.length < maxCompareItems) {
-                    compareProducts.push(productId);
-                    alert('Product added to comparison.');
-                } else {
-                    alert('You can compare up to ' + maxCompareItems + ' products.');
-                }
-    
-                localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
-                document.cookie = 'compareProducts=' + JSON.stringify(compareProducts) + '; path=/';
-            });
-        });
+  document.addEventListener('DOMContentLoaded', function () {
+    const compareButtons = document.querySelectorAll('.compare-button');
+    const maxCompareItems = 3; // Set the maximum number of products to compare
+
+    compareButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const productId = this.getAttribute('data-product-id');
+        let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
+
+        if (compareProducts.includes(productId)) {
+          compareProducts = compareProducts.filter((id) => id !== productId);
+          alert('Product removed from comparison.');
+        } else if (compareProducts.length < maxCompareItems) {
+          compareProducts.push(productId);
+          alert('Product added to comparison.');
+        } else {
+          alert('You can compare up to ' + maxCompareItems + ' products.');
+        }
+
+        localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
+        document.cookie = 'compareProducts=' + JSON.stringify(compareProducts) + '; path=/';
+      });
     });
+  });
 </script>
