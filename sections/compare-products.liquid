@@ -27,21 +27,22 @@
             tableBody.innerHTML = '';
   
             products.forEach(product => {
-              const variant = product.variants[0];
-              let size = 'N/A'; 
-              if (product.options && product.options.length > 0 &&
-                  !(product.options.length === 1 && product.options[0].name === "Title" &&
-                  product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
-                size = variant.option1 || 'N/A';
-              }
+              const sizes = [];
+              product.variants.forEach(variant => {
+                if (variant.option1 && !sizes.includes(variant.option1)) {
+                  sizes.push(variant.option1);
+                }
+              });
+  
+              const sizeString = sizes.length > 0 ? sizes.join(', ') : 'N/A';
               {% comment %} const customField = product.metafields?.custom?.field_name || 'N/A'; {% endcomment %}
   
               const row = document.createElement('tr');
               row.innerHTML = `
                 <td><a href="/products/${product.handle}"><img src="${product.images[0].src}" alt="${product.title}" style="max-width: 100px;"></a></td>
                 <td><a href="/products/${product.handle}">${product.title}</a></td>
-                <td>${variant.price} ${Shopify.currency.active}</td>
-                <td>${size}</td>
+                <td>${product.variants[0].price} ${Shopify.currency.active}</td>
+                <td>${sizeString}</td>
                 {% comment %} <td>${customField}</td> {% endcomment %}
               `;
               tableBody.appendChild(row);
