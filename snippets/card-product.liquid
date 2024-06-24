@@ -603,11 +603,11 @@
 {%- endif -%}
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
     const compareButtons = document.querySelectorAll('.compare-button');
     
     // Debug: Check if compareButtons are being selected
-    console.log('Compare buttons found:', compareButtons);
+    {% comment %} console.log('Compare buttons found:', compareButtons); {% endcomment %}
 
     const maxCompareItems = 3; // Set the maximum number of products to compare
 
@@ -619,12 +619,15 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Product ID:', productId);
 
             if (!productId) {
-                console.error('Product ID not found for this button.');
+                console.error('Product ID not found for this button:', this);
                 return;
             }
 
+            // Fetch compareProducts from localStorage
             let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
+            compareProducts = compareProducts.filter(id => id && typeof id === 'string'); // Clean up any invalid entries
 
+            // Handle adding/removing product
             if (compareProducts.includes(productId)) {
                 compareProducts = compareProducts.filter((id) => id !== productId);
                 alert('Product removed from comparison.');
@@ -635,15 +638,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('You can compare up to ' + maxCompareItems + ' products.');
             }
 
+            // Update localStorage
             localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
 
             // Debug: Check the updated list of compareProducts
             console.log('Updated compareProducts:', compareProducts);
 
-            // Set a cookie with the compareProducts array
+            // Set a cookie with the compareProducts array for potential server-side use
             document.cookie = 'compareProducts=' + JSON.stringify(compareProducts) + '; path=/';
         });
     });
 });
+
 
 </script>
