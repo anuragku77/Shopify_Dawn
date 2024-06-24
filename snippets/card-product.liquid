@@ -617,12 +617,6 @@
 
     compareButtons.forEach((button) => {
         const productId = button.getAttribute('data-product-id');
-
-        // Update button state based on compareProducts
-        if (compareProducts.includes(productId)) {
-            button.textContent = 'Remove from Comparison';
-        }
-
         button.addEventListener('click', function () {
             // Fetch compareProducts from localStorage
             let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
