@@ -20,6 +20,12 @@
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 
+<style>
+  .compare-button {
+    z-index: 2;
+    position: relative;
+</style>
+
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
 
