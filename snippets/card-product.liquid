@@ -605,29 +605,45 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const compareButtons = document.querySelectorAll('.compare-button');
-    {% comment %} console.log(compareButtons); {% endcomment %}
-    {% comment %} console.log("Hello"); {% endcomment %}
+    
+    // Debug: Check if compareButtons are being selected
+    console.log('Compare buttons found:', compareButtons);
+
     const maxCompareItems = 3; // Set the maximum number of products to compare
 
     compareButtons.forEach((button) => {
-      button.addEventListener('click', function () {
-        const productId = this.getAttribute('data-product-id');
-        console.log(productId);
-        let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
+        button.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            
+            // Debug: Check if productId is correctly retrieved
+            console.log('Product ID:', productId);
 
-        if (compareProducts.includes(productId)) {
-          compareProducts = compareProducts.filter((id) => id !== productId);
-          alert('Product removed from comparison.');
-        } else if (compareProducts.length < maxCompareItems) {
-          compareProducts.push(productId);
-          alert('Product added to comparison.');
-        } else {
-          alert('You can compare up to ' + maxCompareItems + ' products.');
-        }
+            if (!productId) {
+                console.error('Product ID not found for this button.');
+                return;
+            }
 
-        localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
-        document.cookie = 'compareProducts=' + JSON.stringify(compareProducts) + '; path=/';
-      });
+            let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
+
+            if (compareProducts.includes(productId)) {
+                compareProducts = compareProducts.filter((id) => id !== productId);
+                alert('Product removed from comparison.');
+            } else if (compareProducts.length < maxCompareItems) {
+                compareProducts.push(productId);
+                alert('Product added to comparison.');
+            } else {
+                alert('You can compare up to ' + maxCompareItems + ' products.');
+            }
+
+            localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
+
+            // Debug: Check the updated list of compareProducts
+            console.log('Updated compareProducts:', compareProducts);
+
+            // Set a cookie with the compareProducts array
+            document.cookie = 'compareProducts=' + JSON.stringify(compareProducts) + '; path=/';
+        });
     });
-  });
+});
+
 </script>
