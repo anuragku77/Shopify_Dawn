@@ -608,12 +608,11 @@
 
     // Add click event listeners to compare buttons
     compareButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const productId = button.getAttribute('data-product-id');
-            console.log(productId)
-            addToCompare(productId);
-        });
-    });
+      button.addEventListener('click', () => {
+          const productId = button.getAttribute('data-product-id');
+          addToCompare(productId);
+      });
+  });
 
     // Function to add product to compare list in localStorage
     function addToCompare(productId) {
