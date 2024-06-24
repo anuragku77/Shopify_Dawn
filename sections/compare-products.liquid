@@ -1,5 +1,6 @@
 <div id="compare-products">
     {% assign compareProductIds = request.cookies.compareProducts | split: ',' %}
+    {{ compareProductIds }}
     
     {% if compareProductIds.size > 0 %}
         <table>
