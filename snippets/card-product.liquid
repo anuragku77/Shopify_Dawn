@@ -613,19 +613,17 @@
           addToCompare(productId);
       });
   });
-
     // Function to add product to compare list in localStorage
     function addToCompare(productId) {
-        let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
+      let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
 
-        if (!compareProducts.includes(productId)) {
-            compareProducts.push(productId);
-            localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
-            console.log(`Product with ID ${productId} added to compare.`);
-            // Optionally, you can trigger a notification or update UI here
-        } else {
-            console.log(`Product with ID ${productId} is already in compare.`);
-        }
-    }
+      if (!compareProducts.includes(productId)) {
+          compareProducts.push(productId);
+          localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
+          console.log(`Product with ID ${productId} added to compare.`);
+      } else {
+          console.log(`Product with ID ${productId} is already in compare.`);
+      }
+  }
 });
 </script>
