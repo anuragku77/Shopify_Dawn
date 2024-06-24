@@ -605,14 +605,14 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const compareButtons = document.querySelectorAll('.compare-button');
-    console.log(compareButtons);
+    {% comment %} console.log(compareButtons); {% endcomment %}
     console.log("Hello");
     const maxCompareItems = 3; // Set the maximum number of products to compare
 
     compareButtons.forEach((button) => {
       button.addEventListener('click', function () {
         const productId = this.getAttribute('data-product-id');
-        console.log(productId)
+        console.log(productId);
         let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
 
         if (compareProducts.includes(productId)) {
