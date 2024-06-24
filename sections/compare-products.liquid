@@ -13,18 +13,18 @@
             <thead>
                 <tr>
                     <th>Product Name</th>
-                    <th>Size</th>
+                    {% comment %} <th>Size</th> {% endcomment %}
                     <th>Price</th>
-                    <th>Custom Field</th>
+                    {% comment %} <th>Custom Field</th> {% endcomment %}
                 </tr>
             </thead>
             <tbody>
-                {% for handle in compare_Products %}
+                {% for handle in compare_products %}
                     {% assign product = all_products[handle] %}
                     {% if product %}
                         <tr>
                             <td>{{ product.title }}</td>
-                            <td>{{ product.metafields.custom.size }}</td>
+                            {% comment %} <td>{{ product.metafields.custom.size }}</td> {% endcomment %}
                             <td>{{ product.price | money }}</td>
                             <td>{{ product.metafields.custom.field_name }}</td>
                         </tr>
