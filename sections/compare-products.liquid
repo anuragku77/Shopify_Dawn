@@ -36,44 +36,47 @@
   {% endif %}
 </div>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Function to fetch product details from localStorage
-    function fetchProductDetails(productIds) {
-      let products = [];
-
-      // Loop through productIds and fetch details
-      productIds.forEach((productId) => {
-        let product = JSON.parse(localStorage.getItem(productId));
-        console.log(product)
-        if (product) {
-          products.push(product);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to fetch product details from localStorage
+        function fetchProductDetails(productIds) {
+            let products = [];
+    
+            // Loop through productIds and fetch details
+            productIds.forEach(productId => {
+                // Retrieve product data from localStorage
+                let product = JSON.parse(localStorage.getItem(productId));
+                if (product) {
+                    products.push(product);
+                } else {
+                    console.warn(`Product with ID ${productId} not found in localStorage.`);
+                    // Optionally handle or log missing products
+                }
+            });
+    
+            return products;
         }
-      });
-
-      return products;
-    }
-
-    // Get compareProductIds from cookies
-    const compareProductIds = JSON.parse(localStorage.getItem('compareProducts')) || [];
-
-    // Fetch product details based on compareProductIds
-    const products = fetchProductDetails(compareProductIds);
-
-    // Populate the table with product details
-    const tableBody = document.getElementById('compare-table-body');
-    if (tableBody) {
-      tableBody.innerHTML = ''; // Clear existing rows
-
-      products.forEach((product) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-                    <td>${product.title}</td>
-                    <td>${product.metafields.custom.size}</td>
-                    <td>${product.price | money}</td>
-                    <td>${product.metafields.custom.field_name}</td>
+    
+        // Get compareProductIds from localStorage
+        const compareProductIds = JSON.parse(localStorage.getItem('compareProducts')) || [];
+    
+        // Fetch product details based on compareProductIds
+        const products = fetchProductDetails(compareProductIds);
+    
+        // Populate the table with product details
+        const tableBody = document.getElementById('compare-table-body');
+        if (tableBody) {
+            tableBody.innerHTML = ''; // Clear existing rows
+    
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.title || 'N/A'}</td>
+                    <td>${product.metafields?.custom?.size || 'N/A'}</td>
+                    <td>${product.price ? `$${product.price.toFixed(2)}` : 'N/A'}</td>
+                    <td>${product.metafields?.custom?.field_name || 'N/A'}</td>
                 `;
-        tableBody.appendChild(row);
-      });
-    }
-  });
-</script>
+                tableBody.appendChild(row);
+            });
+        }
+    });
+    </script>
