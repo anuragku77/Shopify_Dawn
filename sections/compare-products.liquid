@@ -6,7 +6,7 @@
             {% assign compareProducts = compareProducts | append: product.handle | append: ',' %}
         {% endif %}
     {% endfor %}
-    {% assign compareProducts = compareProducts | split: ',' %}
+    {% assign compare_products = compareProducts | split: ',' %}
 
     {% if compareProducts.size > 0 %}
         <table>
