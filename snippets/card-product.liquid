@@ -29,10 +29,7 @@
 {{ 'quick-view.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
 
-<div
-  id="compare-notification"
-  style="display:none; position: fixed; bottom: 10px; right: 10px; background: #f0f0f0; padding: 10px; border: 1px solid #ccc;"
-></div>
+
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -47,7 +44,7 @@
   -%}
 
   <div class="card-wrapper product-card-wrapper underline-links-hover">
-    <button class="compare-button" data-product-id="{{ card_product.handle }}">Add T0 Compare</button>
+    <button class="compare-button" data-product-id="{{ card_product.handle }}">Add To Compare</button>
 
     <div class="product">
       <button class="quick-view-button" data-handle="{{ card_product.handle }}">Quick View</button>
