@@ -1,82 +1,32 @@
-<div id="compare-products">
-  {% comment %}
-    Fetching product IDs from cookies and splitting them into an array.
-  {% endcomment %}
-  {% assign compareProductIds = request.cookies.compareProducts | default: '' | split: ',' %}
+<div id="compare-items"></div>
 
-  {% if compareProductIds.size > 0 %}
-    <table>
-      <thead>
-        <tr>
-          <th>Product Name</th>
-          <th>Size</th>
-          <th>Price</th>
-          <th>Custom Field</th>
-        </tr>
-      </thead>
-      <tbody id="compare-table-body">
-        {% for productId in compareProductIds %}
-          {% comment %}
-            Accessing each product using its ID from all_products dictionary.
-          {% endcomment %}
-          {% assign product = all_products[productId] %}
-          {% if product %}
-            <tr>
-              <td>{{ product.title }}</td>
-              <td>{{ product.metafields.custom.size }}</td>
-              <td>{{ product.price | money }}</td>
-              <td>{{ product.metafields.custom.field_name }}</td>
-            </tr>
-          {% endif %}
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>No products to compare.</p>
-  {% endif %}
-</div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Function to fetch product details from localStorage
-        function fetchProductDetails(productIds) {
-            let products = [];
-    
-            // Loop through productIds and fetch details
-            productIds.forEach(productId => {
-                // Retrieve product data from localStorage
-                let product = JSON.parse(localStorage.getItem(productId));
-                if (product) {
-                    products.push(product);
-                } else {
-                    console.warn(`Product with ID ${productId} not found in localStorage.`);
-                    // Optionally handle or log missing products
-                }
-            });
-    
-            return products;
-        }
-    
-        // Get compareProductIds from localStorage
-        const compareProductIds = JSON.parse(localStorage.getItem('compareProducts')) || [];
-    
-        // Fetch product details based on compareProductIds
-        const products = fetchProductDetails(compareProductIds);
-    
-        // Populate the table with product details
-        const tableBody = document.getElementById('compare-table-body');
-        if (tableBody) {
-            tableBody.innerHTML = ''; // Clear existing rows
-    
-            products.forEach(product => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${product.title || 'N/A'}</td>
-                    <td>${product.metafields?.custom?.size || 'N/A'}</td>
-                    <td>${product.price ? `$${product.price.toFixed(2)}` : 'N/A'}</td>
-                    <td>${product.metafields?.custom?.field_name || 'N/A'}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-    });
-    </script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Fetch compare items from localStorage
+    const compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
+
+    if (compareProducts.length > 0) {
+      fetch('/products.json') // Assuming this endpoint returns product data
+        .then(response => response.json())
+        .then(data => {
+          const products = data.products.filter(product => compareProducts.includes(product.handle));
+          const compareContainer = document.getElementById('compare-items');
+          products.forEach(product => {
+            const price = product.variants[0].price; // Assuming the price is in the first variant
+
+            compareContainer.innerHTML += `
+              <div class="product">
+                <a href="/products/${product.handle}">
+                  <img src="${product.images[0].src}" alt="${product.title}">
+                  <h2>${product.title}</h2>
+                  <p>${price} ${Shopify.currency.active}</p> <!-- Display the product price -->
+                </a>
+              </div>
+            `;
+          });
+        });
+    } else {
+      document.getElementById('compare-items').innerHTML = '<p>No products added to compare.</p>';
+    }
+  });
+</script>
