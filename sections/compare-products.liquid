@@ -1,38 +1,78 @@
 <div id="compare-products">
-    {% comment %}
+  {% comment %}
     Fetching product IDs from cookies and splitting them into an array.
-    {% endcomment %}
-    {% assign compareProductIds = request.cookies.compareProducts | default: "" | split: ',' %}
-    
-    {% if compareProductIds.size > 0 %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Size</th>
-                    <th>Price</th>
-                    <th>Custom Field</th>
-                </tr>
-            </thead>
-            <tbody id="compare-table-body">
-                {% for productId in compareProductIds %}
-                    {% comment %}
-                    Accessing each product using its ID from all_products dictionary.
-                    {% endcomment %}
-                    {% assign product = all_products[productId] %}
-                    {% if product %}
-                        <tr>
-                            <td>{{ product.title }}</td>
-                            <td>{{ product.metafields.custom.size }}</td>
-                            <td>{{ product.price | money }}</td>
-                            <td>{{ product.metafields.custom.field_name }}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No products to compare.</p>
-    {% endif %}
+  {% endcomment %}
+  {% assign compareProductIds = request.cookies.compareProducts | default: '' | split: ',' %}
+
+  {% if compareProductIds.size > 0 %}
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Size</th>
+          <th>Price</th>
+          <th>Custom Field</th>
+        </tr>
+      </thead>
+      <tbody id="compare-table-body">
+        {% for productId in compareProductIds %}
+          {% comment %}
+            Accessing each product using its ID from all_products dictionary.
+          {% endcomment %}
+          {% assign product = all_products[productId] %}
+          {% if product %}
+            <tr>
+              <td>{{ product.title }}</td>
+              <td>{{ product.metafields.custom.size }}</td>
+              <td>{{ product.price | money }}</td>
+              <td>{{ product.metafields.custom.field_name }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No products to compare.</p>
+  {% endif %}
 </div>
-<script></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Function to fetch product details from localStorage
+    function fetchProductDetails(productIds) {
+      let products = [];
+
+      // Loop through productIds and fetch details
+      productIds.forEach((productId) => {
+        let product = JSON.parse(localStorage.getItem(productId));
+        if (product) {
+          products.push(product);
+        }
+      });
+
+      return products;
+    }
+
+    // Get compareProductIds from cookies
+    const compareProductIds = JSON.parse(localStorage.getItem('compareProducts')) || [];
+
+    // Fetch product details based on compareProductIds
+    const products = fetchProductDetails(compareProductIds);
+
+    // Populate the table with product details
+    const tableBody = document.getElementById('compare-table-body');
+    if (tableBody) {
+      tableBody.innerHTML = ''; // Clear existing rows
+
+      products.forEach((product) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+                    <td>${product.title}</td>
+                    <td>${product.metafields.custom.size}</td>
+                    <td>${product.price | money}</td>
+                    <td>${product.metafields.custom.field_name}</td>
+                `;
+        tableBody.appendChild(row);
+      });
+    }
+  });
+</script>
