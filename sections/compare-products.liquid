@@ -42,7 +42,7 @@
                 <td>${product.title}</td>
                 <td>${variant.price} ${Shopify.currency.active}</td>
                 <td>${size}</td>
-                <td>${customField}</td>
+                {% comment %} <td>${customField}</td> {% endcomment %}
               `;
               tableBody.appendChild(row);
             });
