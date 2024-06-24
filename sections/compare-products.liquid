@@ -27,8 +27,8 @@
             tableBody.innerHTML = '';
   
             products.forEach(product => {
-              const variant = product.variants[0]; // Assuming the first variant for simplicity
-              let size = 'N/A'; // Default size value
+              const variant = product.variants[0];
+              let size = 'N/A'; 
               if (product.options && product.options.length > 0 &&
                   !(product.options.length === 1 && product.options[0].name === "Title" &&
                   product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
