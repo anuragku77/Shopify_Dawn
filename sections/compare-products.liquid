@@ -1,0 +1,60 @@
+<div id="compare-products">
+    {% assign compareProducts = '' %}
+    {% for id in request.cookies.compareProducts %}
+        {% assign product = all_products[id] %}
+        {% if product %}
+            {% assign compareProducts = compareProducts | append: product.handle | append: ',' %}
+        {% endif %}
+    {% endfor %}
+    {% assign compareProducts = compareProducts | split: ',' %}
+
+    {% if compareProducts.size > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Custom Field</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for handle in compareProducts %}
+                    {% assign product = all_products[handle] %}
+                    {% if product %}
+                        <tr>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.metafields.custom.size }}</td>
+                            <td>{{ product.price | money }}</td>
+                            <td>{{ product.metafields.custom.field_name }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No products to compare.</p>
+    {% endif %}
+</div>
+
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f8f8f8;
+}
+</style>
