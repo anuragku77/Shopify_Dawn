@@ -45,7 +45,7 @@
   -%}
 
   <div class="card-wrapper product-card-wrapper underline-links-hover">
-    <button class="compare-button" data-product-id="{{ card_product.handle }}">Compare</button>
+    <button class="compare-button" data-product-id="{{ product.id }}">Compare</button>
 
 
 
@@ -603,7 +603,7 @@
 {%- endif -%}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const compareButtons = document.querySelectorAll('.compare-button');
     
     // Debug: Check if compareButtons are being selected
