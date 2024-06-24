@@ -32,7 +32,7 @@
               if (product.options && product.options.length > 0 &&
                   !(product.options.length === 1 && product.options[0].name === "Title" &&
                   product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
-                size = variant.option1 || 'N/A'; // Use variant option1 as size
+                size = variant.option1 || 'N/A';
               }
               const customField = product.metafields?.custom?.field_name || 'N/A'; // Replace with actual metafield path
   
