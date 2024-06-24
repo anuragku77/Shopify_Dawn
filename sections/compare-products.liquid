@@ -8,7 +8,7 @@
     {% endfor %}
     {% assign compare_products = compare_products | split: ',' %}
 
-    {% if compareProducts.size > 0 %}
+    {% if compare_products.size > 0 %}
         <table>
             <thead>
                 <tr>
@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for handle in compareProducts %}
+                {% for handle in compare_Products %}
                     {% assign product = all_products[handle] %}
                     {% if product %}
                         <tr>
