@@ -59,7 +59,28 @@ th {
 }
 </style>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const compareButtons = document.querySelectorAll('.compare-button');
+        const maxCompareItems = 3; // Set the maximum number of products to compare
     
-
-
+        compareButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                let compareProducts = JSON.parse(localStorage.getItem('compareProducts')) || [];
+    
+                if (compareProducts.includes(productId)) {
+                    compareProducts = compareProducts.filter(id => id !== productId);
+                    alert('Product removed from comparison.');
+                } else if (compareProducts.length < maxCompareItems) {
+                    compareProducts.push(productId);
+                    alert('Product added to comparison.');
+                } else {
+                    alert('You can compare up to ' + maxCompareItems + ' products.');
+                }
+    
+                localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
+                document.cookie = 'compareProducts=' + JSON.stringify(compareProducts) + '; path=/';
+            });
+        });
+    });
 </script>
