@@ -26,7 +26,7 @@
                             <td>{{ product.title }}</td>
                             {% comment %} <td>{{ product.metafields.custom.size }}</td> {% endcomment %}
                             <td>{{ product.price | money }}</td>
-                            <td>{{ product.metafields.custom.field_name }}</td>
+                            {% comment %} <td>{{ product.metafields.custom.field_name }}</td> {% endcomment %}
                         </tr>
                     {% endif %}
                 {% endfor %}
@@ -38,6 +38,7 @@
 </div>
 
 <style>
+    .
 table {
     width: 100%;
     border-collapse: collapse;
