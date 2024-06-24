@@ -38,8 +38,8 @@
   
               const row = document.createElement('tr');
               row.innerHTML = `
-                <td><img src="${product.images[0].src}" alt="${product.title}" style="max-width: 100px;"></td>
-                <td>${product.title}</td>
+                <td><a href="/products/${product.handle}"><img src="${product.images[0].src}" alt="${product.title}" style="max-width: 100px;"></a></td>
+                <td><a href="/products/${product.handle}">${product.title}</a></td>
                 <td>${variant.price} ${Shopify.currency.active}</td>
                 <td>${size}</td>
                 {% comment %} <td>${customField}</td> {% endcomment %}
@@ -82,6 +82,15 @@
       margin: auto;
       max-width: 100px;
       max-height: 100px;
+    }
+  
+    #compare-table a {
+      color: inherit; /* Ensures that the link inherits the color of the surrounding text */
+      text-decoration: none; /* Removes the underline from the links */
+    }
+  
+    #compare-table a:hover {
+      text-decoration: underline; /* Adds an underline on hover for better accessibility */
     }
   </style>
   
