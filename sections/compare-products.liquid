@@ -1,30 +1,31 @@
 <div id="compare-products">
-    {% assign compareProducts = '' %}
-    {% for id in compareProducts %}
-        {% assign product = all_products[id] %}
-        {% if product %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        {% comment %} <th>Size</th> {% endcomment %}
-                        <th>Price</th>
-                        {% comment %} <th>Custom Field</th> {% endcomment %}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ product.title }}</td>
-                        {% comment %} <td>{{ product.metafields.custom.size }}</td> {% endcomment %}
-                        <td>{{ product.price | money }}</td>
-                        {% comment %} <td>{{ product.metafields.custom.field_name }}</td> {% endcomment %}
-                    </tr>
-                </tbody>
-            </table>
-        {% endif %}
-    {% endfor %}
-
-    {% if compareProducts.size == 0 %}
+    {% assign compareProductIds = request.cookies.compareProducts | split: ',' %}
+    
+    {% if compareProductIds.size > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Custom Field</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for productId in compareProductIds %}
+                    {% assign product = all_products[productId] %}
+                    {% if product %}
+                        <tr>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.metafields.custom.size }}</td>
+                            <td>{{ product.price | money }}</td>
+                            <td>{{ product.metafields.custom.field_name }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
         <p>No products to compare.</p>
     {% endif %}
 </div>
