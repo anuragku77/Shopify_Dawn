@@ -1,6 +1,8 @@
 <div id="compare-products">
-    {% assign compareProductIds = request.cookies.compareProducts | split: ',' %}
-    {{ compareProductIds }}
+    {% comment %}
+    Fetching product IDs from cookies and splitting them into an array.
+    {% endcomment %}
+    {% assign compareProductIds = request.cookies.compareProducts | default: "" | split: ',' %}
     
     {% if compareProductIds.size > 0 %}
         <table>
@@ -12,8 +14,11 @@
                     <th>Custom Field</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="compare-table-body">
                 {% for productId in compareProductIds %}
+                    {% comment %}
+                    Accessing each product using its ID from all_products dictionary.
+                    {% endcomment %}
                     {% assign product = all_products[productId] %}
                     {% if product %}
                         <tr>
@@ -30,25 +35,3 @@
         <p>No products to compare.</p>
     {% endif %}
 </div>
-
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    thead {
-        background-color: #f4f4f4;
-    }
-
-    th, td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-
-    th {
-        background-color: #f8f8f8;
-    }
-</style>
