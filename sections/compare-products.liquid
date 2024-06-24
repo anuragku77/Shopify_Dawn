@@ -34,7 +34,7 @@
                   product.options[0].values.length === 1 && product.options[0].values[0] === "Default Title")) {
                 size = variant.option1 || 'N/A';
               }
-              const customField = product.metafields?.custom?.field_name || 'N/A'; // Replace with actual metafield path
+              {% comment %} const customField = product.metafields?.custom?.field_name || 'N/A'; {% endcomment %}
   
               const row = document.createElement('tr');
               row.innerHTML = `
