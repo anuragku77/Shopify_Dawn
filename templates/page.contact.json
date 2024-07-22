@@ -32,6 +32,7 @@
         "testimonial_UF73VN": {
           "type": "testimonial",
           "settings": {
+            "html5_video": "shopify:\/\/files\/videos\/4524595-hd_1920_1080_25fps.mp4",
             "youtube_video": "",
             "star_rating": 3,
             "title": "<p>Best product ever! Highly recommend.<\/p>",
