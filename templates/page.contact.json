@@ -72,24 +72,13 @@
             "link_label": "",
             "link": ""
           }
-        },
-        "testimonial_xcEYpe": {
-          "type": "testimonial",
-          "settings": {
-            "youtube_video": "",
-            "star_rating": 5,
-            "title": "<p>Best product ever! Highly recommend.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
         }
       },
       "block_order": [
         "testimonial_UF73VN",
         "testimonial_8h4NaX",
         "testimonial_Cynkk3",
-        "testimonial_CGrRKV",
-        "testimonial_xcEYpe"
+        "testimonial_CGrRKV"
       ],
       "settings": {
         "title": "Some kind words.",
