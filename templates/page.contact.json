@@ -65,8 +65,9 @@
         "testimonial_CGrRKV": {
           "type": "testimonial",
           "settings": {
+            "html5_video": "shopify:\/\/files\/videos\/8400744-uhd_2732_1440_25fps.mp4",
             "youtube_video": "",
-            "star_rating": 5,
+            "star_rating": 4,
             "title": "<p>Best product ever! Highly recommend.<\/p>",
             "link_label": "",
             "link": ""
