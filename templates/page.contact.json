@@ -29,16 +29,6 @@
     "testimonial_nYfYNc": {
       "type": "testimonial",
       "blocks": {
-        "testimonial_GNjfEy": {
-          "type": "testimonial",
-          "settings": {
-            "youtube_video": "",
-            "star_rating": 3,
-            "title": "<p>Best product ever! Highly recommend.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
         "testimonial_UF73VN": {
           "type": "testimonial",
           "settings": {
@@ -71,7 +61,6 @@
         }
       },
       "block_order": [
-        "testimonial_GNjfEy",
         "testimonial_UF73VN",
         "testimonial_CGrRKV",
         "testimonial_xcEYpe"
