@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "main": {
@@ -128,11 +137,30 @@
       ],
       "settings": {
       }
+    },
+    "172164414254ce59fa": {
+      "type": "apps",
+      "blocks": {
+        "doran_reviews_questions_product_widget_kaqXMV": {
+          "type": "shopify:\/\/apps\/doran-reviews-questions\/blocks\/product-widget\/ca90c3ee-bc39-4c25-90cd-fdf0519c6d11",
+          "settings": {
+            "topPadding": 36,
+            "bottomPadding": 36
+          }
+        }
+      },
+      "block_order": [
+        "doran_reviews_questions_product_widget_kaqXMV"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
     "related-products",
-    "product_bundles_BaTnTQ"
+    "product_bundles_BaTnTQ",
+    "172164414254ce59fa"
   ]
 }
