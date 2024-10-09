@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
-    
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -287,9 +286,8 @@
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
-
     <div id="menu-backdrop"></div>
-    
+
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -306,19 +304,19 @@
 
     {% comment %} {% section 'custom-slider' %} {% endcomment %}
 
-   <div id="quick-view-modal" style="display:none;">
-    <div class="modal-content">
+    <div id="quick-view-modal" style="display:none;">
+      <div class="modal-content">
         <span class="close-button">&times;</span>
         <div id="product-details"></div>
+      </div>
     </div>
-    </div>
-    
 
     {% comment %}
-    {% section 'custom-section' %}
+      {% section 'custom-section' %}
     {% endcomment %}
 
     {% comment %} {% section 'custom-footer' %} {% endcomment %}
+
     {% sections 'footer-group' %}
 
     <ul hidden>
