@@ -1051,9 +1051,161 @@
               "claim_shop_cash_description": "بإمكانك استخدام رصيد Shop Cash الخاص بك في عمليات الشراء المستقبلية في تطبيق Shop."
             }
           }
+        },
+        "attempted_delivery_label": "حاول التوصيل",
+        "attempted_delivery_description": "محاولة التسليم لم تنجح.",
+        "attempted_to_deliver_label": "محاولة التوصيل",
+        "confirmed_description": "لقد تلقينا طلبك.",
+        "on_its_way_description": "هذه الشحنة في طريقها.",
+        "out_for_delivery_description": "هذه الشحنة خارج للتسليم.",
+        "preparing_for_shipping_label": "التحضير للشحن",
+        "preparing_for_shipping_description": "يتم الآن إعداد هذه العناصر للشحن.",
+        "ready_for_pickup_label": "جاهز للإستلام",
+        "ready_for_pickup_description": "هذه العناصر جاهزة للاستلام. يرجى إحضار تأكيد طلبك عند استلام طلبك.",
+        "ready_for_pickup_location": "طلبك جاهز للاستلام في الموقع",
+        "picked_up_label": "التقطت",
+        "picked_up_description": "لقد تم التقاط هذه العناصر.",
+        "canceled_description": "تم إلغاء طلبك بتاريخ {{date}} .",
+        "canceled_label": "ألغيت",
+        "canceled_title": "تم إلغاء طلبك",
+        "come_back": "ارجع إلى هذه الصفحة للحصول على تحديثات حول حالة الشحن الخاصة بك.",
+        "company_tracking_number": "رقم التتبع {{company}} :",
+        "confirmed_label": "مؤكد",
+        "confirmed_title": "تم تأكيد طلبك",
+        "confirmed_description_pickup": "ستتلقى بريدًا إلكترونيًا عندما يكون طلبك جاهزًا للاستلام.",
+        "confirmed_description_digital": "ستتلقى بريدًا إلكترونيًا عندما يكون طلبك جاهزًا.",
+        "confirmed_description_gift_card_text": "ستتلقى رسالة نصية عندما يكون طلبك جاهزًا.",
+        "delivered_description": "تم تسليم هذه الشحنة.",
+        "complete_label": "مكتمل",
+        "delivered_label": "تم التوصيل",
+        "delivered_title": "لقد تم تسليم الشحنة الخاصة بك",
+        "delivered_description_digital": {
+          "one": "هذا البند كامل.",
+          "other": "هذه العناصر كاملة."
+        },
+        "delivered_description_gift_card": {
+          "one": "تم إرسال بطاقة الهدايا عبر البريد الإلكتروني.",
+          "other": "تم إرسال بطاقات الهدايا عبر البريد الإلكتروني."
+        },
+        "delivered_description_gift_card_text": {
+          "one": "تم إرسال بطاقة الهدايا عن طريق النص.",
+          "other": "تم إرسال بطاقات الهدايا عن طريق الرسائل النصية."
+        },
+        "gift_card_label": {
+          "one": "كرت هدية",
+          "other": "بطاقات الهدايا"
+        },
+        "gift_card_resend": {
+          "one": "إعادة إرسال البريد الإلكتروني",
+          "other": "إعادة إرسال رسائل البريد الإلكتروني"
+        },
+        "gift_card_resend_text": {
+          "one": "إعادة إرسال النص",
+          "other": "إعادة إرسال النصوص"
+        },
+        "gift_resend_success": {
+          "one": "تمت إعادة إرسال بطاقة الهدايا",
+          "other": "بطاقات الهدايا مستاءة"
+        },
+        "gift_resend_failure": {
+          "one": "حدثت مشكلة أثناء إعادة إرسال بطاقة الهدايا. حاول مرة أخرى أو اتصل بنا.",
+          "other": "حدثت مشكلة أثناء إعادة إرسال بطاقات الهدايا. حاول مرة أخرى أو اتصل بنا."
+        },
+        "gift_card_resend_description": {
+          "one": "إذا لم يتم استلامها، قم بإعادة إرسال البريد الإلكتروني أو",
+          "other": "إذا لم يتم استلامها، قم بإعادة إرسال رسائل البريد الإلكتروني أو"
+        },
+        "gift_card_resend_description_text": {
+          "one": "إذا لم يتم استلامها، أعد إرسال الرسالة النصية أو",
+          "other": "إذا لم يتم استلامها، قم بإعادة إرسال الرسائل النصية أو"
+        },
+        "confirmed_gift_card_additional_description": {
+          "one": "سيتم إرسال بطاقة الهدايا في بريد إلكتروني منفصل.",
+          "other": "سيتم إرسال كل بطاقة هدية في بريد إلكتروني منفصل."
         }
       },
-      "fulfillment_status_title": "حالة الإنجاز: {{status}}"
+      "fulfillment_status_title": "حالة الإنجاز: {{status}}",
+      "order_list": {
+        "pagination": {
+          "previous": "السابق",
+          "previous_accessibility_label": "الطلبات السابقة",
+          "load_more": "تحميل المزيد",
+          "load_more_accessibility_label": "تحميل المزيد من الطلبات"
+        },
+        "order_status_message": {
+          "list_view": {
+            "view_order_for_details": "عرض الطلب للحصول على التفاصيل",
+            "estimated_delivery": "{{date}}",
+            "last_updated": "آخر تحديث {{date}}"
+          },
+          "table_view": {
+            "estimated_delivery": "EST. تاريخ التسليم {{date}}"
+          }
+        },
+        "payment_status": {
+          "list_view": {
+            "overdue": "التأخر في الدفع",
+            "due": "{{date}}",
+            "due_today": "الدفع مستحق اليوم",
+            "due_without_date": "استحقاق الدفع",
+            "due_on_fulfillment": "الدفع مستحق عند الوفاء",
+            "pay_to_confirm": "ادفع للتأكيد",
+            "payment_not_due": "الدفع لم يحين موعده بعد"
+          },
+          "table_view": {
+            "overdue": "تأخرت",
+            "due": "{{date}}",
+            "due_today": "مستحق اليوم",
+            "paid": "مدفوع",
+            "due_without_date": "حق",
+            "due_on_fulfillment": "مستحق عند الوفاء",
+            "pay_to_confirm": "ادفع للتأكيد",
+            "payment_not_due": "ليس بسبب بعد"
+          }
+        },
+        "sort_by": "الترتيب حسب: {{option}}",
+        "sort_hide_options_accessibility_label": "إخفاء خيارات الفرز للطلبات المؤكدة.",
+        "sort_show_options_accessibility_label": "إظهار خيارات الفرز للطلبات المؤكدة.",
+        "sort_currently_sorted_by_accessibility_label": "الترتيب حاليًا حسب: {{option}}",
+        "sort_title": "نوع",
+        "sort": {
+          "date": {
+            "newest": "الأحدث إلى الأقدم",
+            "oldest": "من الأقدم إلى الأحدث"
+          },
+          "location": {
+            "ascending": "الموقع (أريزونا)",
+            "descending": "الموقع (ZA)"
+          },
+          "order_number": {
+            "ascending": "رقم الطلب (من الأقل إلى الأعلى)",
+            "descending": "رقم الطلب (من الأعلى إلى الأدنى)"
+          },
+          "order_total": {
+            "ascending": "إجمالي الطلب (من الأقل إلى الأعلى)",
+            "descending": "إجمالي الطلب (من الأعلى إلى الأدنى)"
+          }
+        },
+        "filter_title": "منقي",
+        "filter": {
+          "clear_section": "مسح القسم",
+          "clear_all": "امسح الكل",
+          "apply": "يتقدم",
+          "date": {
+            "start_date": "تاريخ البدء",
+            "end_date": "تاريخ الانتهاء",
+            "title": "تاريخ الطلب",
+            "today": "اليوم",
+            "last_7_days": "اخر 7 ايام",
+            "last_30_days": "آخر 30 يومًا",
+            "last_90_days": "آخر 90 يومًا",
+            "last_365_days": "آخر 12 شهرًا",
+            "custom": "مخصص"
+          }
+        },
+        "table_view": "عرض عرض الجدول",
+        "show_order_actions_accessibility_label": "إظهار إجراءات الطلب للطلب {{name}}"
+      }
     },
     "B2B": {
       "draft_order_details": {
