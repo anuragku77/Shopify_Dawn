@@ -3448,7 +3448,29 @@
   "customer": {
     "order": {
       "subtotal": "المجموع الفرعي",
-      "total_duties": "الواجبات"
+      "total_duties": "الواجبات",
+      "title": "طلب {{ name }}",
+      "date_html": "تم وضعه في {{ date }}",
+      "cancelled_html": "تم إلغاء الطلب بتاريخ {{ date }}",
+      "cancelled_reason": "السبب: {{ reason }}",
+      "billing_address": "عنوان وصول الفواتير",
+      "payment_status": "حالة السداد",
+      "shipping_address": "عنوان الشحن",
+      "fulfillment_status": "حالة الاكتمال",
+      "discount": "تخفيض",
+      "shipping": "شحن",
+      "tax": "ضريبة",
+      "product": "منتج",
+      "sku": "رمز التخزين التعريفي",
+      "price": "سعر",
+      "quantity": "كمية",
+      "total": "المجموع",
+      "total_refunded": "ردها",
+      "fulfilled_at_html": "تم استيفاؤه {{ date }}",
+      "track_shipment": "شحنة المسار",
+      "tracking_url": "رابط التتبع",
+      "tracking_company": "الناقل",
+      "tracking_number": "عدد تتبع"
     },
     "orders": {
       "title": "تاريخ الطلب",
@@ -3479,6 +3501,59 @@
       "password": "كلمة المرور",
       "password_confirm": "تأكيد كلمة المرور",
       "submit": "إعادة تعيين كلمة المرور"
+    },
+    "account": {
+      "title": "حساب",
+      "details": "تفاصيل الحساب",
+      "view_addresses": "عرض العناوين",
+      "return": "العودة إلى تفاصيل الحساب"
+    },
+    "account_fallback": "حساب",
+    "activate_account": {
+      "title": "تفعيل حساب",
+      "subtext": "قم بإنشاء كلمة المرور الخاصة بك لتفعيل حسابك.",
+      "password": "كلمة المرور",
+      "password_confirm": "تأكيد كلمة المرور",
+      "submit": "تفعيل حساب",
+      "cancel": "رفض الدعوة"
+    },
+    "addresses": {
+      "title": "عناوين",
+      "default": "تقصير",
+      "add_new": "أضف عنوانا جديدا",
+      "edit_address": "تعديل العنوان",
+      "first_name": "الاسم الأول",
+      "last_name": "اسم العائلة",
+      "company": "شركة",
+      "address1": "العنوان 1",
+      "address2": "العنوان 2",
+      "city": "مدينة",
+      "country": "البلد/المنطقة",
+      "province": "مقاطعة",
+      "zip": "الرمز البريدي/الرمز البريدي",
+      "phone": "هاتف",
+      "set_default": "تعيين كعنوان افتراضي",
+      "add": "اضف عنوان",
+      "update": "تحديث العنوان",
+      "cancel": "يلغي",
+      "edit": "يحرر",
+      "delete": "يمسح",
+      "delete_confirm": "هل أنت متأكد من رغبتك في حذف هذا العنوان؟"
+    },
+    "log_in": "تسجيل الدخول",
+    "log_out": "تسجيل خروج",
+    "login_page": {
+      "cancel": "يلغي",
+      "create_account": "إنشاء حساب",
+      "email": "بريد إلكتروني",
+      "forgot_password": "نسيت كلمة السر؟",
+      "guest_continue": "يكمل",
+      "guest_title": "استمر كضيف",
+      "password": "كلمة المرور",
+      "title": "تسجيل الدخول",
+      "sign_in": "تسجيل الدخول",
+      "submit": "يُقدِّم",
+      "alternate_provider_separator": "أو"
     }
   },
   "gift_cards": {
@@ -3802,7 +3877,60 @@
   },
   "templates": {
     "search": {
-      "no_results": "لم يتم العثور على نتائج لـ \" {{ terms }} \". قم بالتدقيق الإملائي أو استخدم كلمة أو عبارة مختلفة."
+      "no_results": "لم يتم العثور على نتائج لـ \" {{ terms }} \". قم بالتدقيق الإملائي أو استخدم كلمة أو عبارة مختلفة.",
+      "page": "صفحة",
+      "products": "منتجات",
+      "results_pages_with_count": {
+        "one": "صفحة {{ count }}",
+        "other": "{{ count }} صفحة"
+      },
+      "results_suggestions_with_count": {
+        "one": "{{ count }} اقتراح",
+        "other": "{{ count }} اقتراحات"
+      },
+      "results_products_with_count": {
+        "one": "{{ count }} المنتج",
+        "other": "{{ count }} من المنتجات"
+      },
+      "results_with_count": {
+        "one": "نتيجة {{ count }}",
+        "other": "{{ count }} نتيجة"
+      },
+      "results_with_count_and_term": {
+        "one": "تم العثور على نتيجة {{ count }} لـ \" {{ terms }} \"",
+        "other": "تم العثور على {{ count }} نتيجة لـ \" {{ terms }} \""
+      },
+      "title": "نتائج البحث",
+      "search_for": "ابحث عن \" {{ terms }} \"",
+      "suggestions": "اقتراحات",
+      "pages": "الصفحات"
+    },
+    "cart": {
+      "cart": "عربة التسوق"
+    },
+    "contact": {
+      "form": {
+        "title": "نموذج الاتصال",
+        "name": "اسم",
+        "email": "بريد إلكتروني",
+        "phone": "رقم التليفون",
+        "comment": "تعليق",
+        "send": "يرسل",
+        "post_success": "شكرا لإتصالك بنا. سنعود إليك في أقرب وقت ممكن.",
+        "error_heading": "يرجى ضبط ما يلي:"
+      }
+    },
+    "404": {
+      "title": "الصفحة غير موجودة"
     }
+  },
+  "localization": {
+    "country_label": "البلد/المنطقة",
+    "language_label": "لغة",
+    "update_language": "تحديث اللغة",
+    "update_country": "تحديث البلد/المنطقة",
+    "search": "يبحث",
+    "popular_countries_regions": "البلدان/المناطق الشعبية",
+    "country_results_count": "تم العثور على {{ count }} من البلدان/المناطق"
   }
 }
