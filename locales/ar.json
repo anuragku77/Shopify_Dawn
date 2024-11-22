@@ -864,7 +864,151 @@
           "connect": "انقر للاتصال بحساب Google Pay الخاص بك",
           "error_authorizing": "حدث خطأ أثناء السماح بالدفع"
         },
-        "account_connected": "تم ربط الحساب."
+        "account_connected": "تم ربط الحساب.",
+        "mor_disclaimer_html": "بالنقر أدناه وإكمال طلبك، فإنك توافق على شراء العنصر (العناصر) الخاص بك من Global-e كتاجر مسجل\n لهذه الصفقة، وفقًا <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{mor_terms}\" href=\"%{terms_href}\">لشروط وأحكام</a> Global-e \n<a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{privacy_policy}\" href=\"%{policy_href}\">وسياسة الخصوصية</a> . العالمية الإلكترونية هي دولية\n مزود خدمة التنفيذ إلى %{shop_name}\n",
+        "pending_payment": {
+          "due_notice": "إن دفعتك البالغة %{amount_due} مستحقة في %{due_date}.",
+          "multibanco": {
+            "buyer_action_info": "لقد حان موعد دفع %{amount_due}.",
+            "instruction_html": "قم بالدفع في Multibanco أو عبر الإنترنت باستخدام التفاصيل أدناه. للأسئلة أو لتحديث تفاصيل الدفع، %{contact_us}.",
+            "entity": "كيان",
+            "reference": "مرجع",
+            "amount": "كمية",
+            "find_nearest_atm": "البحث عن أقرب أجهزة الصراف الآلي"
+          }
+        },
+        "update_payment_method": "تحديث طريقة الدفع",
+        "order_covered_by_store_credit_notice": "يتم تغطية طلبك من خلال رصيد متجرك.",
+        "order_covered_by_redeemables_notice": "طلبك مغطى.",
+        "store_credit": {
+          "label": "مخزن اعتمادات",
+          "apply_label": "تطبيق الائتمان المتجر",
+          "add_label": "إضافة رصيد المتجر",
+          "manage_label": "إدارة الائتمان المتجر",
+          "buying_gift_card": "لا يمكنك استخدام رصيد المتجر لشراء بطاقة هدايا",
+          "no_fixed_selling_plans": "لا يمكنك استخدام رصيد المتجر مع خيارات الشراء المؤجلة"
+        },
+        "clear": "واضح",
+        "billing_must_match_shipping_notice": "يجب أن يتطابق عنوان إرسال الفواتير الخاص بطريقة الدفع الخاصة بك مع عنوان الشحن.",
+        "same_billing_address_checkbox_label": "استخدم عنوان الشحن كعنوان إرسال الفواتير",
+        "location_billing_address_label": "عنوان إرسال الفواتير الموقع",
+        "fact_billing_address_label": "عنوان وصول الفواتير",
+        "location_shipping_address_label": "عنوان الشحن الموقع",
+        "use_order_billing_address_label": "استخدم عنوان إرسال فواتير الطلب",
+        "use_location_billing_address_label": "استخدام عنوان إرسال الفواتير الموقع",
+        "use_location_shipping_address_label": "استخدام عنوان الشحن الموقع",
+        "no_working_method_error": "لا يمكن لهذا المتجر قبول الدفعات في الوقت الحالي. قم بتحديث هذه الصفحة أو قم بالعودة لاحقًا.",
+        "brand_not_available": "هذا المتجر لا يقبل {{brand}} . يرجى استخدام بطاقة مختلفة للدفع.",
+        "shipping_rate_updated": "تم تحديث طرق الشحن المتاحة. قم بتأكيد اختيارك قبل الخروج.",
+        "billing_address_invalid_phone": "قم بتحديث رقم الهاتف في عنوان إرسال الفواتير الخاص بك لـ {{label}} {{last_digits}} للمتابعة.",
+        "billing_address_invalid_phone_no_card": "قم بتحديث رقم الهاتف في عنوان إرسال الفواتير الخاص بك للمتابعة.",
+        "preview_not_available": {
+          "title": "المعاينة غير متوفرة",
+          "content": "لا تقلق، فهذا الخروج السريع يناسب عملائك.",
+          "button": "نعم"
+        },
+        "card_fields": {
+          "errors": {
+            "required": {
+              "issue_date": "أدخل تاريخ إصدار صالحًا",
+              "issue_number": "أدخل رقم إصدار صالح"
+            },
+            "invalid": {
+              "verification_value": "أدخل رمز CVV أو رمز الأمان صالحًا"
+            }
+          }
+        },
+        "simulated_checkout": "المعاينة قريبا",
+        "vaulting_agreement_label": "احفظ معلومات الدفع الخاصة بي لدى %{company} لإجراء عملية دفع أسرع.",
+        "business_customer_vaulting_payment_label": "احفظ هذه البطاقة عند الدفع وقم بتفويض %{company} لتحصيل الرسوم منها مقابل عمليات الشراء المستقبلية لهذا الموقع. يمكن لجميع جهات الاتصال المخصصة لهذا الموقع استخدام البطاقة.",
+        "purchase_options_and_vaulting_agreement_label": "هناك عنصر واحد أو أكثر في سلة التسوق الخاصة بك عبارة عن عملية شراء مؤجلة أو شراء اشتراك. من خلال الاستمرار في الدفع، فإنك توافق على أنه سيتم تحصيل الرسوم من طريقة الدفع الخاصة بك تلقائيًا بالسعر والتكرار المذكورين في هذه الصفحة حتى تنتهي أو تقوم بالإلغاء. تخضع جميع عمليات الإلغاء إلى %{cancellation_policy_label}.",
+        "purchase_options_cancellation_policy_label": "سياسة الإلغاء",
+        "use_different_credit_card_label": "استخدم بطاقة مختلفة",
+        "saved_credit_card": "بطاقتك الائتمانية المحفوظة",
+        "saved_credit_card_info": "آخر أربعة أرقام",
+        "saved_credit_card_cvv_verification": "لأغراض التحقق، يرجى إدخال رمز الأمان الخاص ببطاقتك.",
+        "saved_credit_card_actions": {
+          "edit": "يحرر",
+          "delete": "يمسح"
+        },
+        "saved_credit_cards_modal": {
+          "view_all_label": "عرض جميع البطاقات المحفوظة",
+          "done": "منتهي",
+          "cancel": "يلغي"
+        },
+        "add_credit_card_modal": {
+          "title": "إضافة بطاقة",
+          "save": "يحفظ",
+          "cancel": "يلغي"
+        },
+        "delete_credit_card_modal": {
+          "title": "حذف البطاقة",
+          "confirmation": "هل أنت متأكد أنك تريد حذف {{brandName}} الذي ينتهي بـ {{lastDigits}} ؟",
+          "cancel": "يلغي",
+          "delete": "يمسح"
+        },
+        "edit_credit_card_modal": {
+          "title": "تحرير البطاقة",
+          "done": "منتهي",
+          "cancel": "يلغي",
+          "description": "يمكنك فقط تعديل عنوان إرسال الفواتير الخاص ببطاقتك.",
+          "fields": {
+            "default": "تعيين كافتراضي",
+            "card_number": "رقم البطاقة",
+            "expiry": "تاريخ انتهاء الصلاحية",
+            "security_code": "رمز الحماية",
+            "name": "الاسم على البطاقة",
+            "billing": "مشروع قانون ل"
+          }
+        },
+        "expired_cards_info": {
+          "one": "هناك %{count} بطاقة منتهية الصلاحية، والتي يمكنك عرضها وتعديلها في حسابك.",
+          "other": "هناك %{count} من البطاقات منتهية الصلاحية، والتي يمكنك عرضها وتعديلها في حسابك."
+        },
+        "local_payment_method_receiver_notice": "بعد تقديم طلبك، سوف تتلقى تفاصيل الدفع. قم بالدفع من خلال ماكينة الصراف الآلي أو عبر الإنترنت خلال {{dueDays}} من الأيام.",
+        "order_edit_banner_title": "يلزم دفع {{amount_owed}}",
+        "order_edit_banner_subtitle": "تم تحديث طلبك {{order_number}} . راجع هذه التغييرات، ثم ادفع لتأكيد طلبك.",
+        "order_edit_banner_items_added": {
+          "one": "تمت الإضافة",
+          "other": "تمت إضافة %{count}"
+        },
+        "order_edit_banner_items_removed": {
+          "in_full": "إزالة",
+          "with_quantities": "تمت إزالة {{delta}} من {{quantity}}"
+        },
+        "order_edit_banner_items_returned": {
+          "in_full": "تم إرجاع {{quantity}}",
+          "with_quantities": "تم إرجاع {{delta}} من {{quantity}}"
+        },
+        "order_edit_banner_items_return_line_item_removed": {
+          "in_full": "تمت إزالته من العودة",
+          "with_quantities": "تمت إزالة {{delta}} من العودة"
+        },
+        "order_edit_banner_single_item_added": "تمت الإضافة",
+        "order_edit_banner_multiple_items_added": "تمت إضافة {{amount}}",
+        "order_edit_banner_single_item_removed": "إزالة",
+        "order_edit_banner_multiple_items_removed": "تمت إزالة {{amount}}",
+        "order_edit_banner_single_item_returned": "عاد",
+        "order_edit_banner_multiple_items_returned": "تم إرجاع {{amount}}",
+        "order_edit_banner_single_item_return_line_item_removed": "تمت إزالته من العودة",
+        "order_edit_banner_multiple_items_return_line_item_removed": "تمت إزالة {{amount}} من الإرجاع",
+        "order_edit_banner_updated_order_label": "طلب محدث",
+        "gift_card_wrapper": {
+          "heading": "كرت هدية",
+          "apply_gift_card_label": "تطبيق بطاقة هدية",
+          "apply_another_gift_card_label": "تطبيق بطاقة هدية أخرى",
+          "gift_card_label": "بطاقة الهدايا %{identifier}",
+          "payment_tag": "كرت هدية",
+          "add_label": "أضف بطاقة هدية",
+          "manage_label": "إدارة بطاقات الهدايا"
+        },
+        "gift_card_store_credit": {
+          "add_label": "أضف بطاقة هدايا أو رصيد متجر",
+          "manage_label": "إدارة بطاقات الهدايا أو تخزين الائتمان"
+        },
+        "custom_onsite_payment_method_modal": {
+          "title": "تأكيد الدفع المخصص في الموقع"
+        }
       },
       "order_summary": {
         "recurring_total_tooltip": "لا يشمل الشحن أو الضرائب أو الرسوم أو أي خصومات معمول بها.",
@@ -922,7 +1066,117 @@
             "other": "%{count} من العناصر"
           }
         },
-        "alternative_payment_currency_total": "تم تحصيلها كـ %{amount_due}"
+        "alternative_payment_currency_total": "تم تحصيلها كـ %{amount_due}",
+        "title": "ملخص الطلب",
+        "group_title_label": "جزء من \"%{group_title}\"",
+        "number_items": {
+          "one": "%{count} عنصر",
+          "other": "%{count} من العناصر"
+        },
+        "more_items_modal": {
+          "search_item": "يبحث",
+          "clear_search": "مسح البحث"
+        },
+        "order_name_label": "الطلب %{name}",
+        "shopping_cart_label": "عربة التسوق",
+        "discount_title": "تخفيض",
+        "discount_title_stacking": {
+          "one": "تخفيض",
+          "other": "خصومات"
+        },
+        "discount_order_stacking": {
+          "one": "اطلب تخفيض",
+          "other": "تخفيضات النظام"
+        },
+        "discount_label": "الرقم التسلسلي للخصم",
+        "discount_not_found": "تعذر العثور على خصم صالح مطابق للكود الذي تم إدخاله",
+        "discount_placeholder": "الرقم التسلسلي للخصم",
+        "discount_code_applied": "تم تطبيق رمز الخصم",
+        "gift_card_applied": "تم تطبيق بطاقة الهدايا",
+        "enter_shipping_address": "أدخل عنوان الشحن",
+        "gift_card_title": "كرت هدية",
+        "gift_card_label": "كرت هدية",
+        "gift_card_placeholder": "كرت هدية",
+        "gift_card_and_discount_title": "رمز الخصم أو بطاقة الهدايا",
+        "gift_card_and_discount_label": "رمز الخصم أو بطاقة الهدايا",
+        "gift_card_and_discount_placeholder": "رمز الخصم أو بطاقة الهدايا",
+        "remove_gift_card_label": "بطاقة هدية واضحة",
+        "remove_discount_label": "إزالة الخصم",
+        "return_restocking_fee_label": "رسوم إعادة تخزين",
+        "return_shipping_fee_label": "عودة الشحن",
+        "free_shipping_discount_label": "ًالشحن مجانا",
+        "applied_free_shipping_discount_label": "مُطبَّق",
+        "apply_discount_button_label": "يتقدم",
+        "applied_discount_message": "%{amount} خصم على إجمالي سعر الطلب",
+        "discount_has_been_applied": "تم تطبيق الخصم",
+        "discount_has_been_removed": "تمت إزالة الخصم",
+        "gift_card_has_been_applied": "تم تطبيق بطاقة الهدايا",
+        "gift_card_has_been_removed": "تمت إزالة بطاقة الهدايا",
+        "gift_card_subscriptions_notice": "سيتم تطبيق بطاقات الهدايا فقط على دفعتك الأولى",
+        "discount_already_applied": "تم تطبيق خصم على هذا الطلب. لا يمكنك إضافة خصم آخر.",
+        "cart_does_not_meet_discount_requirements_notice": "رمز الخصم <strong style=\"text-transform:uppercase\">%{code}</strong> غير صالح للعناصر الموجودة في سلة التسوق الخاصة بك",
+        "discount_requires_customer_notice": "أدخل معلومات الشحن الخاصة بك لتطبيق رمز الخصم <strong style=\"text-transform:uppercase\">%{code}.</strong>",
+        "customer_does_not_meet_discount_requirements_notice": "رمز الخصم <strong style=\"text-transform:uppercase\">%{code}</strong> غير متاح لك الآن",
+        "shipping_information_does_not_meet_discount_requirements_notice": "رمز الخصم <strong style=\"text-transform:uppercase\">%{code}</strong> غير متاح لعنوان الشحن الخاص بك",
+        "customer_already_used_once_per_customer_discount_notice": "تم استخدام رمز الخصم <strong style=\"text-transform:uppercase\">%{code}</strong> بالفعل",
+        "subtotal_label": "المجموع الفرعي",
+        "shipping_label": "شحن",
+        "tip_label": "نصيحة",
+        "calculating_shipping": "جارٍ الحساب…",
+        "calculating": "جارٍ الحساب…",
+        "shipping_default_value": "تحسب في الخطوة التالية",
+        "shipping_discount_title": "خصم الشحن",
+        "shipping_pending_message": "لم تتوفر بعد",
+        "shipping_policy_link": "تكاليف الشحن",
+        "taxes_label": "الضرائب",
+        "estimated_taxes_label": "الضرائب المقدرة",
+        "information_estimated_taxes_label": "الضرائب (تقديرية)",
+        "estimated_taxes_finalization_tooltip_content": "سيتم تأكيد الضريبة النهائية والإجمالية عبر البريد الإلكتروني أو الرسالة النصية بعد تقديم طلبك.",
+        "order_total_label": "الطلب الكلي",
+        "price_before_discount_aria_text": "السعر الأصلي",
+        "discount_code_aria_text": "الرقم التسلسلي للخصم",
+        "total_savings": "إجمالي المدخرات",
+        "total_label": "المجموع",
+        "total_outstanding_label": "المبلغ الواجب دفعه",
+        "partial_total_label": "المجموع",
+        "free_total_label": "حر",
+        "free_shipping_total_label": "حر",
+        "paid_label": "مدفوع",
+        "payment_due_label": "استحقاق الدفع",
+        "vat_label_html": "بما في ذلك %{amount} في الضرائب",
+        "duties_included_label": "الإجمالي يشمل الضرائب والرسوم. لا توجد رسوم إضافية عند التسليم.",
+        "discount_and_gift_card_savings_notice": "بعد %{discount_amount} في الخصومات و%{gift_card_amount} في بطاقات الهدايا",
+        "discount_savings_notice": "بعد %{discount_amount} في الخصومات",
+        "gift_card_savings_notice": "بعد %{gift_card_amount} في بطاقات الهدايا",
+        "cost_table_title": "ملخص التكلفة",
+        "description_label": "وصف",
+        "price_label": "سعر",
+        "price_per_item": {
+          "accessibility_label": "٪{السعر للسلعة الواحدة",
+          "label": "%{السعر}/عصا"
+        },
+        "quantity_label": "كمية",
+        "product_change_label": "يتغير",
+        "product_image_label": "صورة المنتج",
+        "product_image_quantity_label": "كمية",
+        "scroll_order_summary": "قم بالتمرير لمزيد من العناصر",
+        "expand_order_summary_short": "يعرض",
+        "collapse_order_summary_short": "يخفي",
+        "expand_order_summary": "عرض ملخص الطلب",
+        "collapse_order_summary": "إخفاء ملخص الطلب",
+        "original_price": "السعر الأصلي",
+        "sale_price": "سعر البيع",
+        "total_updated_label": "تم تحديث السعر الإجمالي:",
+        "order_total_updated_label": "تم تحديث الإجمالي",
+        "total_already_paid_label": "مدفوع",
+        "unit_price": {
+          "accessible_separator": "لكل"
+        },
+        "gift_card_ending": "بطاقة هدايا تنتهي بـ %{last_characters}",
+        "estimated_tax_label": "الضريبة المقدرة",
+        "multiple_shipping_lines_label": "إجمالي الشحن",
+        "recurring_subtotal_label": "المجموع الفرعي المتكرر",
+        "recurring_total_label": "المجموع المتكرر"
       },
       "contact": {
         "title": "معلومة",
@@ -1551,7 +1805,8 @@
           "message": {
             "one": "ستتم إزالة هذا العنصر من سلة التسوق الخاصة بك لأنه لا توجد طرق تسليم متاحة لعنوانك.",
             "other": "ستتم إزالة هذه العناصر من سلة التسوق الخاصة بك لأنه لا توجد طرق تسليم متاحة لعنوانك."
-          }
+          },
+          "label": "لا توصيل"
         }
       }
     },
