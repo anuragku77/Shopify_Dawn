@@ -91,14 +91,19 @@
     <a href="/collections/{{ block.settings.collection-link }}" class="product-item">
       <img
         src="{{ block.settings.product-image | image_url: width: 3840, height: 3840 }}"
-        alt="Summer Collection"
+        alt="Collection Image"
         class="product-image first-image"
         style="object-position: {{ block.settings.object-pos-left }}% {{ block.settings.object-pos-top }}%"
       >
       <div class="product-overlay"></div>
       <div class="product-info">
         <h3 class="product-title">{{ block.settings['product-title'] }}</h3>
-        <button class="shop-now-btn">Shop</button>
+        <button
+          class="shop-now-btn"
+          data-collection-handle="{{ block.settings.collection-link }}"
+        >
+          {{ block.settings['button-label'] }}
+        </button>
       </div>
     </a>
   {% endfor %}
@@ -120,22 +125,28 @@
         {
           "type": "text",
           "id": "product-title",
-          "label": "Text"
+          "label": "Product Title"
         },
         {
           "type": "collection",
           "id": "collection-link",
-          "label": "Collection to link"
+          "label": "Collection to Link"
+        },
+        {
+          "type": "text",
+          "id": "button-label",
+          "label": "Button Label",
+          "default": "Shop Now"
         },
         {
           "type": "number",
           "id": "object-pos-left",
-          "label": "Move image from left (%)"
+          "label": "Move Image from Left (%)"
         },
         {
           "type": "number",
           "id": "object-pos-top",
-          "label": "Move image from top (%)"
+          "label": "Move Image from Top (%)"
         }
       ]
     }
@@ -150,14 +161,14 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const buttons = document.querySelectorAll('.shop-now-btn');
+        const buttons = document.querySelectorAll('.shop-now-btn');
 
-      buttons.forEach(button => {
-          button.addEventListener('click', function(e) {
-              e.preventDefault();
-              const productLink = this.closest('.product-item').getAttribute('href');
-              window.location.href = productLink;
-          });
-      });
-  });
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const collectionHandle = this.getAttribute('data-collection-handle');
+                window.location.href = `/collections/${collectionHandle}`;
+            });
+        });
+    });
 </script>
