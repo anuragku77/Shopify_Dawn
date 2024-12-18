@@ -90,7 +90,8 @@
   {% for block in section.blocks %}
     <a href="/collections/{{ block.settings.collection-link }}" class="product-item">
       <img
-        src="{{ block.settings.product-image | image_url }}"
+        src="{{ block.settings.product-image | image_url}}"
+        width: "100%'
         alt="Summer Collection"
         class="product-image first-image"
         style="object-position: {{ block.settings.object-pos-left }}% {{ block.settings.object-pos-top }}%"
