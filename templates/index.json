@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "image_banner": {
@@ -14,7 +23,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Shop Now",
-            "button_link_1": "shopify:\/\/collections\/all",
+            "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -27,9 +36,9 @@
         "button"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/minimalist-retail-clothing-display.jpg",
+        "image": "shopify://shop_images/minimalist-retail-clothing-display.jpg",
         "video_background": true,
-        "video_url": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/7bc5e671301848ca8b8819b5d08b4f8d.mp4",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/7bc5e671301848ca8b8819b5d08b4f8d.mp4",
         "image_overlay_opacity": 100,
         "image_height": "large",
         "desktop_content_position": "bottom-center",
@@ -76,13 +85,13 @@
         "video_9NNKmx": {
           "type": "video",
           "settings": {
-            "video_link": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/27fe64d7ac634b16abd28eba00255683.mp4",
+            "video_link": "https://cdn.shopify.com/videos/c/o/v/27fe64d7ac634b16abd28eba00255683.mp4",
             "overlay_opacity": 40,
             "title": "Fashion",
-            "text": "<p>Find your signature style with our curated selection of fashionable pieces that exude sophistication and elegance. Upgrade your wardrobe.<\/p>",
+            "text": "<p>Find your signature style with our curated selection of fashionable pieces that exude sophistication and elegance. Upgrade your wardrobe.</p>",
             "color_text": "#000000",
             "button_label": "Shop Now",
-            "button_link": "shopify:\/\/collections\/all",
+            "button_link": "shopify://collections/all",
             "color_btn_bg": "#000000",
             "color_btn_text": "#ffffff"
           }
@@ -92,13 +101,32 @@
         "video_9NNKmx"
       ],
       "disabled": true,
-      "settings": {
-      }
+      "settings": {}
+    },
+    "photo_grid_7MNCBe": {
+      "type": "photo-grid",
+      "blocks": {
+        "image_FKYF7J": {
+          "type": "Image",
+          "settings": {
+            "product-image": "shopify://shop_images/makeup-and-jewelry.jpg",
+            "product-title": "",
+            "collection-link": "mens-shirts",
+            "object-pos-left": 16,
+            "object-pos-top": -9
+          }
+        }
+      },
+      "block_order": [
+        "image_FKYF7J"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
-    "video_background_RiqBxe"
+    "video_background_RiqBxe",
+    "photo_grid_7MNCBe"
   ]
 }
