@@ -118,6 +118,7 @@
         "image_9TAybp": {
           "type": "Image",
           "settings": {
+            "product-image": "shopify://shop_images/core-strength-fitness.jpg",
             "product-title": "",
             "collection-link": "",
             "button-label": "Shop Now"
