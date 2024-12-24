@@ -106,18 +106,47 @@
     "photo_grid_7MNCBe": {
       "type": "photo-grid",
       "blocks": {
+        "image_NxEnKj": {
+          "type": "Image",
+          "settings": {
+            "product-image": "shopify://shop_images/a-model-in-khakis-holding-orchids.jpg",
+            "product-title": "",
+            "collection-link": "",
+            "button-label": "Shop Now"
+          }
+        },
+        "image_9TAybp": {
+          "type": "Image",
+          "settings": {
+            "product-title": "",
+            "collection-link": "",
+            "button-label": "Shop Now"
+          }
+        },
+        "image_jpC3qz": {
+          "type": "Image",
+          "settings": {
+            "product-title": "",
+            "collection-link": "",
+            "button-label": "Shop Now"
+          }
+        },
         "image_FKYF7J": {
           "type": "Image",
           "settings": {
             "product-image": "shopify://shop_images/makeup-and-jewelry.jpg",
             "product-title": "",
             "collection-link": "mens-shirts",
+            "button-label": "Shop Now",
             "object-pos-left": 16,
             "object-pos-top": -9
           }
         }
       },
       "block_order": [
+        "image_NxEnKj",
+        "image_9TAybp",
+        "image_jpC3qz",
         "image_FKYF7J"
       ],
       "settings": {}
