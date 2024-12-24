@@ -127,6 +127,7 @@
         "image_jpC3qz": {
           "type": "Image",
           "settings": {
+            "product-image": "shopify://shop_images/mens-watch-and-ring.jpg",
             "product-title": "",
             "collection-link": "",
             "button-label": "Shop Now"
