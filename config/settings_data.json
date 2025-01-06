@@ -203,8 +203,7 @@
           "slide_AWCqmT",
           "slide_pxEDWa"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "custom-footer": {
         "type": "custom-footer",
@@ -239,22 +238,20 @@
         "type": "sticky-atc",
         "settings": {
           "enable_section": true,
-          "color_scheme": "scheme-4",
-          "title_size": "h4",
+          "color_scheme": "scheme-1",
+          "title_size": "h3",
           "show_img": true,
           "img_width": "80",
           "img_height": "80",
           "show_quantity_input": true,
           "btn_style": "primary",
-          "offset": 0,
-          "pt": 0.5,
-          "pb": 0.5
+          "offset": 100,
+          "pt": 1.5,
+          "pb": 1.5
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
         "settings": {
